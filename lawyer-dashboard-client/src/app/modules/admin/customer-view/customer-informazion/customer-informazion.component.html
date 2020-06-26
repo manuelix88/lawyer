@@ -1,0 +1,135 @@
+<div class="max-w-full m-8 rich-text">
+    <form class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
+        <p class="text-lg font-medium">Anagrafica Cliente</p>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput
+                       [placeholder]="'Nome'">
+                <mat-icon matPrefix
+                          [svgIcon]="'account_circle'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput
+                       [placeholder]="'Cognome'">
+                <mat-icon matPrefix
+                          [svgIcon]="'account_circle'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput
+                       [placeholder]="'Email'">
+                <mat-icon matPrefix
+                          [svgIcon]="'mail'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput
+                       [placeholder]="'Codice Fiscale'">
+                <mat-icon matPrefix
+                          [svgIcon]="'assignment_turned_in'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput
+                       [placeholder]="'Indirizzo Completo'">
+                <mat-icon matPrefix
+                          [svgIcon]="'room'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field  class="flex-auto gt-xs:pr-3">
+                <input matInput [placeholder]="'Data di Nascita'" [matDatepicker]="picker">
+                <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-select [placeholder]="'Nazione'">
+                    <mat-option value="1">Italia</mat-option>
+                </mat-select>
+                <mat-icon matPrefix
+                          [svgIcon]="'room'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-select [placeholder]="'Città'">
+                    <mat-option value="1">Napoli</mat-option>
+                </mat-select>
+                <mat-icon matPrefix
+                          [svgIcon]="'room'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-select [placeholder]="'Provincia'">
+                    <mat-option value="1">Na</mat-option>
+                </mat-select>
+                <mat-icon matPrefix
+                          [svgIcon]="'room'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <mat-divider class="mt-6 mb-10"></mat-divider>
+
+        <p class="text-lg font-medium">Informazioni Aggiuntive</p>
+
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput
+                       [placeholder]="'Qualifica'">
+                <mat-icon matPrefix
+                          [svgIcon]="'data_usage'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-select [placeholder]="'Documentazione'">
+                    <mat-option value="country-1">SI</mat-option>
+                    <mat-option value="country-2">NO</mat-option>
+                </mat-select>
+                <mat-icon matPrefix
+                          [svgIcon]="'feather:archive'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput type="number" min="0"
+                       [placeholder]="'Faldone'">
+                <mat-icon matPrefix
+                          [svgIcon]="'all_inbox'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput type="number" min="0"
+                       [placeholder]="'Ricorso'">
+                <mat-icon matPrefix
+                          [svgIcon]="'heroicons_outline:folder'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <input matInput type="number" min="0"
+                       [placeholder]="'Pagamento'">
+                <mat-icon matPrefix
+                          [svgIcon]="'heroicons_outline:currency-euro'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="treo-mat-textarea flex-auto">
+                        <textarea matInput
+                                  [placeholder]="'Altro'"
+                                  [rows]="3"></textarea>
+                <mat-icon matPrefix
+                          [svgIcon]="'notes'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="treo-mat-textarea flex-auto">
+                        <textarea matInput
+                                  [placeholder]="'Note'"
+                                  [rows]="3"></textarea>
+                <mat-icon matPrefix
+                          [svgIcon]="'notes'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 light:bg-cool-gray-50 dark:bg-cool-gray-700">
+            <button mat-button>
+                Reset
+            </button>
+            <button class="px-6 ml-3" type="button"
+                    mat-flat-button
+                    [color]="'primary'">
+                Salva
+            </button>
+        </div>
+    </form>
+</div>
