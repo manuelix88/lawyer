@@ -65,64 +65,167 @@
         </div>
         <mat-divider class="mt-6 mb-10"></mat-divider>
 
-        <p class="text-lg font-medium">Informazioni Aggiuntive</p>
-
-        <div class="flex flex-col gt-xs:flex-row">
-            <mat-form-field class="flex-auto gt-xs:pr-3">
-                <input matInput
-                       [placeholder]="'Qualifica'">
-                <mat-icon matPrefix
-                          [svgIcon]="'data_usage'"></mat-icon>
-            </mat-form-field>
-            <mat-form-field class="flex-auto gt-xs:pr-3">
-                <mat-select [placeholder]="'Documentazione'">
-                    <mat-option value="country-1">SI</mat-option>
-                    <mat-option value="country-2">NO</mat-option>
-                </mat-select>
-                <mat-icon matPrefix
-                          [svgIcon]="'feather:archive'"></mat-icon>
-            </mat-form-field>
-            <mat-form-field class="flex-auto gt-xs:pr-3">
-                <input matInput type="number" min="0"
-                       [placeholder]="'Faldone'">
-                <mat-icon matPrefix
-                          [svgIcon]="'all_inbox'"></mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="flex flex-col gt-xs:flex-row">
-            <mat-form-field class="flex-auto gt-xs:pr-3">
-                <input matInput type="number" min="0"
-                       [placeholder]="'Ricorso'">
-                <mat-icon matPrefix
-                          [svgIcon]="'heroicons_outline:folder'"></mat-icon>
-            </mat-form-field>
-            <mat-form-field class="flex-auto gt-xs:pr-3">
-                <input matInput type="number" min="0"
-                       [placeholder]="'Pagamento'">
-                <mat-icon matPrefix
-                          [svgIcon]="'heroicons_outline:currency-euro'"></mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="flex">
-            <mat-form-field class="treo-mat-textarea flex-auto">
+        <mat-tab-group>
+            <mat-tab label="Informazioni Amministrative">
+                <div class="flex flex-col gt-xs:flex-row mt-6">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Qualifica'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'data_usage'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-select [placeholder]="'Documentazione'">
+                            <mat-option value="country-1">SI</mat-option>
+                            <mat-option value="country-2">NO</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'feather:archive'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput type="number" min="0"
+                               [placeholder]="'Faldone'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'all_inbox'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput type="number" min="0"
+                               [placeholder]="'Ricorso'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'heroicons_outline:folder'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput type="number" min="0"
+                               [placeholder]="'Pagamento'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'heroicons_outline:currency-euro'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field class="treo-mat-textarea flex-auto">
                         <textarea matInput
                                   [placeholder]="'Altro'"
                                   [rows]="3"></textarea>
-                <mat-icon matPrefix
-                          [svgIcon]="'notes'"></mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="flex">
-            <mat-form-field class="treo-mat-textarea flex-auto">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'notes'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field class="treo-mat-textarea flex-auto">
                         <textarea matInput
                                   [placeholder]="'Note'"
                                   [rows]="3"></textarea>
-                <mat-icon matPrefix
-                          [svgIcon]="'notes'"></mat-icon>
-            </mat-form-field>
-        </div>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'notes'"></mat-icon>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Patronato">
+                <div class="flex flex-col gt-xs:flex-row mt-6">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-select [placeholder]="'Convenzione'">
+                            <mat-option value="conv-1">SI</mat-option>
+                            <mat-option value="conv-2">NO</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'feather:archive'"></mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-select [placeholder]="'Spese'">
+                            <mat-option value="spese-1">SI</mat-option>
+                            <mat-option value="spese-2">NO</mat-option>
+                            <mat-option value="spese-2">COMPENSATE</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'feather:archive'"></mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-select [placeholder]="'Decorrenza Successiva'">
+                            <mat-option value="dec-1">SI</mat-option>
+                            <mat-option value="dec-2">NO</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'feather:archive'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Codice'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Tipo Pratica'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-select [placeholder]="'Tribunale'">
+                            <mat-option value="na-1">NAPOLI</mat-option>
+                            <mat-option value="sal-2">SALERNO</mat-option>
+                            <mat-option value="no-2">NOCERA INF.</mat-option>
+                            <mat-option value="torann-2">TORRE ANNUNZIATA</mat-option>
+                            <mat-option value="lago-2">LAGO NEGRO</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Ruolo Generale'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Giudice'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'heroicons_outline:library'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Udienza'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
+                    </mat-form-field>
+                    <button mat-icon-button type="button" color="accent" routerLink="/customer/modify">
+                        <mat-icon [svgIcon]="'feather:clipboard'"></mat-icon>
+                    </button>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Patronato Di Provenienza'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <input matInput
+                               [placeholder]="'Avvocato Delegato'">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="treo-mat-textarea flex-auto">
+                        <textarea matInput
+                                  [placeholder]="'Note'"
+                                  [rows]="3"></textarea>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'notes'"></mat-icon>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
         <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 light:bg-cool-gray-50 dark:bg-cool-gray-700">
-            <button mat-button>
+            <button mat-button type="button">
                 Reset
             </button>
             <button class="px-6 ml-3" type="button"

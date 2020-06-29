@@ -78,9 +78,9 @@ export const appRoutes: Route[] = [
             {path: 'report', loadChildren: () => import('app/modules/admin/report-views/report-views.module').then(m => m.ReportViewsModule)},
             {path: 'search', loadChildren: () => import('app/modules/admin/search-report-element/search-report.module').then(m => m.SearchReportModule)}
 
-            // 404 & Catch all
-            // {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/errors/error-404/error-404.module').then(m => m.Error404Module)},
-            // {path: '**', redirectTo: '404-not-found'}
+           // 404 & Catch all
+           //  {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/errors/error-404/error-404.module').then(m => m.Error404Module)},
+           //  {path: '**', redirectTo: '404-not-found'}
         ]
     }
 ];

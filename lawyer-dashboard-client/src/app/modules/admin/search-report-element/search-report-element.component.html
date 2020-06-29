@@ -43,10 +43,10 @@
                                   [svgIcon]="'feather:archive'"></mat-icon>
                     </mat-form-field>
                     <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <input matInput type="number" min="0"
-                               [placeholder]="'Ricorso'">
+                        <input matInput
+                               [placeholder]="'Qualifica'">
                         <mat-icon matPrefix
-                                  [svgIcon]="'heroicons_outline:folder'"></mat-icon>
+                                  [svgIcon]="'data_usage'"></mat-icon>
                     </mat-form-field>
 
                     <mat-form-field class="flex-auto gt-xs:pr-3">
@@ -88,7 +88,7 @@
                 <!-- Weight Column -->
                 <ng-container matColumnDef="surname">
                     <th mat-header-cell *matHeaderCellDef> Cognome </th>
-                    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
                 </ng-container>
 
                 <!-- Symbol Column -->
@@ -108,7 +108,7 @@
                         <button mat-icon-button type="button" color="warn">
                             <mat-icon>delete</mat-icon>
                         </button>
-                        <button mat-icon-button type="button"  color="accent">
+                        <button mat-icon-button type="button" color="accent" routerLink="/customer/modify">
                             <mat-icon>edit</mat-icon>
                         </button>
                     </td>
