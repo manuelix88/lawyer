@@ -8,7 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="lawyerApi-repository" />
         <module name="lawyerApi-boot" />
-        <module name="lawyerApi-controller" />
+        <module name="lawyerApi-services" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -17,6 +17,7 @@
       <module name="lawyer-boot" target="1.8" />
       <module name="lawyer-dashboard" target="1.5" />
       <module name="lawyerApi" target="1.8" />
+      <module name="lawyerApi-controller" target="1.8" />
       <module name="lawyesApi-boot" target="1.8" />
     </bytecodeTargetLevel>
   </component>

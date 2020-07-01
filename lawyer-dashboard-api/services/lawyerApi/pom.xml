@@ -20,7 +20,7 @@
         <module>lawyerApi-boot</module>
         <module>lawyerApi-repository</module>
         <module>lawyerApi-services</module>
-        <module>lawyerApi-controller</module>
+<!--        <module>lawyerApi-controller</module>-->
     </modules>
 
     <profiles>
@@ -51,11 +51,11 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>it.shiftlab.lawyer</groupId>
-                <artifactId>lawyerApi-controller</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>it.shiftlab.lawyer</groupId>-->
+<!--                <artifactId>lawyerApi-controller</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 </project>
