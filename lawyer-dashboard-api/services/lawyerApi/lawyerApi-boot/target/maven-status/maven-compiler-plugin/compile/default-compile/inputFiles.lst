@@ -1,10 +1,8 @@
-C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\models\JwtUser.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\security\JwtAuthenticationEntryPoint.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\security\JwtAuthenticationTokenFilter.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\Application.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\controller\auth\LoginController.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\models\JwtAuthenticationResponse.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\utils\JwtTokenUtil.java
-C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\config\WebConfig.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\config\WebSecurityConfig.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\security\JwtAuthenticationRequest.java
-C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\security\JWTAuthenticationFilter.java

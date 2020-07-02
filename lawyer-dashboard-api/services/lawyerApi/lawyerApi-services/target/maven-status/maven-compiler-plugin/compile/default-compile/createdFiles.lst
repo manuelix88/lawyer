@@ -1,2 +1,5 @@
-it\shiftlab\lawyer\service\UserServiceImpl.class
-it\shiftlab\lawyer\serviceimpl\UserService.class
+it\shiftlab\lawyer\serviceImp\UserServiceImpl.class
+it\shiftlab\lawyer\mapper\JwtUserFactory.class
+it\shiftlab\lawyer\dto\JwtUser.class
+it\shiftlab\lawyer\serviceImp\JwtUserDetailsServiceImpl.class
+it\shiftlab\lawyer\service\UserService.class

@@ -1,2 +1,5 @@
-C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\service\UserServiceImpl.java
-C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\serviceimpl\UserService.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\serviceImp\UserServiceImpl.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\serviceImp\JwtUserDetailsServiceImpl.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\service\UserService.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\dto\JwtUser.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\mapper\JwtUserFactory.java

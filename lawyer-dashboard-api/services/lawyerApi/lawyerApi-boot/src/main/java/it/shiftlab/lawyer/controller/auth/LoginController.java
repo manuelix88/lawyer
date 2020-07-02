@@ -1,8 +1,9 @@
 package it.shiftlab.lawyer.controller.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import it.shiftlab.lawyer.models.JwtAuthenticationResponse;
 import it.shiftlab.lawyer.security.JwtAuthenticationRequest;
-import it.shiftlab.lawyer.serviceimpl.UserService;
+import it.shiftlab.lawyer.service.UserService;
 import it.shiftlab.lawyer.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,17 +28,22 @@ public class LoginController {
 
     @Value("${jwt.header}")
     private String tokenHeader;
-
+    @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
     @Autowired
     private UserDetailsService userDetailsService;
-
     @Autowired
     private UserService userService;
+
+
+//    public LoginController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService, UserService userService) {
+//        this.authenticationManager = authenticationManager;
+//        this.jwtTokenUtil = jwtTokenUtil;
+//        this.userDetailsService = userDetailsService;
+//        this.userService = userService;
+//    }
 
     @RequestMapping(value = "public/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device, HttpServletResponse response) throws AuthenticationException, JsonProcessingException {
@@ -56,8 +62,8 @@ public class LoginController {
         final String token = jwtTokenUtil.generateToken(userDetails, device);
         response.setHeader(tokenHeader,token);
         // Ritorno il token
-        return ResponseEntity.ok(null);
-//        new JwtAuthenticationResponse(userDetails.getUsername(),userDetails.getAuthorities())
+//        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(userDetails.getUsername(),userDetails.getAuthorities()));
     }
 
     @RequestMapping(value = "public/test", method = RequestMethod.GET)
@@ -65,7 +71,7 @@ public class LoginController {
         userService.addFakeData();
     }
 
-    @RequestMapping(value = "public/vai", method = RequestMethod.GET)
+    @RequestMapping(value = "protected/vai", method = RequestMethod.GET)
     public String aa() {
         return "asdas";
     }

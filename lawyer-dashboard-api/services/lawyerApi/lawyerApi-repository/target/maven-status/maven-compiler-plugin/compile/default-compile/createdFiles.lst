@@ -1,10 +1,8 @@
 it\shiftlab\lawyer\config\JpaConfig.class
 it\shiftlab\lawyer\jpa\entity\ReportAmministrativeEntity.class
-it\shiftlab\lawyer\jpa\entity\LoginEntity.class
 it\shiftlab\lawyer\jpa\entity\AuthorityName.class
 it\shiftlab\lawyer\jpa\repository\UserRepository.class
 it\shiftlab\lawyer\jpa\entity\ReportPatronatoEntity.class
-it\shiftlab\lawyer\jpa\repository\LoginRepository.class
 it\shiftlab\lawyer\jpa\repository\AuthorityRepository.class
 it\shiftlab\lawyer\jpa\entity\AuthoritiesEntity.class
 it\shiftlab\lawyer\jpa\entity\AnagraficaClienteEntity.class

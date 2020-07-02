@@ -1,10 +1,8 @@
 it\shiftlab\lawyer\security\JwtAuthenticationEntryPoint.class
+it\shiftlab\lawyer\models\JwtAuthenticationResponse.class
 it\shiftlab\lawyer\security\JwtAuthenticationTokenFilter.class
 it\shiftlab\lawyer\Application.class
-it\shiftlab\lawyer\config\WebConfig.class
 it\shiftlab\lawyer\controller\auth\LoginController.class
-it\shiftlab\lawyer\models\JwtUser.class
-it\shiftlab\lawyer\security\JWTAuthenticationFilter.class
 it\shiftlab\lawyer\config\WebSecurityConfig.class
 it\shiftlab\lawyer\utils\JwtTokenUtil.class
 it\shiftlab\lawyer\security\JwtAuthenticationRequest.class
