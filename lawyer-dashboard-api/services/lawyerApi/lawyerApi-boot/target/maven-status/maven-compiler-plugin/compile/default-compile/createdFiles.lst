@@ -1,5 +1,7 @@
 it\shiftlab\lawyer\security\JwtAuthenticationEntryPoint.class
 it\shiftlab\lawyer\models\JwtAuthenticationResponse.class
+it\shiftlab\lawyer\models\GenericResponseMessage.class
+it\shiftlab\lawyer\config\CustomGlobalExceptionHandler.class
 it\shiftlab\lawyer\security\JwtAuthenticationTokenFilter.class
 it\shiftlab\lawyer\Application.class
 it\shiftlab\lawyer\controller\auth\LoginController.class

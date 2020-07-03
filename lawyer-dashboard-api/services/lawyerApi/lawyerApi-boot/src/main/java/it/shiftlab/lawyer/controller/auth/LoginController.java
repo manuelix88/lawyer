@@ -1,7 +1,9 @@
 package it.shiftlab.lawyer.controller.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import it.shiftlab.lawyer.models.GenericResponseMessage;
 import it.shiftlab.lawyer.models.JwtAuthenticationResponse;
+import it.shiftlab.lawyer.dto.UserDTO;
 import it.shiftlab.lawyer.security.JwtAuthenticationRequest;
 import it.shiftlab.lawyer.service.UserService;
 import it.shiftlab.lawyer.utils.JwtTokenUtil;
@@ -16,36 +18,32 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RestController
 public class LoginController {
 
     @Value("${jwt.header}")
     private String tokenHeader;
+
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Autowired
     private UserService userService;
 
 
-//    public LoginController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService, UserService userService) {
-//        this.authenticationManager = authenticationManager;
-//        this.jwtTokenUtil = jwtTokenUtil;
-//        this.userDetailsService = userDetailsService;
-//        this.userService = userService;
-//    }
-
-    @RequestMapping(value = "public/login", method = RequestMethod.POST)
+    @PostMapping(value = "public/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device, HttpServletResponse response) throws AuthenticationException, JsonProcessingException {
 
         // Effettuo l autenticazione
@@ -62,17 +60,15 @@ public class LoginController {
         final String token = jwtTokenUtil.generateToken(userDetails, device);
         response.setHeader(tokenHeader,token);
         // Ritorno il token
-//        return ResponseEntity.ok(null);
         return ResponseEntity.ok(new JwtAuthenticationResponse(userDetails.getUsername(),userDetails.getAuthorities()));
     }
 
-    @RequestMapping(value = "public/test", method = RequestMethod.GET)
-    public void create() {
-        userService.addFakeData();
+    @PostMapping(value = "public/registration")
+    public ResponseEntity<?> registerUserAccount(@RequestBody @Valid UserDTO userDto,
+                                                 HttpServletRequest request) {
+        userService.registerNewUserAccount(userDto);
+        return ResponseEntity.ok(new GenericResponseMessage("ok", "Utente Registrato correttamente"));
     }
 
-    @RequestMapping(value = "protected/vai", method = RequestMethod.GET)
-    public String aa() {
-        return "asdas";
-    }
+
 }

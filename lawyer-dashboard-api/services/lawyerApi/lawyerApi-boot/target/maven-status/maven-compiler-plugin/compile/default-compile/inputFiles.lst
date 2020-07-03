@@ -3,6 +3,8 @@ C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\Application.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\controller\auth\LoginController.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\models\JwtAuthenticationResponse.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\config\CustomGlobalExceptionHandler.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\utils\JwtTokenUtil.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\models\GenericResponseMessage.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\config\WebSecurityConfig.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-boot\src\main\java\it\shiftlab\lawyer\security\JwtAuthenticationRequest.java

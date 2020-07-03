@@ -2,4 +2,6 @@ C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\serviceImp\JwtUserDetailsServiceImpl.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\service\UserService.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\dto\JwtUser.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\dto\UserDTO.java
+C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\exception\clazz\UserAlreadyExistException.java
 C:\repository\lawyer\lawyer-dashboard-api\services\lawyerApi\lawyerApi-services\src\main\java\it\shiftlab\lawyer\mapper\JwtUserFactory.java
