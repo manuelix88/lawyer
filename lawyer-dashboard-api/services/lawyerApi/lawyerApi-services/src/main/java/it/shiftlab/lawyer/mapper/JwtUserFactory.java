@@ -14,7 +14,7 @@ public class JwtUserFactory {
     private JwtUserFactory() {
     }
 
-    public static JwtUser createFromEntitytoDTO(UsersEntity user) {
+    public static JwtUser createFromEntityToDTO(UsersEntity user) {
         return new JwtUser(
                 user.getUsername(),
                 user.getPassword(),
@@ -23,7 +23,7 @@ public class JwtUserFactory {
         );
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<AuthoritiesEntity> authorities) {
+    public static List<GrantedAuthority> mapToGrantedAuthorities(List<AuthoritiesEntity> authorities) {
         return authorities.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName().name()))
                 .collect(Collectors.toList());

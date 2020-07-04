@@ -22,8 +22,42 @@ public class ReportPatronatoEntity {
     private String note;
     private AnagraficaClienteEntity anagraficaClientesByIdRepPatronato;
 
+    public ReportPatronatoEntity(long idRepPatronato, String convenzione, String spese, String decorrenzaSuccessiva, String codice, String tipoPratica, String tribunale, String ruoloGenerale, Date dataUltimaUdienza, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note, AnagraficaClienteEntity anagraficaClientesByIdRepPatronato) {
+        this.idRepPatronato = idRepPatronato;
+        this.convenzione = convenzione;
+        this.spese = spese;
+        this.decorrenzaSuccessiva = decorrenzaSuccessiva;
+        this.codice = codice;
+        this.tipoPratica = tipoPratica;
+        this.tribunale = tribunale;
+        this.ruoloGenerale = ruoloGenerale;
+        this.dataUltimaUdienza = dataUltimaUdienza;
+        this.patronatoProvenienza = patronatoProvenienza;
+        this.giudice = giudice;
+        this.avvocatoDelegato = avvocatoDelegato;
+        this.note = note;
+        this.anagraficaClientesByIdRepPatronato = anagraficaClientesByIdRepPatronato;
+    }
+
+    public ReportPatronatoEntity(long idRepPatronato, String convenzione, String spese, String decorrenzaSuccessiva, String codice, String tipoPratica, String tribunale, String ruoloGenerale, Date dataUltimaUdienza, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note) {
+        this.idRepPatronato = idRepPatronato;
+        this.convenzione = convenzione;
+        this.spese = spese;
+        this.decorrenzaSuccessiva = decorrenzaSuccessiva;
+        this.codice = codice;
+        this.tipoPratica = tipoPratica;
+        this.tribunale = tribunale;
+        this.ruoloGenerale = ruoloGenerale;
+        this.dataUltimaUdienza = dataUltimaUdienza;
+        this.patronatoProvenienza = patronatoProvenienza;
+        this.giudice = giudice;
+        this.avvocatoDelegato = avvocatoDelegato;
+        this.note = note;
+    }
+
     @Id
     @Column(name = "ID_REP_PATRONATO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getIdRepPatronato() {
         return idRepPatronato;
     }

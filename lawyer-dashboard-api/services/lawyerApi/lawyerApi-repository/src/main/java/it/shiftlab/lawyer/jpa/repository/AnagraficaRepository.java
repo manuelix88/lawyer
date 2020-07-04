@@ -1,4 +1,12 @@
 package it.shiftlab.lawyer.jpa.repository;
 
-public interface AnagraficaRepository {
+import it.shiftlab.lawyer.jpa.entity.AnagraficaClienteEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface AnagraficaRepository extends JpaRepository<AnagraficaClienteEntity, Long> {
+    Optional<AnagraficaClienteEntity> findByNome(String nome);
 }

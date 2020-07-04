@@ -20,8 +20,24 @@ public class AnagraficaClienteEntity {
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
     private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
 
+    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNasacita, ReportPatronatoEntity reportPatronatoByIdRepPatronato, ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
+        this.idAnagrafica = idAnagrafica;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.codiceFiscale = codiceFiscale;
+        this.nazione = nazione;
+        this.indirizzo = indirizzo;
+        this.citta = citta;
+        this.provincia = provincia;
+        this.dataNasacita = dataNasacita;
+        this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
+        this.reportAmministrativeByIdRepAmministrative = reportAmministrativeByIdRepAmministrative;
+    }
+
     @Id
     @Column(name = "ID_ANAGRAFICA")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getIdAnagrafica() {
         return idAnagrafica;
     }
@@ -143,7 +159,7 @@ public class AnagraficaClienteEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "ID_REP_PATRONATO", referencedColumnName = "ID_REP_PATRONATO", nullable = false)
+    @JoinColumn(name = "ID_REP_PATRONATO", referencedColumnName = "ID_REP_PATRONATO")
     public ReportPatronatoEntity getReportPatronatoByIdRepPatronato() {
         return reportPatronatoByIdRepPatronato;
     }
@@ -153,7 +169,7 @@ public class AnagraficaClienteEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "ID_REP_AMMINISTRATIVE", referencedColumnName = "ID_REP_AMMINISTRATIVE", nullable = false)
+    @JoinColumn(name = "ID_REP_AMMINISTRATIVE", referencedColumnName = "ID_REP_AMMINISTRATIVE")
     public ReportAmministrativeEntity getReportAmministrativeByIdRepAmministrative() {
         return reportAmministrativeByIdRepAmministrative;
     }

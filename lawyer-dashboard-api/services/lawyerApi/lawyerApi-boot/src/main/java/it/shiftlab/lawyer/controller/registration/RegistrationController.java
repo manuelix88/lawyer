@@ -1,4 +1,4 @@
-package it.shiftlab.lawyer.controller.auth;
+package it.shiftlab.lawyer.controller.registration;
 
 import it.shiftlab.lawyer.dto.UserDTO;
 import it.shiftlab.lawyer.models.GenericResponseMessage;

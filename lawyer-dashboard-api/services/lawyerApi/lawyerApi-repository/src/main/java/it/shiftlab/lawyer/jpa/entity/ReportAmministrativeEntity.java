@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "report_amministrative", schema = "lawyer_", catalog = "")
+@Table(name = "REPORT_AMMINISTRATIVE", schema = "lawyer_", catalog = "")
 public class ReportAmministrativeEntity {
     private long idRepAmministrative;
     private String qualifica;
@@ -16,8 +16,30 @@ public class ReportAmministrativeEntity {
     private String note;
     private AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative;
 
+    public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note) {
+        this.idRepAmministrative = idRepAmministrative;
+        this.qualifica = qualifica;
+        this.dataPagamento = dataPagamento;
+        this.numeroFaldone = numeroFaldone;
+        this.ricordoCedu = ricordoCedu;
+        this.altro = altro;
+        this.note = note;
+    }
+
+    public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative) {
+        this.idRepAmministrative = idRepAmministrative;
+        this.qualifica = qualifica;
+        this.dataPagamento = dataPagamento;
+        this.numeroFaldone = numeroFaldone;
+        this.ricordoCedu = ricordoCedu;
+        this.altro = altro;
+        this.note = note;
+        this.anagraficaClientesByIdRepAmministrative = anagraficaClientesByIdRepAmministrative;
+    }
+
     @Id
     @Column(name = "ID_REP_AMMINISTRATIVE")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getIdRepAmministrative() {
         return idRepAmministrative;
     }
