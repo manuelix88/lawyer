@@ -5,9 +5,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "REPORT_PATRONATO", schema = "lawyer_", catalog = "")
+@Table(name = "report_patronato", schema = "lawyer_", catalog = "")
 public class ReportPatronatoEntity {
-    private int idRepPatronato;
+    private long idRepPatronato;
     private String convenzione;
     private String spese;
     private String decorrenzaSuccessiva;
@@ -20,14 +20,15 @@ public class ReportPatronatoEntity {
     private String giudice;
     private String avvocatoDelegato;
     private String note;
+    private AnagraficaClienteEntity anagraficaClientesByIdRepPatronato;
 
     @Id
     @Column(name = "ID_REP_PATRONATO")
-    public int getIdRepPatronato() {
+    public long getIdRepPatronato() {
         return idRepPatronato;
     }
 
-    public void setIdRepPatronato(int idRepPatronato) {
+    public void setIdRepPatronato(long idRepPatronato) {
         this.idRepPatronato = idRepPatronato;
     }
 
@@ -174,5 +175,14 @@ public class ReportPatronatoEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idRepPatronato, convenzione, spese, decorrenzaSuccessiva, codice, tipoPratica, tribunale, ruoloGenerale, dataUltimaUdienza, patronatoProvenienza, giudice, avvocatoDelegato, note);
+    }
+
+    @OneToOne(mappedBy = "reportPatronatoByIdRepPatronato")
+    public AnagraficaClienteEntity getAnagraficaClientesByIdRepPatronato() {
+        return anagraficaClientesByIdRepPatronato;
+    }
+
+    public void setAnagraficaClientesByIdRepPatronato(AnagraficaClienteEntity anagraficaClientesByIdRepPatronato) {
+        this.anagraficaClientesByIdRepPatronato = anagraficaClientesByIdRepPatronato;
     }
 }

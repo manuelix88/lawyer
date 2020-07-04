@@ -5,24 +5,24 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "REPORT_AMMINISTRATIVE", schema = "lawyer_", catalog = "")
+@Table(name = "report_amministrative", schema = "lawyer_", catalog = "")
 public class ReportAmministrativeEntity {
-    private int idRepAmministrative;
+    private long idRepAmministrative;
     private String qualifica;
     private Date dataPagamento;
     private Integer numeroFaldone;
     private String ricordoCedu;
     private String altro;
     private String note;
-    private int idAnagrafica;
+    private AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative;
 
     @Id
     @Column(name = "ID_REP_AMMINISTRATIVE")
-    public int getIdRepAmministrative() {
+    public long getIdRepAmministrative() {
         return idRepAmministrative;
     }
 
-    public void setIdRepAmministrative(int idRepAmministrative) {
+    public void setIdRepAmministrative(long idRepAmministrative) {
         this.idRepAmministrative = idRepAmministrative;
     }
 
@@ -86,23 +86,12 @@ public class ReportAmministrativeEntity {
         this.note = note;
     }
 
-    @Basic
-    @Column(name = "ID_ANAGRAFICA")
-    public int getIdAnagrafica() {
-        return idAnagrafica;
-    }
-
-    public void setIdAnagrafica(int idAnagrafica) {
-        this.idAnagrafica = idAnagrafica;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReportAmministrativeEntity that = (ReportAmministrativeEntity) o;
         return idRepAmministrative == that.idRepAmministrative &&
-                idAnagrafica == that.idAnagrafica &&
                 Objects.equals(qualifica, that.qualifica) &&
                 Objects.equals(dataPagamento, that.dataPagamento) &&
                 Objects.equals(numeroFaldone, that.numeroFaldone) &&
@@ -113,6 +102,15 @@ public class ReportAmministrativeEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idRepAmministrative, qualifica, dataPagamento, numeroFaldone, ricordoCedu, altro, note, idAnagrafica);
+        return Objects.hash(idRepAmministrative, qualifica, dataPagamento, numeroFaldone, ricordoCedu, altro, note);
+    }
+
+    @OneToOne(mappedBy = "reportAmministrativeByIdRepAmministrative")
+    public AnagraficaClienteEntity getAnagraficaClientesByIdRepAmministrative() {
+        return anagraficaClientesByIdRepAmministrative;
+    }
+
+    public void setAnagraficaClientesByIdRepAmministrative(AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative) {
+        this.anagraficaClientesByIdRepAmministrative = anagraficaClientesByIdRepAmministrative;
     }
 }

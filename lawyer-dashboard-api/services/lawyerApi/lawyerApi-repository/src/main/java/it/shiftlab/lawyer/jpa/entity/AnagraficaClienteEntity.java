@@ -5,9 +5,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ANAGRAFICA_CLIENTE", schema = "lawyer_", catalog = "")
+@Table(name = "anagrafica_cliente", schema = "lawyer_", catalog = "")
 public class AnagraficaClienteEntity {
-    private int idAnagrafica;
+    private long idAnagrafica;
     private String nome;
     private String cognome;
     private String email;
@@ -17,14 +17,16 @@ public class AnagraficaClienteEntity {
     private String citta;
     private String provincia;
     private Date dataNasacita;
+    private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
+    private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
 
     @Id
     @Column(name = "ID_ANAGRAFICA")
-    public int getIdAnagrafica() {
+    public long getIdAnagrafica() {
         return idAnagrafica;
     }
 
-    public void setIdAnagrafica(int idAnagrafica) {
+    public void setIdAnagrafica(long idAnagrafica) {
         this.idAnagrafica = idAnagrafica;
     }
 
@@ -122,21 +124,41 @@ public class AnagraficaClienteEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AnagraficaClienteEntity that = (AnagraficaClienteEntity) o;
-        return idAnagrafica == that.idAnagrafica &&
-                Objects.equals(nome, that.nome) &&
-                Objects.equals(cognome, that.cognome) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(codiceFiscale, that.codiceFiscale) &&
-                Objects.equals(nazione, that.nazione) &&
-                Objects.equals(indirizzo, that.indirizzo) &&
-                Objects.equals(citta, that.citta) &&
-                Objects.equals(provincia, that.provincia) &&
-                Objects.equals(dataNasacita, that.dataNasacita);
+        AnagraficaClienteEntity entity = (AnagraficaClienteEntity) o;
+        return idAnagrafica == entity.idAnagrafica &&
+                Objects.equals(nome, entity.nome) &&
+                Objects.equals(cognome, entity.cognome) &&
+                Objects.equals(email, entity.email) &&
+                Objects.equals(codiceFiscale, entity.codiceFiscale) &&
+                Objects.equals(nazione, entity.nazione) &&
+                Objects.equals(indirizzo, entity.indirizzo) &&
+                Objects.equals(citta, entity.citta) &&
+                Objects.equals(provincia, entity.provincia) &&
+                Objects.equals(dataNasacita, entity.dataNasacita);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idAnagrafica, nome, cognome, email, codiceFiscale, nazione, indirizzo, citta, provincia, dataNasacita);
+    }
+
+    @OneToOne
+    @JoinColumn(name = "ID_REP_PATRONATO", referencedColumnName = "ID_REP_PATRONATO", nullable = false)
+    public ReportPatronatoEntity getReportPatronatoByIdRepPatronato() {
+        return reportPatronatoByIdRepPatronato;
+    }
+
+    public void setReportPatronatoByIdRepPatronato(ReportPatronatoEntity reportPatronatoByIdRepPatronato) {
+        this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "ID_REP_AMMINISTRATIVE", referencedColumnName = "ID_REP_AMMINISTRATIVE", nullable = false)
+    public ReportAmministrativeEntity getReportAmministrativeByIdRepAmministrative() {
+        return reportAmministrativeByIdRepAmministrative;
+    }
+
+    public void setReportAmministrativeByIdRepAmministrative(ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
+        this.reportAmministrativeByIdRepAmministrative = reportAmministrativeByIdRepAmministrative;
     }
 }
