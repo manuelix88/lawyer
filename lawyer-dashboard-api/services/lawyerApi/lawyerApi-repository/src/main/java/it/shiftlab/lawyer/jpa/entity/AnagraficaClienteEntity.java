@@ -20,6 +20,9 @@ public class AnagraficaClienteEntity {
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
     private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
 
+    public AnagraficaClienteEntity() {
+    }
+
     public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNasacita, ReportPatronatoEntity reportPatronatoByIdRepPatronato, ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
         this.idAnagrafica = idAnagrafica;
         this.nome = nome;
@@ -33,6 +36,19 @@ public class AnagraficaClienteEntity {
         this.dataNasacita = dataNasacita;
         this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
         this.reportAmministrativeByIdRepAmministrative = reportAmministrativeByIdRepAmministrative;
+    }
+
+    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNasacita) {
+        this.idAnagrafica = idAnagrafica;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.codiceFiscale = codiceFiscale;
+        this.nazione = nazione;
+        this.indirizzo = indirizzo;
+        this.citta = citta;
+        this.provincia = provincia;
+        this.dataNasacita = dataNasacita;
     }
 
     @Id

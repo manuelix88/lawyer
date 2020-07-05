@@ -22,6 +22,9 @@ public class ReportPatronatoEntity {
     private String note;
     private AnagraficaClienteEntity anagraficaClientesByIdRepPatronato;
 
+    public ReportPatronatoEntity() {
+    }
+
     public ReportPatronatoEntity(long idRepPatronato, String convenzione, String spese, String decorrenzaSuccessiva, String codice, String tipoPratica, String tribunale, String ruoloGenerale, Date dataUltimaUdienza, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note, AnagraficaClienteEntity anagraficaClientesByIdRepPatronato) {
         this.idRepPatronato = idRepPatronato;
         this.convenzione = convenzione;

@@ -1,9 +1,12 @@
 package it.shiftlab.lawyer.controller;
 
+import it.shiftlab.lawyer.dto.AnagraficaDto;
+import it.shiftlab.lawyer.models.GenericResponseMessage;
 import it.shiftlab.lawyer.service.AnagraficaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AnagraficaController {
@@ -15,8 +18,14 @@ public class AnagraficaController {
         this.anagraficaService = anagraficaService;
     }
 
-    @GetMapping("public/retrieveAnagrafica")
-    public void retrieveAnagrafica() {
-        anagraficaService.findById();
+    @GetMapping("public/retrieveAnagraficaById")
+    public ResponseEntity<AnagraficaDto> retrieveAnagraficaById(@RequestParam("anagraficaId") long id) {
+        return ResponseEntity.ok(anagraficaService.findById(id));
+    }
+
+    @PostMapping("public/addAnagrafica")
+    public ResponseEntity<?> addAnagrafica(@RequestBody AnagraficaDto anagraficaDto) {
+        anagraficaService.saveAnagrafica(anagraficaDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

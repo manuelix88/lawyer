@@ -7,8 +7,6 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.sql.Date;
 
-@Builder
-@Getter @Setter
 public class ReportAmministrativeDto implements Serializable {
 
     private long idRepAmministrative;

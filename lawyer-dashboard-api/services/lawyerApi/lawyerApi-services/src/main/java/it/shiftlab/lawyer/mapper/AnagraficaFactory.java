@@ -54,8 +54,8 @@ public class AnagraficaFactory {
                 dto.getIndirizzo(),
                 dto.getCitta(),
                 dto.getProvincia(),
-                dto.getDataNasacita(),
-                mapRepPatronatoDtoToEntity(dto.getReportPatronatoDto()),mapRepAmmDtoToEntity(dto.getReportAmministrativeDto()));
+                dto.getDataNasacita());
+//                mapRepPatronatoDtoToEntity(dto.getReportPatronatoDto()),mapRepAmmDtoToEntity(dto.getReportAmministrativeDto()));
     }
     public static ReportPatronatoEntity mapRepPatronatoDtoToEntity(ReportPatronatoDto dto) {
         return new ReportPatronatoEntity(dto.getIdRepPatronato(),

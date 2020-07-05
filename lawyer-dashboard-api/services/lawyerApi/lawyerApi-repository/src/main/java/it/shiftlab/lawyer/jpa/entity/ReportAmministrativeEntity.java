@@ -16,6 +16,9 @@ public class ReportAmministrativeEntity {
     private String note;
     private AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative;
 
+    public ReportAmministrativeEntity() {
+    }
+
     public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note) {
         this.idRepAmministrative = idRepAmministrative;
         this.qualifica = qualifica;
