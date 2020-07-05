@@ -4,18 +4,22 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { AuthService } from 'app/core/auth/auth.service';
 import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
+import {ConfigModule} from './config/config-entry-point.service';
+import {HttpTokenInterceptor} from './config/http-token.interceptor';
 
 @NgModule({
     imports  : [
         HttpClientModule
     ],
     providers: [
+        ConfigModule.init(),
         AuthService,
         {
             provide : HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi   : true
-        }
+        },
+        // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     ]
 })
 export class CoreModule

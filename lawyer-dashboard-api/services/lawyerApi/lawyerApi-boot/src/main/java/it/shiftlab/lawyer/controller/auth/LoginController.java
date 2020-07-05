@@ -1,9 +1,7 @@
 package it.shiftlab.lawyer.controller.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import it.shiftlab.lawyer.models.GenericResponseMessage;
 import it.shiftlab.lawyer.models.JwtAuthenticationResponse;
-import it.shiftlab.lawyer.dto.UserDTO;
 import it.shiftlab.lawyer.security.JwtAuthenticationRequest;
 import it.shiftlab.lawyer.service.UserService;
 import it.shiftlab.lawyer.utils.JwtTokenUtil;
@@ -12,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,14 +19,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.util.Locale;
-import java.util.UUID;
 
 @RestController
 public class LoginController {
@@ -76,7 +68,7 @@ public class LoginController {
         final String token = jwtTokenUtil.generateToken(userDetails, device);
         response.setHeader(tokenHeader,token);
         // Ritorno il token
-        return ResponseEntity.ok(new JwtAuthenticationResponse(userDetails.getUsername(),userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(userDetails.getUsername(),userDetails.getAuthorities(), token));
     }
 //
 //    @PostMapping(value = "public/registration")

@@ -28,4 +28,10 @@ public class AnagraficaController {
         anagraficaService.saveAnagrafica(anagraficaDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("public/updateAnagrafica")
+    public ResponseEntity<?> updateAnagrafica(@RequestBody AnagraficaDto anagraficaDto) {
+        anagraficaService.updateAnagrafica(anagraficaDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

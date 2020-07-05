@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TreoMediaWatcherService } from '@treo/services/media-watcher';
 import { TreoNavigationService } from '@treo/components/navigation';
+import {AuthenticationService} from '../../../../core/auth/authentication.service';
 
 @Component({
     selector     : 'classy-layout',
@@ -31,7 +32,8 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
         private _activatedRoute: ActivatedRoute,
         private _treoMediaWatcherService: TreoMediaWatcherService,
         private _treoNavigationService: TreoNavigationService,
-        private _router: Router
+        private _router: Router,
+        private _auth: AuthenticationService
     )
     {
         // Set the private defaults

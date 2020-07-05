@@ -24,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @EnableWebSecurity
@@ -61,9 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-control-expose-headers",
+                "Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type",
+                "Authorization", "X-Auth"));
         configuration.addAllowedOrigin("*");
         configuration.setAllowedMethods(Arrays.asList("POST, PUT, GET, OPTIONS, DELETE"));
-        configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

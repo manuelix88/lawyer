@@ -14,10 +14,12 @@ public class JwtAuthenticationResponse implements Serializable {
 
     private final String username;
     Collection<? extends GrantedAuthority> authorities;
+    private final String token;
 
-    public JwtAuthenticationResponse(String username, Collection<? extends GrantedAuthority> authorities) {
+    public JwtAuthenticationResponse(String username, Collection<? extends GrantedAuthority> authorities, String token) {
         this.username = username;
         this.authorities = authorities;
+        this.token = token;
     }
 
     public String getUsername() {
@@ -30,5 +32,9 @@ public class JwtAuthenticationResponse implements Serializable {
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

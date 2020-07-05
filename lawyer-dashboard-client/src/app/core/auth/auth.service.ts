@@ -32,12 +32,12 @@ export class AuthService
      */
     set accessToken(token: string)
     {
-        localStorage.setItem('access_token', token);
+        sessionStorage.setItem('access_token', token);
     }
 
     get accessToken(): string
     {
-        return localStorage.getItem('access_token');
+        return sessionStorage.getItem('access_token');
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ export class AuthService
      *
      * @param credentials
      */
-    signIn(credentials: { email: string, password: string }): Observable<any>
+    signIn(credentials: { username: string, password: string }): Observable<any>
     {
         // Throw error, if the user is already logged in
         if ( this._authenticated )
@@ -57,11 +57,12 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post('http://localhost:8080/public/login', credentials).pipe(
             switchMap((response: any) => {
 
+                console.log(response.headers.get('X-Auth'));
                 // Store the access token in the local storage
-                this.accessToken = response.access_token;
+                this.accessToken = response.headers.get('X-Auth');
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
@@ -77,27 +78,8 @@ export class AuthService
      */
     signInUsingToken(): Observable<any>
     {
-        // Renew token
-        return this._httpClient.post('api/auth/refresh-access-token', {
-            access_token: this.accessToken
-        }).pipe(
-            catchError(() => {
 
-                // Return false
-                return of(false);
-            }),
-            switchMap((response: any) => {
-
-                // Store the access token in the local storage
-                this.accessToken = response.access_token;
-
-                // Set the authenticated flag to true
-                this._authenticated = true;
-
-                // Return true
-                return of(true);
-            })
-        );
+        return of(true);
     }
 
     /**

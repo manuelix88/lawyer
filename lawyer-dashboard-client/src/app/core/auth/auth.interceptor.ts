@@ -30,6 +30,14 @@ export class AuthInterceptor implements HttpInterceptor
         // Clone the request object
         let newReq = req.clone();
 
+
+        const headersConfig = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        };
+        if (this._authService.accessToken) {
+            headersConfig['authorization'] = `Bearer ${this._authService.accessToken}`;
+        }
         // Request
         //
         // If the access token didn't expire, add the Authorization header.
@@ -38,12 +46,10 @@ export class AuthInterceptor implements HttpInterceptor
         // for the protected API routes which our response interceptor will
         // catch and delete the access token from the local storage while logging
         // the user out from the app.
-        if ( this._authService.accessToken && !AuthUtils.isTokenExpired(this._authService.accessToken) )
-        {
-            newReq = req.clone({
-                headers: req.headers.set('Authorization', 'Bearer ' + this._authService.accessToken)
-            });
-        }
+        // if ( this._authService.accessToken && !AuthUtils.isTokenExpired(this._authService.accessToken) )
+        // {
+            newReq = req.clone({ setHeaders: headersConfig });
+        // }
 
         // Response
         return next.handle(newReq).pipe(

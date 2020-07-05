@@ -95,10 +95,10 @@ export class InitialDataResolver implements Resolve<any>
             this._loadNavigation(),
 
             // Notifications
-            this._loadNotifications(),
+            // this._loadNotifications(),
 
             // Shortcuts
-            this._loadShortcuts(),
+            // this._loadShortcuts(),
 
             // User
             this._loadUser()
@@ -113,9 +113,9 @@ export class InitialDataResolver implements Resolve<any>
                         futuristic: data[1].futuristic,
                         horizontal: data[1].horizontal
                     },
-                    notifications: data[2].notifications,
-                    shortcuts    : data[3].shortcuts,
-                    user         : data[4].user
+                    // notifications: data[2].notifications,
+                    // shortcuts    : data[3].shortcuts,
+                    // user         : data[4].user
                 };
             })
         );

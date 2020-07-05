@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TreoAnimations } from '@treo/animations';
 import { AuthService } from 'app/core/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {AuthenticationService} from '../../../core/auth/authentication.service';
 
 @Component({
     selector     : 'auth-sign-in',
@@ -27,6 +28,7 @@ export class AuthSignInComponent implements OnInit
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
+        private _authLawyerService: AuthenticationService,
         private _formBuilder: FormBuilder,
         private _router: Router
     )
@@ -46,8 +48,8 @@ export class AuthSignInComponent implements OnInit
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['emanuele.aprea@gmail.com'],
-            password  : ['admin'],
+            username     : [''],
+            password  : [''],
             rememberMe: ['']
         });
     }
@@ -59,7 +61,7 @@ export class AuthSignInComponent implements OnInit
     /**
      * Sign in
      */
-    signIn(): void
+    async signIn()
     {
         // Disable the form
         this.signInForm.disable();
@@ -70,8 +72,7 @@ export class AuthSignInComponent implements OnInit
         // Get the credentials
         const credentials = this.signInForm.value;
 
-        // Sign in
-        this._authService.signIn(credentials)
+        this._authLawyerService.signIn(credentials)
             .subscribe(() => {
 
                 // Set the redirect url.
@@ -83,7 +84,7 @@ export class AuthSignInComponent implements OnInit
                 // Navigate to the redirect url
                 this._router.navigateByUrl(redirectURL);
 
-            }, (response) => {
+            },  (response) => {
 
                 // Re-enable the form
                 this.signInForm.enable();
