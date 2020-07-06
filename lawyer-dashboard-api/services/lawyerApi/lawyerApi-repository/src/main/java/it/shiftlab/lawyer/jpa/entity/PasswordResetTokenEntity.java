@@ -2,6 +2,7 @@ package it.shiftlab.lawyer.jpa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -23,13 +24,28 @@ public class PasswordResetTokenEntity {
     private Date expiryDate;
 
     public PasswordResetTokenEntity() {
+        super();
     }
 
-    public PasswordResetTokenEntity(String token, UsersEntity user) {
+    public PasswordResetTokenEntity(final String token) {
+        super();
+        this.token = token;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
+    }
+
+    public PasswordResetTokenEntity(final String token, final UsersEntity user) {
+        super();
         this.token = token;
         this.user = user;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
+    private Date calculateExpiryDate(final int expiryTimeInMinutes) {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(new Date().getTime());
+        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+        return new Date(cal.getTime().getTime());
+    }
     public Long getId() {
         return id;
     }

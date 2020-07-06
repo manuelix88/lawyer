@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TreoAnimations } from '@treo/animations';
+import {ForgotPasswordService} from '../../../core/auth/forgot-password.service';
 
 @Component({
     selector     : 'auth-forgot-password',
@@ -20,7 +21,7 @@ export class AuthForgotPasswordComponent implements OnInit
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder, private _forgotPasswordservice: ForgotPasswordService
     )
     {
         // Set the defaults
@@ -49,7 +50,8 @@ export class AuthForgotPasswordComponent implements OnInit
     /**
      * Send the reset link
      */
-    sendResetLink(): void
+    // tslint:disable-next-line:typedef
+    async sendResetLink()
     {
         // Do nothing if the form is invalid
         if ( this.forgotPasswordForm.invalid )
@@ -64,24 +66,43 @@ export class AuthForgotPasswordComponent implements OnInit
         this.message = null;
 
         // Do your action here...
+        await this._forgotPasswordservice.resetPassword(this.forgotPasswordForm.value)
+            .then( value => {
+                // Re-enable the form
+                this.forgotPasswordForm.enable();
 
+                // Reset the form
+                this.forgotPasswordForm.reset({});
+
+                // Show the message
+                this.message = {
+                    appearance: 'outline',
+                    content   : 'Password reset sent! You\'ll receive an email if you are registered on our system.',
+                    shake     : false,
+                    showIcon  : false,
+                    type      : 'success'
+                };
+            })
+            .catch(error => {
+
+            });
         // Emulate server delay
-        setTimeout(() => {
-
-            // Re-enable the form
-            this.forgotPasswordForm.enable();
-
-            // Reset the form
-            this.forgotPasswordForm.reset({});
-
-            // Show the message
-            this.message = {
-                appearance: 'outline',
-                content   : 'Password reset sent! You\'ll receive an email if you are registered on our system.',
-                shake     : false,
-                showIcon  : false,
-                type      : 'success'
-            };
-        }, 1000);
+        // setTimeout(() => {
+        //
+        //     // Re-enable the form
+        //     this.forgotPasswordForm.enable();
+        //
+        //     // Reset the form
+        //     this.forgotPasswordForm.reset({});
+        //
+        //     // Show the message
+        //     this.message = {
+        //         appearance: 'outline',
+        //         content   : 'Password reset sent! You\'ll receive an email if you are registered on our system.',
+        //         shake     : false,
+        //         showIcon  : false,
+        //         type      : 'success'
+        //     };
+        // }, 1000);
     }
 }
