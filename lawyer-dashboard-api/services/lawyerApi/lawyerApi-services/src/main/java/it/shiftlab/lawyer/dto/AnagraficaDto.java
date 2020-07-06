@@ -28,13 +28,13 @@ public class AnagraficaDto {
 
     private String provincia;
 
-    private Date dataNasacita;
+    private Date dataNascita;
 
-    private ReportPatronatoDto reportPatronatoDto;
+    private ReportPatronatoDto reportPatronato;
 
-    private ReportAmministrativeDto reportAmministrativeDto;
+    private ReportAmministrativeDto reportAmministrative;
 
-    public AnagraficaDto(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNasacita, ReportPatronatoDto reportPatronatoDto, ReportAmministrativeDto reportAmministrativeDto) {
+    public AnagraficaDto(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNascita, ReportPatronatoDto reportPatronato, ReportAmministrativeDto reportAmministrative) {
         this.idAnagrafica = idAnagrafica;
         this.nome = nome;
         this.cognome = cognome;
@@ -44,9 +44,9 @@ public class AnagraficaDto {
         this.indirizzo = indirizzo;
         this.citta = citta;
         this.provincia = provincia;
-        this.dataNasacita = dataNasacita;
-        this.reportPatronatoDto = reportPatronatoDto;
-        this.reportAmministrativeDto = reportAmministrativeDto;
+        this.dataNascita = dataNascita;
+        this.reportPatronato = reportPatronato;
+        this.reportAmministrative = reportAmministrative;
     }
 
     public long getIdAnagrafica() {
@@ -121,27 +121,27 @@ public class AnagraficaDto {
         this.provincia = provincia;
     }
 
-    public Date getDataNasacita() {
-        return dataNasacita;
+    public Date getDataNascita() {
+        return dataNascita;
     }
 
-    public void setDataNasacita(Date dataNasacita) {
-        this.dataNasacita = dataNasacita;
+    public void setDataNascita(Date dataNascita) {
+        this.dataNascita = dataNascita;
     }
 
-    public ReportPatronatoDto getReportPatronatoDto() {
-        return reportPatronatoDto;
+    public ReportPatronatoDto getReportPatronato() {
+        return reportPatronato;
     }
 
-    public void setReportPatronatoDto(ReportPatronatoDto reportPatronatoDto) {
-        this.reportPatronatoDto = reportPatronatoDto;
+    public void setReportPatronato(ReportPatronatoDto reportPatronato) {
+        this.reportPatronato = reportPatronato;
     }
 
-    public ReportAmministrativeDto getReportAmministrativeDto() {
-        return reportAmministrativeDto;
+    public ReportAmministrativeDto getReportAmministrative() {
+        return reportAmministrative;
     }
 
-    public void setReportAmministrativeDto(ReportAmministrativeDto reportAmministrativeDto) {
-        this.reportAmministrativeDto = reportAmministrativeDto;
+    public void setReportAmministrative(ReportAmministrativeDto reportAmministrative) {
+        this.reportAmministrative = reportAmministrative;
     }
 }

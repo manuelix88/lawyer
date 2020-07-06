@@ -16,7 +16,7 @@ export class AuthenticationService {
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
     constructor(private api: ApiService, private jwtService: JwtService) { }
 
-    signIn(credentials): Observable<User>{
+    signIn(credentials): Observable<User> {
         return this.api.post('/public/login', credentials).pipe(map(
             (value: User) => {
                 this.jwtService.setToken(value.token);
@@ -33,8 +33,10 @@ export class AuthenticationService {
         const user: User = {username: jwtUser.sub}
         return user;
     }
+
     public getCurrentUser(): User {
         return this.currentUserSubject.value;
     }
+
 
 }

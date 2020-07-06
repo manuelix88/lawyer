@@ -31,7 +31,7 @@ public class AnagraficaFactory {
         return new ReportAmministrativeDto(entity.getIdRepAmministrative(),
                 entity.getQualifica(),
                 entity.getDataPagamento(),
-                entity.getNumeroFaldone(), entity.getRicordoCedu(), entity.getAltro(), entity.getNote());
+                entity.getNumeroFaldone(), entity.getRicordoCedu(), entity.getAltro(), entity.getNote(), entity.getDocumentazione());
     }
 
     public static ReportPatronatoDto mapRepPatronatoEntityToDto(ReportPatronatoEntity entity) {
@@ -54,7 +54,7 @@ public class AnagraficaFactory {
                 dto.getIndirizzo(),
                 dto.getCitta(),
                 dto.getProvincia(),
-                dto.getDataNasacita());
+                dto.getDataNascita());
 //                mapRepPatronatoDtoToEntity(dto.getReportPatronatoDto()),mapRepAmmDtoToEntity(dto.getReportAmministrativeDto()));
     }
     public static ReportPatronatoEntity mapRepPatronatoDtoToEntity(ReportPatronatoDto dto) {
@@ -72,6 +72,7 @@ public class AnagraficaFactory {
                 dto.getNumeroFaldone(),
                 dto.getRicordoCedu(),
                 dto.getAltro(),
-                dto.getNote());
+                dto.getNote(),
+                dto.getDocumentazione());
     }
 }

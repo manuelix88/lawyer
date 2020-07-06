@@ -14,12 +14,13 @@ public class ReportAmministrativeEntity {
     private String ricordoCedu;
     private String altro;
     private String note;
+    private String documentazione;
     private AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative;
 
     public ReportAmministrativeEntity() {
     }
 
-    public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note) {
+    public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, String documentazione) {
         this.idRepAmministrative = idRepAmministrative;
         this.qualifica = qualifica;
         this.dataPagamento = dataPagamento;
@@ -27,7 +28,9 @@ public class ReportAmministrativeEntity {
         this.ricordoCedu = ricordoCedu;
         this.altro = altro;
         this.note = note;
+        this.documentazione = documentazione;
     }
+
 
     public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative) {
         this.idRepAmministrative = idRepAmministrative;
@@ -111,6 +114,16 @@ public class ReportAmministrativeEntity {
         this.note = note;
     }
 
+    @Basic
+    @Column(name = "DOCUMENTAZIONE")
+    public String getDocumentazione() {
+        return documentazione;
+    }
+
+    public void setDocumentazione(String documentazione) {
+        this.documentazione = documentazione;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,12 +135,13 @@ public class ReportAmministrativeEntity {
                 Objects.equals(numeroFaldone, that.numeroFaldone) &&
                 Objects.equals(ricordoCedu, that.ricordoCedu) &&
                 Objects.equals(altro, that.altro) &&
-                Objects.equals(note, that.note);
+                Objects.equals(note, that.note) &&
+                Objects.equals(documentazione, that.documentazione);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idRepAmministrative, qualifica, dataPagamento, numeroFaldone, ricordoCedu, altro, note);
+        return Objects.hash(idRepAmministrative, qualifica, dataPagamento, numeroFaldone, ricordoCedu, altro, note, documentazione);
     }
 
     @OneToOne(mappedBy = "reportAmministrativeByIdRepAmministrative")

@@ -13,11 +13,11 @@
                 </div>
 
                 <!-- Title -->
-                <div class="title">Sign up</div>
+                <div class="title">Iscriviti</div>
                 <div class="subtitle">
-                    <span>Already have an account?</span>
+                    <span>Possiedi già un' account?</span>
                     <a class="link"
-                       [routerLink]="['/sign-in']">Sign in</a>
+                       [routerLink]="['/sign-in']">Accedi</a>
                 </div>
 
                 <!-- Message -->
@@ -33,19 +33,19 @@
                 <form [formGroup]="signUpForm">
 
                     <!-- Name field -->
-                    <mat-form-field>
-                        <mat-label>Full name</mat-label>
-                        <input id="name"
-                               matInput
-                               [formControlName]="'name'">
-                        <mat-error *ngIf="signUpForm.get('name').hasError('required')">
-                            Full name is required
-                        </mat-error>
-                    </mat-form-field>
+<!--                    <mat-form-field>-->
+<!--                        <mat-label>Full name</mat-label>-->
+<!--                        <input id="name"-->
+<!--                               matInput-->
+<!--                               [formControlName]="'name'">-->
+<!--                        <mat-error *ngIf="signUpForm.get('name').hasError('required')">-->
+<!--                            Full name is required-->
+<!--                        </mat-error>-->
+<!--                    </mat-form-field>-->
 
                     <!-- Email field -->
                     <mat-form-field>
-                        <mat-label>Email address</mat-label>
+                        <mat-label>Email</mat-label>
                         <input id="email"
                                matInput
                                [formControlName]="'email'">
@@ -80,25 +80,25 @@
                     </mat-form-field>
 
                     <!-- Company field -->
-                    <mat-form-field>
-                        <mat-label>Company</mat-label>
-                        <input id="company-confirm"
-                               matInput
-                               [formControlName]="'company'">
-                    </mat-form-field>
+<!--                    <mat-form-field>-->
+<!--                        <mat-label>Company</mat-label>-->
+<!--                        <input id="company-confirm"-->
+<!--                               matInput-->
+<!--                               [formControlName]="'company'">-->
+<!--                    </mat-form-field>-->
 
                     <!-- Field footer -->
-                    <div class="field-footer">
-                        <mat-checkbox [color]="'primary'"
-                                      [formControlName]="'agreements'">
-                            <span>I agree to the</span>
-                            <a class="link"
-                               [routerLink]="['./']">Terms of Service</a>
-                            <span>and</span>
-                            <a class="link"
-                               [routerLink]="['./']">Privacy Policy</a>
-                        </mat-checkbox>
-                    </div>
+<!--                    <div class="field-footer">-->
+<!--                        <mat-checkbox [color]="'primary'"-->
+<!--                                      [formControlName]="'agreements'">-->
+<!--                            <span>I agree to the</span>-->
+<!--                            <a class="link"-->
+<!--                               [routerLink]="['./']">Terms of Service</a>-->
+<!--                            <span>and</span>-->
+<!--                            <a class="link"-->
+<!--                               [routerLink]="['./']">Privacy Policy</a>-->
+<!--                        </mat-checkbox>-->
+<!--                    </div>-->
 
                     <!-- Submit button -->
                     <button class="submit-button treo-mat-button-large"
@@ -108,7 +108,7 @@
                             [disabled]="signUpForm.disabled"
                             (click)="signUp()">
                         <span *ngIf="!signUpForm.disabled">
-                            Create your free account
+                            Crea Account
                         </span>
                         <mat-progress-spinner *ngIf="signUpForm.disabled"
                                               [diameter]="24"

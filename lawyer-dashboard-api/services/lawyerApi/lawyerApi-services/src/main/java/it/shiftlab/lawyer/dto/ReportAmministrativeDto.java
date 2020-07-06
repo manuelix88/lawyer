@@ -16,8 +16,9 @@ public class ReportAmministrativeDto implements Serializable {
     private String ricordoCedu;
     private String altro;
     private String note;
+    private String documentazione;
 
-    public ReportAmministrativeDto(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note) {
+    public ReportAmministrativeDto(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, String documentazione) {
         this.idRepAmministrative = idRepAmministrative;
         this.qualifica = qualifica;
         this.dataPagamento = dataPagamento;
@@ -25,6 +26,7 @@ public class ReportAmministrativeDto implements Serializable {
         this.ricordoCedu = ricordoCedu;
         this.altro = altro;
         this.note = note;
+        this.documentazione = documentazione;
     }
 
     public long getIdRepAmministrative() {
@@ -81,5 +83,13 @@ public class ReportAmministrativeDto implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getDocumentazione() {
+        return documentazione;
+    }
+
+    public void setDocumentazione(String documentazione) {
+        this.documentazione = documentazione;
     }
 }

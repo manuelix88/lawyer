@@ -28,7 +28,6 @@ export class AuthSignInComponent implements OnInit
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
-        private _authLawyerService: AuthenticationService,
         private _formBuilder: FormBuilder,
         private _router: Router
     )
@@ -72,7 +71,7 @@ export class AuthSignInComponent implements OnInit
         // Get the credentials
         const credentials = this.signInForm.value;
 
-        this._authLawyerService.signIn(credentials)
+        this._authService.signIn(credentials)
             .subscribe(() => {
 
                 // Set the redirect url.
@@ -92,7 +91,7 @@ export class AuthSignInComponent implements OnInit
                 // Show the error message
                 this.message = {
                     appearance: 'outline',
-                    content   : response.error,
+                    content   : response.error.message,
                     shake     : true,
                     showIcon  : false,
                     type      : 'error'

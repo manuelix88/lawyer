@@ -1,15 +1,48 @@
 import { Component, OnInit } from '@angular/core';
+import {CustomerService} from '../../customer-service/customer.service';
+import {AnagraficaCliente} from '../model/anagrafica-cliente';
+import {TreoAnimations} from '../../../../../@treo/animations';
 
 @Component({
-  selector: 'app-add-customer',
-  templateUrl: './add-customer.component.html',
-  styleUrls: ['./add-customer.component.scss']
+    selector: 'add-customer',
+    templateUrl: './add-customer.component.html',
+    styleUrls: ['./add-customer.component.scss'],
+    animations   : TreoAnimations
 })
 export class AddCustomerComponent implements OnInit {
+    message: any;
+    anagrafica = new AnagraficaCliente();
+    constructor(private customer: CustomerService) { }
 
-  constructor() { }
+    ngOnInit(): void {
+        this.message = null;
+    }
 
-  ngOnInit(): void {
-  }
+    // tslint:disable-next-line:typedef
+    async sendForm($event: AnagraficaCliente) {
+        await this.customer.addAnagrafica($event)
+            .then(value => {
 
+                // Show the error message
+                this.message = {
+                    appearance: 'outline',
+                    content   : 'Operazione effettuata con successo',
+                    shake     : true,
+                    showIcon  : false,
+                    type      : 'success'
+                };
+
+            })
+            .catch(error => {
+                this.message = {
+                    appearance: 'outline',
+                    content   : error.message,
+                    shake     : true,
+                    showIcon  : false,
+                    type      : 'error'
+                };
+
+                this.anagrafica = $event;
+            })
+    }
 }

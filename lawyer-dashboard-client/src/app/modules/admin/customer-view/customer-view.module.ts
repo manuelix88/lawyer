@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -28,7 +29,8 @@ import {MatTabsModule} from '@angular/material/tabs';
         MatButtonModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatTabsModule
+        MatTabsModule,
+        FormsModule
     ],
     providers: [
         MatDatepickerModule,

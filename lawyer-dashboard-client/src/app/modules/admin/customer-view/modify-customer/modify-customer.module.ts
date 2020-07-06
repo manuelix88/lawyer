@@ -4,6 +4,7 @@ import {ModifyCustomerComponent} from './modify-customer/modify-customer.compone
 import {CustomerViewModule} from '../customer-view.module';
 import {RouterModule} from '@angular/router';
 import {modifyCustomerRouting} from './modify-customer.routing';
+import {TreoMessageModule} from '../../../../../@treo/components/message';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {modifyCustomerRouting} from './modify-customer.routing';
     imports: [
         CommonModule,
         RouterModule.forChild(modifyCustomerRouting),
-        CustomerViewModule
+        CustomerViewModule,
+        TreoMessageModule
     ]
 })
 export class ModifyCustomerModule { }

@@ -10,6 +10,7 @@ import {RouterModule} from '@angular/router';
 import {addCustomerRouting} from './add-customer.routing';
 import {MatButtonModule} from '@angular/material/button';
 import {CustomerViewModule} from '../customer-view.module';
+import {TreoMessageModule} from '../../../../../@treo/components/message';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {CustomerViewModule} from '../customer-view.module';
         MatInputModule,
         MatSelectModule,
         MatButtonModule,
-        CustomerViewModule
+        CustomerViewModule,
+        TreoMessageModule
     ]
 })
 export class AddCustomerModule { }

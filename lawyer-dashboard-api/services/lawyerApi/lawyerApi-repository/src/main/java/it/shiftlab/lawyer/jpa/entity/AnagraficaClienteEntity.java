@@ -23,7 +23,9 @@ public class AnagraficaClienteEntity {
     public AnagraficaClienteEntity() {
     }
 
-    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNasacita, ReportPatronatoEntity reportPatronatoByIdRepPatronato, ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
+    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
+                                   String nazione, String indirizzo, String citta, String provincia, Date dataNasacita,
+                                   ReportPatronatoEntity reportPatronatoByIdRepPatronato, ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
         this.idAnagrafica = idAnagrafica;
         this.nome = nome;
         this.cognome = cognome;
@@ -38,7 +40,8 @@ public class AnagraficaClienteEntity {
         this.reportAmministrativeByIdRepAmministrative = reportAmministrativeByIdRepAmministrative;
     }
 
-    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNasacita) {
+    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia,
+                                   Date dataNasacita) {
         this.idAnagrafica = idAnagrafica;
         this.nome = nome;
         this.cognome = cognome;

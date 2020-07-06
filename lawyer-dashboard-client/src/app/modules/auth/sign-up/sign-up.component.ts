@@ -102,7 +102,7 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
             // Show the message
             this.message = {
                 appearance: 'outline',
-                content   : 'Your account has been created and a confirmation mail has been sent to your email address.',
+                content   : 'Il tuo account è stato correttamente creato. ',
                 shake     : false,
                 showIcon  : false,
                 type      : 'success'

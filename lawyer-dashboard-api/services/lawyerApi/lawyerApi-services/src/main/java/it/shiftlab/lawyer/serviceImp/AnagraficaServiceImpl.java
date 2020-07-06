@@ -46,14 +46,14 @@ public class AnagraficaServiceImpl implements AnagraficaService {
     public void saveAnagrafica(AnagraficaDto anagraficaDto) {
         Optional<AnagraficaClienteEntity> byCodiceFiscale = anagraficaRepository.findByCodiceFiscale(anagraficaDto.getCodiceFiscale());
 
-        if (byCodiceFiscale.isPresent()) {
+        if (byCodiceFiscale.isPresent() && byCodiceFiscale.get().getCodiceFiscale() != null) {
             throw new DataAlreadyExistException("Esiste già un utente con il seguente codice fiscale " + anagraficaDto.getCodiceFiscale());
         }
         AnagraficaClienteEntity entity = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
-        ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrativeDto());
+        ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrative());
         ReportAmministrativeEntity save = reportAmministrativeRepository.save(repAmm);
         entity.setReportAmministrativeByIdRepAmministrative(save);
-        ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronatoDto());
+        ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronato());
         ReportPatronatoEntity savePatronato = reportPatronatoRepository.save(patronatoEntity);
         entity.setReportPatronatoByIdRepPatronato(savePatronato);
         anagraficaRepository.save(entity);
@@ -69,10 +69,12 @@ public class AnagraficaServiceImpl implements AnagraficaService {
         }
 
         AnagraficaClienteEntity entity = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
-        ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrativeDto());
-        entity.setReportAmministrativeByIdRepAmministrative(repAmm);
-        ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronatoDto());
-        entity.setReportPatronatoByIdRepPatronato(patronatoEntity);
+        ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrative());
+        ReportAmministrativeEntity save = reportAmministrativeRepository.save(repAmm);
+        entity.setReportAmministrativeByIdRepAmministrative(save);
+        ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronato());
+        ReportPatronatoEntity savePatronato = reportPatronatoRepository.save(patronatoEntity);
+        entity.setReportPatronatoByIdRepPatronato(savePatronato);
         anagraficaRepository.save(entity);
     }
 }
