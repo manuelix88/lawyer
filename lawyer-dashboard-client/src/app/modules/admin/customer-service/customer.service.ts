@@ -12,19 +12,19 @@ export class CustomerService {
 
     addAnagrafica(req): Promise<any> {
         return new Promise<any>((res, rej) => {
-            this.api.post('/public/addAnagrafica', req).subscribe(success => res(success), error => rej(error));
+            this.api.post('/protected/addAnagrafica', req).subscribe(success => res(success), error => rej(error));
         });
     }
 
     updateAnagrafica(req): Promise<any> {
         return new Promise<any>((res, rej) => {
-            this.api.post('/public/updateAnagrafica', req).subscribe(success => res(success), error => rej(error));
+            this.api.post('/protected/updateAnagrafica', req).subscribe(success => res(success), error => rej(error));
         });
     }
 
     getAnagraficaById(req): Promise<AnagraficaCliente> {
       return new Promise<AnagraficaCliente>((res, rej) => {
-          this.api.get('/public/retrieveAnagraficaById', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
+          this.api.get('/protected/retrieveAnagraficaById', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
       });
     }
 }

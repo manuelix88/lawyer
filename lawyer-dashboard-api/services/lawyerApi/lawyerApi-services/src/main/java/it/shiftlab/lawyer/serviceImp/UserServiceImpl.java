@@ -2,6 +2,7 @@ package it.shiftlab.lawyer.serviceImp;
 
 import it.shiftlab.lawyer.dto.UserDTO;
 import it.shiftlab.lawyer.exception.clazz.UserAlreadyExistException;
+import it.shiftlab.lawyer.exception.clazz.UserNotFound;
 import it.shiftlab.lawyer.jpa.entity.AuthoritiesEntity;
 import it.shiftlab.lawyer.jpa.entity.AuthorityName;
 import it.shiftlab.lawyer.jpa.entity.PasswordResetTokenEntity;
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -41,16 +43,16 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistException("There is an account with that email address: " + userDto.getEmail());
         }
 
-        AuthoritiesEntity authorityAdmin = new AuthoritiesEntity();
-        authorityAdmin.setName(AuthorityName.ROLE_ADMIN);
-        authorityAdmin = authorityRepository.save(authorityAdmin);
+//        AuthoritiesEntity authorityAdmin = new AuthoritiesEntity();
+//        authorityAdmin.setName(AuthorityName.ROLE_ADMIN);
+//        authorityAdmin = authorityRepository.save(authorityAdmin);
 
         AuthoritiesEntity authorityUser = new AuthoritiesEntity();
         authorityUser.setName(AuthorityName.ROLE_USER);
         authorityUser = authorityRepository.save(authorityUser);
 
 
-        List<AuthoritiesEntity> authorities = Arrays.asList(new AuthoritiesEntity[]{authorityAdmin, authorityUser});
+        List<AuthoritiesEntity> authorities = Arrays.asList(new AuthoritiesEntity[]{authorityUser});
 
         UsersEntity user = new UsersEntity();
         user.setAuthorities(authorities);
@@ -65,6 +67,16 @@ public class UserServiceImpl implements UserService {
         UsersEntity userEntiy = userRepository.findByUsername(user.getUsername());
         PasswordResetTokenEntity myToken = new PasswordResetTokenEntity(token, userEntiy);
         passwordTokenRepository.save(myToken);
+    }
+
+    @Override
+    public void changeUserPassword(UserDTO userDto) {
+        UsersEntity byUsername = userRepository.findByUsername(userDto.getEmail());
+        if (byUsername == null) {
+            throw new UserNotFound("Questo utente non esiste: " + userDto.getEmail());
+        }
+        byUsername.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(byUsername);
     }
 
     @Override

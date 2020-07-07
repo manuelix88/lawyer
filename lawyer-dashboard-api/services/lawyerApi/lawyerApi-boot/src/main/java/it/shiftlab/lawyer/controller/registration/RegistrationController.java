@@ -7,6 +7,7 @@ import it.shiftlab.lawyer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -67,6 +68,7 @@ public class RegistrationController {
         mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, userDetails));
         return ResponseEntity.ok(new GenericResponseMessage("ok", "ok"));
     }
+
     private SimpleMailMessage constructResetTokenEmail(
             String contextPath, Locale locale, String token, UserDetails user) {
         String url = contextPath + "/public/changePassword?token=" + token;
@@ -86,6 +88,12 @@ public class RegistrationController {
             String message = messages.getMessage("auth.message." + result, null, locale);
             }
         return null;
+    }
+
+    @PostMapping("/public/savePassword")
+    public ResponseEntity<?> savePassword(@Valid UserDTO userDto) {
+        userService.changeUserPassword(userDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private SimpleMailMessage constructEmail(String subject, String body,

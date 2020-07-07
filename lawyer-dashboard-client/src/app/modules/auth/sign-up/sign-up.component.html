@@ -75,30 +75,32 @@
                                       [svgIcon]="'visibility_off'"></mat-icon>
                         </button>
                         <mat-error>
-                            Password is required
+                            La Password è obbligatoria
                         </mat-error>
                     </mat-form-field>
-
-                    <!-- Company field -->
-<!--                    <mat-form-field>-->
-<!--                        <mat-label>Company</mat-label>-->
-<!--                        <input id="company-confirm"-->
-<!--                               matInput-->
-<!--                               [formControlName]="'company'">-->
-<!--                    </mat-form-field>-->
-
-                    <!-- Field footer -->
-<!--                    <div class="field-footer">-->
-<!--                        <mat-checkbox [color]="'primary'"-->
-<!--                                      [formControlName]="'agreements'">-->
-<!--                            <span>I agree to the</span>-->
-<!--                            <a class="link"-->
-<!--                               [routerLink]="['./']">Terms of Service</a>-->
-<!--                            <span>and</span>-->
-<!--                            <a class="link"-->
-<!--                               [routerLink]="['./']">Privacy Policy</a>-->
-<!--                        </mat-checkbox>-->
-<!--                    </div>-->
+                    <mat-form-field>
+                        <mat-label>Password (Confirma)</mat-label>
+                        <input id="password-confirm"
+                               matInput
+                               type="password"
+                               [formControlName]="'passwordConfirm'"
+                               #passwordConfirmField>
+                        <button mat-icon-button
+                                (click)="passwordConfirmField.type === 'password' ? passwordConfirmField.type = 'text' : passwordConfirmField.type = 'password'"
+                                tabindex="-1"
+                                matSuffix>
+                            <mat-icon *ngIf="passwordConfirmField.type === 'password'"
+                                      [svgIcon]="'visibility'"></mat-icon>
+                            <mat-icon *ngIf="passwordConfirmField.type === 'text'"
+                                      [svgIcon]="'visibility_off'"></mat-icon>
+                        </button>
+                        <mat-error *ngIf="signUpForm.get('passwordConfirm').hasError('required')">
+                            La Password di conferma è obbligatoria
+                        </mat-error>
+                        <mat-error *ngIf="signUpForm.get('passwordConfirm').hasError('mustMatch')">
+                            Le Password non coincidono
+                        </mat-error>
+                    </mat-form-field>
 
                     <!-- Submit button -->
                     <button class="submit-button treo-mat-button-large"

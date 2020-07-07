@@ -12,4 +12,6 @@ public interface UserService {
     UsersEntity registerNewUserAccount(UserDTO userDto) throws UserAlreadyExistException;
 
     void createPasswordResetTokenForUser(UserDetails user, String token);
+
+    void changeUserPassword(UserDTO userDto);
 }

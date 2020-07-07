@@ -1,9 +1,7 @@
 package it.shiftlab.lawyer.exception.clazz;
 
-public class UserAlreadyExistException extends RuntimeException{
+public class UserAlreadyExistException extends DataAlreadyExistException{
 
-    public UserAlreadyExistException() {
-    }
 
     public UserAlreadyExistException(String username) {
         super(username);

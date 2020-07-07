@@ -18,18 +18,18 @@ public class AnagraficaController {
         this.anagraficaService = anagraficaService;
     }
 
-    @GetMapping("public/retrieveAnagraficaById")
+    @GetMapping("protected/retrieveAnagraficaById")
     public ResponseEntity<AnagraficaDto> retrieveAnagraficaById(@RequestParam("anagraficaId") long id) {
         return ResponseEntity.ok(anagraficaService.findById(id));
     }
 
-    @PostMapping("public/addAnagrafica")
+    @PostMapping("protected/addAnagrafica")
     public ResponseEntity<?> addAnagrafica(@RequestBody AnagraficaDto anagraficaDto) {
         anagraficaService.saveAnagrafica(anagraficaDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("public/updateAnagrafica")
+    @PostMapping("protected/updateAnagrafica")
     public ResponseEntity<?> updateAnagrafica(@RequestBody AnagraficaDto anagraficaDto) {
         anagraficaService.updateAnagrafica(anagraficaDto);
         return new ResponseEntity<>(HttpStatus.OK);
