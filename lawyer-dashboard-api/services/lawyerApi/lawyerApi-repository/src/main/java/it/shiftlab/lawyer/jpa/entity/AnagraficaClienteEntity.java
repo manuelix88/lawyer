@@ -5,58 +5,23 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "anagrafica_cliente", schema = "lawyer_", catalog = "")
+@Table(name = "anagrafica_cliente", schema = "lawyer2", catalog = "")
 public class AnagraficaClienteEntity {
     private long idAnagrafica;
-    private String nome;
-    private String cognome;
-    private String email;
-    private String codiceFiscale;
-    private String nazione;
-    private String indirizzo;
     private String citta;
-    private String provincia;
+    private String codiceFiscale;
+    private String cognome;
     private Date dataNasacita;
-    private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
+    private String email;
+    private String indirizzo;
+    private String nazione;
+    private String nome;
+    private String provincia;
     private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
-
-    public AnagraficaClienteEntity() {
-    }
-
-    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
-                                   String nazione, String indirizzo, String citta, String provincia, Date dataNasacita,
-                                   ReportPatronatoEntity reportPatronatoByIdRepPatronato, ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
-        this.idAnagrafica = idAnagrafica;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.codiceFiscale = codiceFiscale;
-        this.nazione = nazione;
-        this.indirizzo = indirizzo;
-        this.citta = citta;
-        this.provincia = provincia;
-        this.dataNasacita = dataNasacita;
-        this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
-        this.reportAmministrativeByIdRepAmministrative = reportAmministrativeByIdRepAmministrative;
-    }
-
-    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia,
-                                   Date dataNasacita) {
-        this.idAnagrafica = idAnagrafica;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.codiceFiscale = codiceFiscale;
-        this.nazione = nazione;
-        this.indirizzo = indirizzo;
-        this.citta = citta;
-        this.provincia = provincia;
-        this.dataNasacita = dataNasacita;
-    }
+    private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
 
     @Id
-    @Column(name = "ID_ANAGRAFICA")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_anagrafica")
     public long getIdAnagrafica() {
         return idAnagrafica;
     }
@@ -66,67 +31,7 @@ public class AnagraficaClienteEntity {
     }
 
     @Basic
-    @Column(name = "NOME")
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @Basic
-    @Column(name = "COGNOME")
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    @Basic
-    @Column(name = "EMAIL")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Basic
-    @Column(name = "CODICE_FISCALE")
-    public String getCodiceFiscale() {
-        return codiceFiscale;
-    }
-
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
-    }
-
-    @Basic
-    @Column(name = "NAZIONE")
-    public String getNazione() {
-        return nazione;
-    }
-
-    public void setNazione(String nazione) {
-        this.nazione = nazione;
-    }
-
-    @Basic
-    @Column(name = "INDIRIZZO")
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
-    @Basic
-    @Column(name = "CITTA")
+    @Column(name = "citta")
     public String getCitta() {
         return citta;
     }
@@ -136,17 +41,27 @@ public class AnagraficaClienteEntity {
     }
 
     @Basic
-    @Column(name = "PROVINCIA")
-    public String getProvincia() {
-        return provincia;
+    @Column(name = "codice_fiscale")
+    public String getCodiceFiscale() {
+        return codiceFiscale;
     }
 
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
+    public void setCodiceFiscale(String codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
     }
 
     @Basic
-    @Column(name = "DATA_NASACITA")
+    @Column(name = "cognome")
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    @Basic
+    @Column(name = "data_nasacita")
     public Date getDataNasacita() {
         return dataNasacita;
     }
@@ -155,45 +70,95 @@ public class AnagraficaClienteEntity {
         this.dataNasacita = dataNasacita;
     }
 
+    @Basic
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Basic
+    @Column(name = "indirizzo")
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    @Basic
+    @Column(name = "nazione")
+    public String getNazione() {
+        return nazione;
+    }
+
+    public void setNazione(String nazione) {
+        this.nazione = nazione;
+    }
+
+    @Basic
+    @Column(name = "nome")
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Basic
+    @Column(name = "provincia")
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AnagraficaClienteEntity entity = (AnagraficaClienteEntity) o;
         return idAnagrafica == entity.idAnagrafica &&
-                Objects.equals(nome, entity.nome) &&
-                Objects.equals(cognome, entity.cognome) &&
-                Objects.equals(email, entity.email) &&
-                Objects.equals(codiceFiscale, entity.codiceFiscale) &&
-                Objects.equals(nazione, entity.nazione) &&
-                Objects.equals(indirizzo, entity.indirizzo) &&
                 Objects.equals(citta, entity.citta) &&
-                Objects.equals(provincia, entity.provincia) &&
-                Objects.equals(dataNasacita, entity.dataNasacita);
+                Objects.equals(codiceFiscale, entity.codiceFiscale) &&
+                Objects.equals(cognome, entity.cognome) &&
+                Objects.equals(dataNasacita, entity.dataNasacita) &&
+                Objects.equals(email, entity.email) &&
+                Objects.equals(indirizzo, entity.indirizzo) &&
+                Objects.equals(nazione, entity.nazione) &&
+                Objects.equals(nome, entity.nome) &&
+                Objects.equals(provincia, entity.provincia);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idAnagrafica, nome, cognome, email, codiceFiscale, nazione, indirizzo, citta, provincia, dataNasacita);
+        return Objects.hash(idAnagrafica, citta, codiceFiscale, cognome, dataNasacita, email, indirizzo, nazione, nome, provincia);
     }
 
     @OneToOne
-    @JoinColumn(name = "ID_REP_PATRONATO", referencedColumnName = "ID_REP_PATRONATO")
-    public ReportPatronatoEntity getReportPatronatoByIdRepPatronato() {
-        return reportPatronatoByIdRepPatronato;
-    }
-
-    public void setReportPatronatoByIdRepPatronato(ReportPatronatoEntity reportPatronatoByIdRepPatronato) {
-        this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "ID_REP_AMMINISTRATIVE", referencedColumnName = "ID_REP_AMMINISTRATIVE")
+    @JoinColumn(name = "id_rep_amministrative", referencedColumnName = "id_rep_amministrative")
     public ReportAmministrativeEntity getReportAmministrativeByIdRepAmministrative() {
         return reportAmministrativeByIdRepAmministrative;
     }
 
     public void setReportAmministrativeByIdRepAmministrative(ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
         this.reportAmministrativeByIdRepAmministrative = reportAmministrativeByIdRepAmministrative;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "id_rep_patronato", referencedColumnName = "id_rep_patronato")
+    public ReportPatronatoEntity getReportPatronatoByIdRepPatronato() {
+        return reportPatronatoByIdRepPatronato;
+    }
+
+    public void setReportPatronatoByIdRepPatronato(ReportPatronatoEntity reportPatronatoByIdRepPatronato) {
+        this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
     }
 }

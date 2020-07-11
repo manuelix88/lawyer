@@ -5,47 +5,20 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "REPORT_AMMINISTRATIVE", schema = "lawyer_", catalog = "")
+@Table(name = "report_amministrative", schema = "lawyer2", catalog = "")
 public class ReportAmministrativeEntity {
     private long idRepAmministrative;
-    private String qualifica;
-    private Date dataPagamento;
-    private Integer numeroFaldone;
-    private String ricordoCedu;
     private String altro;
+    private Date dataPagamento;
     private String note;
+    private Integer numeroFaldone;
+    private String qualifica;
+    private String ricordoCedu;
     private String documentazione;
     private AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative;
 
-    public ReportAmministrativeEntity() {
-    }
-
-    public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, String documentazione) {
-        this.idRepAmministrative = idRepAmministrative;
-        this.qualifica = qualifica;
-        this.dataPagamento = dataPagamento;
-        this.numeroFaldone = numeroFaldone;
-        this.ricordoCedu = ricordoCedu;
-        this.altro = altro;
-        this.note = note;
-        this.documentazione = documentazione;
-    }
-
-
-    public ReportAmministrativeEntity(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative) {
-        this.idRepAmministrative = idRepAmministrative;
-        this.qualifica = qualifica;
-        this.dataPagamento = dataPagamento;
-        this.numeroFaldone = numeroFaldone;
-        this.ricordoCedu = ricordoCedu;
-        this.altro = altro;
-        this.note = note;
-        this.anagraficaClientesByIdRepAmministrative = anagraficaClientesByIdRepAmministrative;
-    }
-
     @Id
-    @Column(name = "ID_REP_AMMINISTRATIVE")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rep_amministrative")
     public long getIdRepAmministrative() {
         return idRepAmministrative;
     }
@@ -55,47 +28,7 @@ public class ReportAmministrativeEntity {
     }
 
     @Basic
-    @Column(name = "QUALIFICA")
-    public String getQualifica() {
-        return qualifica;
-    }
-
-    public void setQualifica(String qualifica) {
-        this.qualifica = qualifica;
-    }
-
-    @Basic
-    @Column(name = "DATA_PAGAMENTO")
-    public Date getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
-    }
-
-    @Basic
-    @Column(name = "NUMERO_FALDONE")
-    public Integer getNumeroFaldone() {
-        return numeroFaldone;
-    }
-
-    public void setNumeroFaldone(Integer numeroFaldone) {
-        this.numeroFaldone = numeroFaldone;
-    }
-
-    @Basic
-    @Column(name = "RICORDO_CEDU")
-    public String getRicordoCedu() {
-        return ricordoCedu;
-    }
-
-    public void setRicordoCedu(String ricordoCedu) {
-        this.ricordoCedu = ricordoCedu;
-    }
-
-    @Basic
-    @Column(name = "ALTRO")
+    @Column(name = "altro")
     public String getAltro() {
         return altro;
     }
@@ -105,7 +38,17 @@ public class ReportAmministrativeEntity {
     }
 
     @Basic
-    @Column(name = "NOTE")
+    @Column(name = "data_pagamento")
+    public Date getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(Date dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    @Basic
+    @Column(name = "note")
     public String getNote() {
         return note;
     }
@@ -115,7 +58,37 @@ public class ReportAmministrativeEntity {
     }
 
     @Basic
-    @Column(name = "DOCUMENTAZIONE")
+    @Column(name = "numero_faldone")
+    public Integer getNumeroFaldone() {
+        return numeroFaldone;
+    }
+
+    public void setNumeroFaldone(Integer numeroFaldone) {
+        this.numeroFaldone = numeroFaldone;
+    }
+
+    @Basic
+    @Column(name = "qualifica")
+    public String getQualifica() {
+        return qualifica;
+    }
+
+    public void setQualifica(String qualifica) {
+        this.qualifica = qualifica;
+    }
+
+    @Basic
+    @Column(name = "ricordo_cedu")
+    public String getRicordoCedu() {
+        return ricordoCedu;
+    }
+
+    public void setRicordoCedu(String ricordoCedu) {
+        this.ricordoCedu = ricordoCedu;
+    }
+
+    @Basic
+    @Column(name = "documentazione")
     public String getDocumentazione() {
         return documentazione;
     }
@@ -130,18 +103,18 @@ public class ReportAmministrativeEntity {
         if (o == null || getClass() != o.getClass()) return false;
         ReportAmministrativeEntity that = (ReportAmministrativeEntity) o;
         return idRepAmministrative == that.idRepAmministrative &&
-                Objects.equals(qualifica, that.qualifica) &&
-                Objects.equals(dataPagamento, that.dataPagamento) &&
-                Objects.equals(numeroFaldone, that.numeroFaldone) &&
-                Objects.equals(ricordoCedu, that.ricordoCedu) &&
                 Objects.equals(altro, that.altro) &&
+                Objects.equals(dataPagamento, that.dataPagamento) &&
                 Objects.equals(note, that.note) &&
+                Objects.equals(numeroFaldone, that.numeroFaldone) &&
+                Objects.equals(qualifica, that.qualifica) &&
+                Objects.equals(ricordoCedu, that.ricordoCedu) &&
                 Objects.equals(documentazione, that.documentazione);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idRepAmministrative, qualifica, dataPagamento, numeroFaldone, ricordoCedu, altro, note, documentazione);
+        return Objects.hash(idRepAmministrative, altro, dataPagamento, note, numeroFaldone, qualifica, ricordoCedu, documentazione);
     }
 
     @OneToOne(mappedBy = "reportAmministrativeByIdRepAmministrative")

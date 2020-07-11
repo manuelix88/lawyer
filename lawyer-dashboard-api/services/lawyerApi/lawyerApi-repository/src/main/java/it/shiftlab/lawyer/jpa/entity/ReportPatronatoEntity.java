@@ -2,65 +2,31 @@ package it.shiftlab.lawyer.jpa.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "report_patronato", schema = "lawyer_", catalog = "")
+@Table(name = "report_patronato", schema = "lawyer2", catalog = "")
 public class ReportPatronatoEntity {
     private long idRepPatronato;
-    private String convenzione;
-    private String spese;
-    private String decorrenzaSuccessiva;
-    private String codice;
-    private String tipoPratica;
-    private String tribunale;
-    private String ruoloGenerale;
-    private Date dataUltimaUdienza;
-    private String patronatoProvenienza;
-    private String giudice;
     private String avvocatoDelegato;
+    private String convenzione;
+    private Date dataUltimaUdienza;
+    private String decorrenzaSuccessiva;
+    private String giudice;
     private String note;
+    private String patronatoProvenienza;
+    private String ruoloGenerale;
+    private String spese;
+    private String tipoPratica;
     private AnagraficaClienteEntity anagraficaClientesByIdRepPatronato;
-
-    public ReportPatronatoEntity() {
-    }
-
-    public ReportPatronatoEntity(long idRepPatronato, String convenzione, String spese, String decorrenzaSuccessiva, String codice, String tipoPratica, String tribunale, String ruoloGenerale, Date dataUltimaUdienza, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note, AnagraficaClienteEntity anagraficaClientesByIdRepPatronato) {
-        this.idRepPatronato = idRepPatronato;
-        this.convenzione = convenzione;
-        this.spese = spese;
-        this.decorrenzaSuccessiva = decorrenzaSuccessiva;
-        this.codice = codice;
-        this.tipoPratica = tipoPratica;
-        this.tribunale = tribunale;
-        this.ruoloGenerale = ruoloGenerale;
-        this.dataUltimaUdienza = dataUltimaUdienza;
-        this.patronatoProvenienza = patronatoProvenienza;
-        this.giudice = giudice;
-        this.avvocatoDelegato = avvocatoDelegato;
-        this.note = note;
-        this.anagraficaClientesByIdRepPatronato = anagraficaClientesByIdRepPatronato;
-    }
-
-    public ReportPatronatoEntity(long idRepPatronato, String convenzione, String spese, String decorrenzaSuccessiva, String codice, String tipoPratica, String tribunale, String ruoloGenerale, Date dataUltimaUdienza, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note) {
-        this.idRepPatronato = idRepPatronato;
-        this.convenzione = convenzione;
-        this.spese = spese;
-        this.decorrenzaSuccessiva = decorrenzaSuccessiva;
-        this.codice = codice;
-        this.tipoPratica = tipoPratica;
-        this.tribunale = tribunale;
-        this.ruoloGenerale = ruoloGenerale;
-        this.dataUltimaUdienza = dataUltimaUdienza;
-        this.patronatoProvenienza = patronatoProvenienza;
-        this.giudice = giudice;
-        this.avvocatoDelegato = avvocatoDelegato;
-        this.note = note;
-    }
+    private Collection<DateUdienzeEntity> dateUdienzesByIdRepPatronato;
+    private StatusEntity statusByStatusId;
+    private CodiciReportEntity codiciReportByCodiciReportId;
+    private TribunaliEntity tribunaliByTribunaliId;
 
     @Id
-    @Column(name = "ID_REP_PATRONATO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rep_patronato")
     public long getIdRepPatronato() {
         return idRepPatronato;
     }
@@ -70,107 +36,7 @@ public class ReportPatronatoEntity {
     }
 
     @Basic
-    @Column(name = "CONVENZIONE")
-    public String getConvenzione() {
-        return convenzione;
-    }
-
-    public void setConvenzione(String convenzione) {
-        this.convenzione = convenzione;
-    }
-
-    @Basic
-    @Column(name = "SPESE")
-    public String getSpese() {
-        return spese;
-    }
-
-    public void setSpese(String spese) {
-        this.spese = spese;
-    }
-
-    @Basic
-    @Column(name = "DECORRENZA_SUCCESSIVA")
-    public String getDecorrenzaSuccessiva() {
-        return decorrenzaSuccessiva;
-    }
-
-    public void setDecorrenzaSuccessiva(String decorrenzaSuccessiva) {
-        this.decorrenzaSuccessiva = decorrenzaSuccessiva;
-    }
-
-    @Basic
-    @Column(name = "CODICE")
-    public String getCodice() {
-        return codice;
-    }
-
-    public void setCodice(String codice) {
-        this.codice = codice;
-    }
-
-    @Basic
-    @Column(name = "TIPO_PRATICA")
-    public String getTipoPratica() {
-        return tipoPratica;
-    }
-
-    public void setTipoPratica(String tipoPratica) {
-        this.tipoPratica = tipoPratica;
-    }
-
-    @Basic
-    @Column(name = "TRIBUNALE")
-    public String getTribunale() {
-        return tribunale;
-    }
-
-    public void setTribunale(String tribunale) {
-        this.tribunale = tribunale;
-    }
-
-    @Basic
-    @Column(name = "RUOLO_GENERALE")
-    public String getRuoloGenerale() {
-        return ruoloGenerale;
-    }
-
-    public void setRuoloGenerale(String ruoloGenerale) {
-        this.ruoloGenerale = ruoloGenerale;
-    }
-
-    @Basic
-    @Column(name = "DATA_ULTIMA_UDIENZA")
-    public Date getDataUltimaUdienza() {
-        return dataUltimaUdienza;
-    }
-
-    public void setDataUltimaUdienza(Date dataUltimaUdienza) {
-        this.dataUltimaUdienza = dataUltimaUdienza;
-    }
-
-    @Basic
-    @Column(name = "PATRONATO_PROVENIENZA")
-    public String getPatronatoProvenienza() {
-        return patronatoProvenienza;
-    }
-
-    public void setPatronatoProvenienza(String patronatoProvenienza) {
-        this.patronatoProvenienza = patronatoProvenienza;
-    }
-
-    @Basic
-    @Column(name = "GIUDICE")
-    public String getGiudice() {
-        return giudice;
-    }
-
-    public void setGiudice(String giudice) {
-        this.giudice = giudice;
-    }
-
-    @Basic
-    @Column(name = "AVVOCATO_DELEGATO")
+    @Column(name = "avvocato_delegato")
     public String getAvvocatoDelegato() {
         return avvocatoDelegato;
     }
@@ -180,7 +46,47 @@ public class ReportPatronatoEntity {
     }
 
     @Basic
-    @Column(name = "NOTE")
+    @Column(name = "convenzione")
+    public String getConvenzione() {
+        return convenzione;
+    }
+
+    public void setConvenzione(String convenzione) {
+        this.convenzione = convenzione;
+    }
+
+    @Basic
+    @Column(name = "data_ultima_udienza")
+    public Date getDataUltimaUdienza() {
+        return dataUltimaUdienza;
+    }
+
+    public void setDataUltimaUdienza(Date dataUltimaUdienza) {
+        this.dataUltimaUdienza = dataUltimaUdienza;
+    }
+
+    @Basic
+    @Column(name = "decorrenza_successiva")
+    public String getDecorrenzaSuccessiva() {
+        return decorrenzaSuccessiva;
+    }
+
+    public void setDecorrenzaSuccessiva(String decorrenzaSuccessiva) {
+        this.decorrenzaSuccessiva = decorrenzaSuccessiva;
+    }
+
+    @Basic
+    @Column(name = "giudice")
+    public String getGiudice() {
+        return giudice;
+    }
+
+    public void setGiudice(String giudice) {
+        this.giudice = giudice;
+    }
+
+    @Basic
+    @Column(name = "note")
     public String getNote() {
         return note;
     }
@@ -189,29 +95,67 @@ public class ReportPatronatoEntity {
         this.note = note;
     }
 
+    @Basic
+    @Column(name = "patronato_provenienza")
+    public String getPatronatoProvenienza() {
+        return patronatoProvenienza;
+    }
+
+    public void setPatronatoProvenienza(String patronatoProvenienza) {
+        this.patronatoProvenienza = patronatoProvenienza;
+    }
+
+    @Basic
+    @Column(name = "ruolo_generale")
+    public String getRuoloGenerale() {
+        return ruoloGenerale;
+    }
+
+    public void setRuoloGenerale(String ruoloGenerale) {
+        this.ruoloGenerale = ruoloGenerale;
+    }
+
+    @Basic
+    @Column(name = "spese")
+    public String getSpese() {
+        return spese;
+    }
+
+    public void setSpese(String spese) {
+        this.spese = spese;
+    }
+
+    @Basic
+    @Column(name = "tipo_pratica")
+    public String getTipoPratica() {
+        return tipoPratica;
+    }
+
+    public void setTipoPratica(String tipoPratica) {
+        this.tipoPratica = tipoPratica;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReportPatronatoEntity that = (ReportPatronatoEntity) o;
         return idRepPatronato == that.idRepPatronato &&
-                Objects.equals(convenzione, that.convenzione) &&
-                Objects.equals(spese, that.spese) &&
-                Objects.equals(decorrenzaSuccessiva, that.decorrenzaSuccessiva) &&
-                Objects.equals(codice, that.codice) &&
-                Objects.equals(tipoPratica, that.tipoPratica) &&
-                Objects.equals(tribunale, that.tribunale) &&
-                Objects.equals(ruoloGenerale, that.ruoloGenerale) &&
-                Objects.equals(dataUltimaUdienza, that.dataUltimaUdienza) &&
-                Objects.equals(patronatoProvenienza, that.patronatoProvenienza) &&
-                Objects.equals(giudice, that.giudice) &&
                 Objects.equals(avvocatoDelegato, that.avvocatoDelegato) &&
-                Objects.equals(note, that.note);
+                Objects.equals(convenzione, that.convenzione) &&
+                Objects.equals(dataUltimaUdienza, that.dataUltimaUdienza) &&
+                Objects.equals(decorrenzaSuccessiva, that.decorrenzaSuccessiva) &&
+                Objects.equals(giudice, that.giudice) &&
+                Objects.equals(note, that.note) &&
+                Objects.equals(patronatoProvenienza, that.patronatoProvenienza) &&
+                Objects.equals(ruoloGenerale, that.ruoloGenerale) &&
+                Objects.equals(spese, that.spese) &&
+                Objects.equals(tipoPratica, that.tipoPratica);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idRepPatronato, convenzione, spese, decorrenzaSuccessiva, codice, tipoPratica, tribunale, ruoloGenerale, dataUltimaUdienza, patronatoProvenienza, giudice, avvocatoDelegato, note);
+        return Objects.hash(idRepPatronato, avvocatoDelegato, convenzione, dataUltimaUdienza, decorrenzaSuccessiva, giudice, note, patronatoProvenienza, ruoloGenerale, spese, tipoPratica);
     }
 
     @OneToOne(mappedBy = "reportPatronatoByIdRepPatronato")
@@ -221,5 +165,44 @@ public class ReportPatronatoEntity {
 
     public void setAnagraficaClientesByIdRepPatronato(AnagraficaClienteEntity anagraficaClientesByIdRepPatronato) {
         this.anagraficaClientesByIdRepPatronato = anagraficaClientesByIdRepPatronato;
+    }
+
+    @OneToMany(mappedBy = "reportPatronatoByIdRepPatronato")
+    public Collection<DateUdienzeEntity> getDateUdienzesByIdRepPatronato() {
+        return dateUdienzesByIdRepPatronato;
+    }
+
+    public void setDateUdienzesByIdRepPatronato(Collection<DateUdienzeEntity> dateUdienzesByIdRepPatronato) {
+        this.dateUdienzesByIdRepPatronato = dateUdienzesByIdRepPatronato;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
+    public StatusEntity getStatusByStatusId() {
+        return statusByStatusId;
+    }
+
+    public void setStatusByStatusId(StatusEntity statusByStatusId) {
+        this.statusByStatusId = statusByStatusId;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "codici_report_id", referencedColumnName = "id", nullable = false)
+    public CodiciReportEntity getCodiciReportByCodiciReportId() {
+        return codiciReportByCodiciReportId;
+    }
+
+    public void setCodiciReportByCodiciReportId(CodiciReportEntity codiciReportByCodiciReportId) {
+        this.codiciReportByCodiciReportId = codiciReportByCodiciReportId;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "tribunali_id", referencedColumnName = "id", nullable = false)
+    public TribunaliEntity getTribunaliByTribunaliId() {
+        return tribunaliByTribunaliId;
+    }
+
+    public void setTribunaliByTribunaliId(TribunaliEntity tribunaliByTribunaliId) {
+        this.tribunaliByTribunaliId = tribunaliByTribunaliId;
     }
 }
