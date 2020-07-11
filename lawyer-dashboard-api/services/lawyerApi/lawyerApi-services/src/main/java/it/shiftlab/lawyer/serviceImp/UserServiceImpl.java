@@ -43,16 +43,16 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistException("There is an account with that email address: " + userDto.getEmail());
         }
 
-//        AuthoritiesEntity authorityAdmin = new AuthoritiesEntity();
-//        authorityAdmin.setName(AuthorityName.ROLE_ADMIN);
-//        authorityAdmin = authorityRepository.save(authorityAdmin);
+        AuthoritiesEntity authorityAdmin = new AuthoritiesEntity();
+        authorityAdmin.setName(AuthorityName.ROLE_ADMIN);
+        authorityAdmin = authorityRepository.save(authorityAdmin);
 
         AuthoritiesEntity authorityUser = new AuthoritiesEntity();
         authorityUser.setName(AuthorityName.ROLE_USER);
         authorityUser = authorityRepository.save(authorityUser);
 
 
-        List<AuthoritiesEntity> authorities = Arrays.asList(new AuthoritiesEntity[]{authorityUser});
+        List<AuthoritiesEntity> authorities = Arrays.asList(new AuthoritiesEntity[]{authorityAdmin,authorityUser});
 
         UsersEntity user = new UsersEntity();
         user.setAuthorities(authorities);

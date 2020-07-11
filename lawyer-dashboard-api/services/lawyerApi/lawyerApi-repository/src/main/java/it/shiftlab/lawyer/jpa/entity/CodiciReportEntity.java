@@ -4,14 +4,23 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "codici_report", schema = "lawyer2", catalog = "")
+@Table(name = "CODICI_REPORT")
 public class CodiciReportEntity {
     private long id;
     private String code;
     private ReportPatronatoEntity reportPatronatoesById;
 
+    public CodiciReportEntity() {
+    }
+
+    public CodiciReportEntity(long id, String code) {
+        this.id = id;
+        this.code = code;
+    }
+
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }

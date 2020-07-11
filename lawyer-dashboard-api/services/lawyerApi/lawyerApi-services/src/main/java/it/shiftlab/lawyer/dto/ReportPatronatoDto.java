@@ -6,13 +6,16 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @Builder
 public class ReportPatronatoDto implements Serializable {
 
-    private long idRepPatronato;
+    private Long idRepPatronato;
+
+    private StatusDto status;
 
     private String convenzione;
 
@@ -20,15 +23,15 @@ public class ReportPatronatoDto implements Serializable {
 
     private String decorrenzaSuccessiva;
 
-    private String codice;
+    private CodiceDto codice;
 
     private String tipoPratica;
 
-    private String tribunale;
+    private TribunaleDto tribunale;
 
     private String ruoloGenerale;
 
-    private Date dataUltimaUdienza;
+    private List<DataUdienzaDto> dateUdienze;
 
     private String patronatoProvenienza;
 
@@ -38,8 +41,13 @@ public class ReportPatronatoDto implements Serializable {
 
     private String note;
 
-    public ReportPatronatoDto(long idRepPatronato, String convenzione, String spese, String decorrenzaSuccessiva, String codice, String tipoPratica, String tribunale, String ruoloGenerale, Date dataUltimaUdienza, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note) {
+    public ReportPatronatoDto() {
+    }
+
+    public ReportPatronatoDto(Long idRepPatronato, StatusDto status, String convenzione, String spese, String decorrenzaSuccessiva, CodiceDto codice, String tipoPratica,
+                              TribunaleDto tribunale, String ruoloGenerale, List<DataUdienzaDto> dateUdienze, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note) {
         this.idRepPatronato = idRepPatronato;
+        this.status = status;
         this.convenzione = convenzione;
         this.spese = spese;
         this.decorrenzaSuccessiva = decorrenzaSuccessiva;
@@ -47,19 +55,27 @@ public class ReportPatronatoDto implements Serializable {
         this.tipoPratica = tipoPratica;
         this.tribunale = tribunale;
         this.ruoloGenerale = ruoloGenerale;
-        this.dataUltimaUdienza = dataUltimaUdienza;
+        this.dateUdienze = dateUdienze;
         this.patronatoProvenienza = patronatoProvenienza;
         this.giudice = giudice;
         this.avvocatoDelegato = avvocatoDelegato;
         this.note = note;
     }
 
-    public long getIdRepPatronato() {
+    public Long getIdRepPatronato() {
         return idRepPatronato;
     }
 
-    public void setIdRepPatronato(long idRepPatronato) {
+    public void setIdRepPatronato(Long idRepPatronato) {
         this.idRepPatronato = idRepPatronato;
+    }
+
+    public StatusDto getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusDto status) {
+        this.status = status;
     }
 
     public String getConvenzione() {
@@ -86,11 +102,11 @@ public class ReportPatronatoDto implements Serializable {
         this.decorrenzaSuccessiva = decorrenzaSuccessiva;
     }
 
-    public String getCodice() {
+    public CodiceDto getCodice() {
         return codice;
     }
 
-    public void setCodice(String codice) {
+    public void setCodice(CodiceDto codice) {
         this.codice = codice;
     }
 
@@ -102,11 +118,11 @@ public class ReportPatronatoDto implements Serializable {
         this.tipoPratica = tipoPratica;
     }
 
-    public String getTribunale() {
+    public TribunaleDto getTribunale() {
         return tribunale;
     }
 
-    public void setTribunale(String tribunale) {
+    public void setTribunale(TribunaleDto tribunale) {
         this.tribunale = tribunale;
     }
 
@@ -118,12 +134,12 @@ public class ReportPatronatoDto implements Serializable {
         this.ruoloGenerale = ruoloGenerale;
     }
 
-    public Date getDataUltimaUdienza() {
-        return dataUltimaUdienza;
+    public List<DataUdienzaDto> getDateUdienze() {
+        return dateUdienze;
     }
 
-    public void setDataUltimaUdienza(Date dataUltimaUdienza) {
-        this.dataUltimaUdienza = dataUltimaUdienza;
+    public void setDateUdienze(List<DataUdienzaDto> dateUdienze) {
+        this.dateUdienze = dateUdienze;
     }
 
     public String getPatronatoProvenienza() {

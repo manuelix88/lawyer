@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {CustomerInformazionComponent} from './customer-informazion/customer-informazion.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -11,11 +11,12 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {FormsModule} from '@angular/forms';
-
+import {SatPopoverModule} from '@ncstate/sat-popover';
+import {InlineEditComponent} from '../in-line-edit/in-line-edit.component';
 
 
 @NgModule({
-    declarations: [CustomerInformazionComponent],
+    declarations: [CustomerInformazionComponent, InlineEditComponent],
     exports: [
         CustomerInformazionComponent
     ],
@@ -30,7 +31,8 @@ import {FormsModule} from '@angular/forms';
         MatDatepickerModule,
         MatNativeDateModule,
         MatTabsModule,
-        FormsModule
+        FormsModule,
+        SatPopoverModule
     ],
     providers: [
         MatDatepickerModule,

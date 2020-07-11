@@ -74,7 +74,7 @@ export const appRoutes: Route[] = [
 
             // Example
             {path: 'add', loadChildren: () => import('app/modules/admin/customer-view/add-customer/add-customer.module').then(m => m.AddCustomerModule)},
-            {path: 'modify', loadChildren: () => import('app/modules/admin/customer-view/modify-customer/modify-customer.module').then(m => m.ModifyCustomerModule)},
+            {path: 'modify/:id', loadChildren: () => import('app/modules/admin/customer-view/modify-customer/modify-customer.module').then(m => m.ModifyCustomerModule)},
             {path: 'report', loadChildren: () => import('app/modules/admin/report-views/report-views.module').then(m => m.ReportViewsModule)},
             {path: 'search', loadChildren: () => import('app/modules/admin/search-report-element/search-report.module').then(m => m.SearchReportModule)}
 

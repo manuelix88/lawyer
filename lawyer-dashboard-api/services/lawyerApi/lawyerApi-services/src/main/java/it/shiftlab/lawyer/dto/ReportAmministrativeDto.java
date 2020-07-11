@@ -1,15 +1,12 @@
 package it.shiftlab.lawyer.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class ReportAmministrativeDto implements Serializable {
 
-    private long idRepAmministrative;
+    private Long idRepAmministrative;
     private String qualifica;
     private Date dataPagamento;
     private Integer numeroFaldone;
@@ -18,7 +15,10 @@ public class ReportAmministrativeDto implements Serializable {
     private String note;
     private String documentazione;
 
-    public ReportAmministrativeDto(long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, String documentazione) {
+    public ReportAmministrativeDto() {
+    }
+
+    public ReportAmministrativeDto(Long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, String documentazione) {
         this.idRepAmministrative = idRepAmministrative;
         this.qualifica = qualifica;
         this.dataPagamento = dataPagamento;
@@ -29,11 +29,12 @@ public class ReportAmministrativeDto implements Serializable {
         this.documentazione = documentazione;
     }
 
-    public long getIdRepAmministrative() {
+
+    public Long getIdRepAmministrative() {
         return idRepAmministrative;
     }
 
-    public void setIdRepAmministrative(long idRepAmministrative) {
+    public void setIdRepAmministrative(Long idRepAmministrative) {
         this.idRepAmministrative = idRepAmministrative;
     }
 
@@ -92,4 +93,5 @@ public class ReportAmministrativeDto implements Serializable {
     public void setDocumentazione(String documentazione) {
         this.documentazione = documentazione;
     }
+
 }

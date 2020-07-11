@@ -1,19 +1,36 @@
 package it.shiftlab.lawyer.jpa.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "date_udienze", schema = "lawyer2", catalog = "")
+@Table(name = "DATE_UDIENZE")
 public class DateUdienzeEntity {
     private long id;
     private Boolean enable;
-    private Timestamp dataUdienza;
+    private Date dataUdienza;
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
+
+    public DateUdienzeEntity() {
+    }
+
+    public DateUdienzeEntity(long id, Boolean enable, Date dataUdienza) {
+        this.id = id;
+        this.enable = enable;
+        this.dataUdienza = dataUdienza;
+    }
+
+    public DateUdienzeEntity(long id, Boolean enable, Date dataUdienza, ReportPatronatoEntity reportPatronatoByIdRepPatronato) {
+        this.id = id;
+        this.enable = enable;
+        this.dataUdienza = dataUdienza;
+        this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
+    }
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -34,11 +51,11 @@ public class DateUdienzeEntity {
 
     @Basic
     @Column(name = "data_udienza")
-    public Timestamp getDataUdienza() {
+    public Date getDataUdienza() {
         return dataUdienza;
     }
 
-    public void setDataUdienza(Timestamp dataUdienza) {
+    public void setDataUdienza(Date dataUdienza) {
         this.dataUdienza = dataUdienza;
     }
 

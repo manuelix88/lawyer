@@ -4,14 +4,14 @@ import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'inline-edit',
-    styleUrls: ['inline-edit.component.scss'],
+    styleUrls: ['in-line-edit.component.scss'],
     template: `
     <form (ngSubmit)="onSubmit()">
       <div class="mat-subheading-2">Add a comment</div>
 
       <mat-form-field>
         <input matInput maxLength="140" name="comment" [(ngModel)]="comment">
-        <mat-hint align="end">{{comment?.length || 0}}/140</mat-hint>
+        <mat-hint align="end">/140</mat-hint>
       </mat-form-field>
 
       <div class="actions">

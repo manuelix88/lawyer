@@ -92,12 +92,13 @@ export class AuthService
     }
 
     signIn(credentials): Observable<User> {
-        return this._api.post('/public/login', credentials).pipe(map(
-            (value: User) => {
+        return this._api.post('/public/login', credentials).pipe(switchMap(
+            value => {
+                this._authenticated = true;
                 this.jwtService.setToken(value.token);
                 this.currentUserSubject.next(this.getLoggedUser(value.token));
                 this.isAuthenticatedSubject.next(true);
-                return value;
+                return of (value);
             }
         ));
     }
@@ -153,11 +154,11 @@ export class AuthService
             return of(false);
         }
 
-        // Check the access token expire date
-        if ( AuthUtils.isTokenExpired(this.accessToken) )
-        {
-            return of(false);
-        }
+        // // Check the access token expire date
+        // if ( AuthUtils.isTokenExpired(this.accessToken) )
+        // {
+        //     return of(false);
+        // }
 
         // If the access token exists and it didn't expire, sign in using it
         return this.signInUsingToken();

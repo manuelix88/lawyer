@@ -1,24 +1,25 @@
 <div class="max-w-full m-8 rich-text">
+    {{ customer  | json}}
     <form #customerForm="ngForm" class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
-        <p class="text-lg font-medium">Anagrafica Cliente</p>
+        <p class="text-lg font-medium mb-8">Anagrafica Cliente</p>
         <div class="flex flex-col gt-xs:flex-row">
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Nome</mat-label>
                 <input matInput [(ngModel)]="customer.nome" name="nome"
-                       [placeholder]="'Nome'">
+                       [placeholder]="'Nome'" required>
                 <mat-icon matPrefix
                           [svgIcon]="'account_circle'"></mat-icon>
             </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Cognome</mat-label>
                 <input matInput [(ngModel)]="customer.cognome" name="cognome"
-                       [placeholder]="'Cognome'">
+                       [placeholder]="'Cognome'" required>
                 <mat-icon matPrefix
                           [svgIcon]="'account_circle'"></mat-icon>
             </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Email</mat-label>
-                <input matInput  [(ngModel)]="customer.email" name="email"
+                <input matInput  [(ngModel)]="customer.email" name="email" email="true"
                        [placeholder]="'Email'">
                 <mat-icon matPrefix
                           [svgIcon]="'mail'"></mat-icon>
@@ -42,7 +43,7 @@
             </mat-form-field>
             <mat-form-field  class="flex-auto gt-xs:pr-3">
                 <mat-label>Data di Nascita</mat-label>
-                <input matInput  [(ngModel)]="customer.dataNascita" name="datanascita" [placeholder]="'Data di Nascita'" [matDatepicker]="picker">
+                <input matInput  [(ngModel)]="customer.dataNascita" name="dataNascita" [placeholder]="'Data di Nascita'" [matDatepicker]="picker" readonly>
                 <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -108,10 +109,11 @@
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Data Pagamento</mat-label>
                         <input matInput type="text" [(ngModel)]="customer.reportAmministrative.dataPagamento" name="reportAmministrativeDataPagamento"
-                               [placeholder]="'Data Pagamento'">
-                        <mat-icon matPrefix
-                                  [svgIcon]="'heroicons_outline:currency-euro'"></mat-icon>
+                               [placeholder]="'Data Pagamento'" [matDatepicker]="pickerDataPagamento" readonly>
+                        <mat-datepicker-toggle matPrefix [for]="pickerDataPagamento"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDataPagamento></mat-datepicker>
                     </mat-form-field>
+
                 </div>
                 <div class="flex">
                     <mat-form-field class="treo-mat-textarea flex-auto">
@@ -138,7 +140,7 @@
                 <div class="flex flex-col gt-xs:flex-row mt-6">
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Convenzione</mat-label>
-                        <mat-select [placeholder]="'Convenzione'" [(ngModel)]="customer.reportPatronato.convenzione" name="reportPatronatoConv">
+                        <mat-select [placeholder]="'Convenzione'" [(value)]="customer.reportPatronato.convenzione" [(ngModel)]="customer.reportPatronato.convenzione" name="reportPatronatoConv">
                             <mat-option value="SI">SI</mat-option>
                             <mat-option value="NO">NO</mat-option>
                         </mat-select>
@@ -148,7 +150,7 @@
 
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Spese</mat-label>
-                        <mat-select [placeholder]="'Spese'" [(ngModel)]="customer.reportPatronato.spese" name="reportPatronatoSpese">
+                        <mat-select [placeholder]="'Spese'" [(value)]="customer.reportPatronato.spese" [(ngModel)]="customer.reportPatronato.spese" name="reportPatronatoSpese">
                             <mat-option value="SI">SI</mat-option>
                             <mat-option value="NO">NO</mat-option>
                             <mat-option value="COMPENSATE">COMPENSATE</mat-option>
@@ -170,8 +172,10 @@
                 <div class="flex flex-col gt-xs:flex-row">
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Codice</mat-label>
-                        <input matInput
-                               [placeholder]="'Codice'" [(ngModel)]="customer.reportPatronato.codice" name="reportPatronatoCodice">
+                        <mat-select [placeholder]="'Codice'" [(ngModel)]="customer.reportPatronato.codice"  name="reportPatronatoCodice"  [compareWith]="compareCodice" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let codice of store.baseData.codici" [value]="codice"> {{codice.code}}</mat-option>
+                        </mat-select>
                         <mat-icon matPrefix
                                   [svgIcon]="'room'"></mat-icon>
                     </mat-form-field>
@@ -184,16 +188,23 @@
                     </mat-form-field>
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Tribunale</mat-label>
-                        <mat-select [placeholder]="'Tribunale'" [(ngModel)]="customer.reportPatronato.tribunale" name="reportPatronatoTribunale">
-                            <mat-option value="NAPOLI">NAPOLI</mat-option>
-                            <mat-option value="SALERNO">SALERNO</mat-option>
-                            <mat-option value="NOCERA INF">NOCERA INF</mat-option>
-                            <mat-option value="TORRE ANNUNZIATA">TORRE ANNUNZIATA</mat-option>
-                            <mat-option value="LAGO NEGRO">LAGO NEGRO</mat-option>
+                        <mat-select [placeholder]="'Tribunale'"[(ngModel)]="customer.reportPatronato.tribunale" name="reportPatronatoTribunale"  [compareWith]="compareTribunale" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let tribunale of store.baseData.tribunali" [value]="tribunale">{{tribunale.tribunali}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Status</mat-label>
+                        <mat-placeholder>Status</mat-placeholder>
+                        <mat-select [(ngModel)]="customer.reportPatronato.status" name="reportPatronatostatus" [compareWith]="compareStatus" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let status of store.baseData.status" [value]="status"> {{status.status}}</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Ruolo Generale</mat-label>
                         <input matInput
@@ -208,15 +219,8 @@
                         <mat-icon matPrefix
                                   [svgIcon]="'heroicons_outline:library'"></mat-icon>
                     </mat-form-field>
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Udienza</mat-label>
-                        <input matInput
-                               [placeholder]="'Udienza'" [(ngModel)]="customer.reportPatronato.dataUltimaUdienza" name="reportPatronatoUdienza">
-                        <mat-icon matPrefix
-                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
-                    </mat-form-field>
 
-                    <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px">
+                    <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px" [satPopoverAnchor]="p" (click)="p.open()">
                         Storico Udienza
                     </button>
                 </div>
@@ -250,15 +254,21 @@
         </mat-tab-group>
 
         <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 light:bg-cool-gray-50 dark:bg-cool-gray-700">
-            <button mat-button type="button" (click)="customerForm.resetForm()">
+            <button mat-button type="button" (click)="reset()">
                 Reset
             </button>
             <button class="px-6 ml-3" type="button"
                     mat-flat-button
                     [color]="'primary'"
-                    (click)="sendCustomer(customer); customerForm.resetForm()">
+                    (click)="sendCustomer(customer, customerForm); reset()">
                 Salva
             </button>
         </div>
     </form>
+    <sat-popover #p
+                 hasBackdrop
+                 xAlign="start"
+                 yAlign="start">
+        <inline-edit></inline-edit>
+    </sat-popover>
 </div>

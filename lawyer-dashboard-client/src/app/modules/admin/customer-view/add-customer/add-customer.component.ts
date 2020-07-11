@@ -20,6 +20,8 @@ export class AddCustomerComponent implements OnInit {
 
     // tslint:disable-next-line:typedef
     async sendForm($event: AnagraficaCliente) {
+        $event.reportPatronato = null;
+        $event.reportAmministrative = null;
         await this.customer.addAnagrafica($event)
             .then(value => {
 

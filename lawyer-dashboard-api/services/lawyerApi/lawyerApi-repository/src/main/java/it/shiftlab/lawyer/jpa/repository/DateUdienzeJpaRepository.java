@@ -1,4 +1,9 @@
 package it.shiftlab.lawyer.jpa.repository;
 
-public interface DateUdienzeJpaRepository {
+import it.shiftlab.lawyer.jpa.entity.DateUdienzeEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface DateUdienzeJpaRepository extends JpaRepository<DateUdienzeEntity, Long> {
 }

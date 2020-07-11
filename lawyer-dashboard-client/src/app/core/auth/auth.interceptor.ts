@@ -36,7 +36,7 @@ export class AuthInterceptor implements HttpInterceptor
             'Accept': 'application/json'
         };
         if (this._authService.accessToken) {
-            headersConfig['authorization'] = `Bearer ${this._authService.accessToken}`;
+            headersConfig['X-Auth'] = `${this._authService.accessToken}`;
         }
         // Request
         //

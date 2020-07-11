@@ -27,4 +27,9 @@ export class CustomerService {
           this.api.get('/protected/retrieveAnagraficaById', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
       });
     }
+    getAnagraficaAll(req): Promise<any> {
+        return new Promise<any>((res, rej) => {
+            this.api.get('/public/retrieveAllAnagrafica', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
+        });
+    }
 }

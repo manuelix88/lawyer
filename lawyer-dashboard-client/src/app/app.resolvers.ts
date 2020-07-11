@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {ApiService} from './core/services/api';
+import {GenericsService} from './core/services/generics.service';
+import {ApplicationStoreService} from './core/store/application-store.service';
+import {Codice, Status, Tribunale} from './modules/admin/customer-view/model/report-patronato';
+import {CodiceArray, StatusArray, TribunaleArray} from './core/store/generics.store';
 
 @Injectable({
     providedIn: 'root'
@@ -13,9 +18,11 @@ export class InitialDataResolver implements Resolve<any>
      * Constructor
      *
      * @param {HttpClient} _httpClient
+     * @param _genericService
+     * @param _store
      */
     constructor(
-        private _httpClient: HttpClient
+        private _httpClient: HttpClient, private _genericService: GenericsService, private _store: ApplicationStoreService
     )
     {
     }
@@ -74,6 +81,23 @@ export class InitialDataResolver implements Resolve<any>
         return this._httpClient.get('api/common/user');
     }
 
+    private _loadTribunali(): void {
+        this._genericService.getAllTribunali().then((values:Tribunale[]) => {
+            this._store.updateStore(new TribunaleArray(values));
+        })
+    }
+
+    private _loadCodici(): void {
+        this._genericService.getAllCodice().then((values:Codice[]) => {
+            this._store.updateStore(new CodiceArray(values));
+        })
+    }
+
+    private _loadStatus(): void {
+        this._genericService.getAllStatus().then((values: Status[]) => {
+            this._store.updateStore(new StatusArray(values));
+        })
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -86,6 +110,9 @@ export class InitialDataResolver implements Resolve<any>
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
     {
+        this._loadCodici();
+        this._loadStatus();
+        this._loadTribunali()
         return forkJoin([
 
             // Messages
@@ -101,7 +128,10 @@ export class InitialDataResolver implements Resolve<any>
             // this._loadShortcuts(),
 
             // User
-            this._loadUser()
+            this._loadUser(),
+
+
+
         ]).pipe(
             map((data) => {
 

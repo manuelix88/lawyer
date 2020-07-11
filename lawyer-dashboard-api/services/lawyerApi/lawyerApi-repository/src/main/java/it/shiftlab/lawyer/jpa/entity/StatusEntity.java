@@ -4,14 +4,23 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "status", schema = "lawyer2", catalog = "")
+@Table(name = "STATUS")
 public class StatusEntity {
     private long id;
     private String status;
     private ReportPatronatoEntity reportPatronatoesById;
 
+    public StatusEntity() {
+    }
+
+    public StatusEntity(long id, String status) {
+        this.id = id;
+        this.status = status;
+    }
+
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }

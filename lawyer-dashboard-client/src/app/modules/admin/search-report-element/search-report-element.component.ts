@@ -1,19 +1,17 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-export interface TableResultData {
-    name: string;
-    position: number;
-    surname: string;
-    cf: string;
+import {AnagraficaCliente} from '../customer-view/model/anagrafica-cliente';
+import {MatTableDataSource} from '@angular/material/table';
+import {CustomerService} from '../customer-service/customer.service';
+export class SearchFilter {
+    nome: string;
+    cognome: number;
+    codiceFiscale: string;
     qualifica: string;
+    faldone: number;
+    documentazione: string;
 }
 
-const ELEMENT_DATA: TableResultData[] = [
-    {position: 1, name: 'Fabrizio', surname: 'Vita', cf: 'H', qualifica: 'Pompiere'},
-    {position: 2, name: 'Emanuele', surname: 'Aprea', cf: 'He', qualifica: 'Sviluppatore'},
-    {position: 3, name: 'Salvatore', surname: 'Arca', cf: 'Li', qualifica: 'Pensionato'},
-    {position: 4, name: 'Gianluca', surname: 'Tello', cf: 'Be', qualifica: 'Disoccupato'},
-    {position: 5, name: 'Alex', surname: 'Baroni', cf: 'B', qualifica: 'Cantante'}
-];
+
 @Component({
     selector: 'search-report-element',
     templateUrl: './search-report-element.component.html',
@@ -21,14 +19,55 @@ const ELEMENT_DATA: TableResultData[] = [
     encapsulation  : ViewEncapsulation.None,
 })
 export class SearchReportElementComponent implements OnInit {
-    displayedColumns: string[] = ['position', 'name', 'surname', 'cf','qualifica', 'details'];
-    dataSource = ELEMENT_DATA;
-    constructor() { }
+    searchFiler = new SearchFilter();
+    displayedColumns: string[] = ['name', 'surname', 'cf','qualifica', 'documentazione', 'details'];
+    dataSource: MatTableDataSource<AnagraficaCliente>;
+    customers: Array<AnagraficaCliente> = [];
+    length = 0;
+    pageSize = 10;
+    pageIndex = 0;
+    pageSizeOption: number[] = [5, 10, 25, 100];
+    data: any;
+    constructor(private customerService: CustomerService) { }
 
     ngOnInit(): void {
     }
 
-    test(): void {
-        alert('asd')
+    searchData(input: SearchFilter): void {
+     this.getPageAnagrafica(input);
+    }
+
+    pageChanged(event, searchFiler: SearchFilter): void {
+        this.pageIndex = event.pageIndex;
+        this.pageSize = event.pageSize;
+        this.getPageAnagrafica(searchFiler);
+    }
+
+    getPageAnagrafica(input?: SearchFilter): void {
+        const req = {
+            page: this.pageIndex,
+            limit: this.pageSize,
+            nome: input === undefined ? null : input.nome,
+            cognome:  input === undefined ? null : input.cognome,
+            codiceFiscale: input === undefined ? null : input.codiceFiscale,
+            qualifica: input === undefined ? null : input.qualifica,
+            faldone: input === undefined ? null : input.faldone,
+            documentazione: input === undefined ? null : input.documentazione,
+        };
+        this.customerService.getAnagraficaAll(req)
+            .then( value => {
+                this.data = value;
+
+                this.customers = this.data.content;
+                this.dataSource = new MatTableDataSource(this.customers);
+                this.length = this.data.totalElements;
+                // this.spinner.hide();
+            })
+            .catch(error => {
+                // this.notification.error(
+                //     error.message
+                // );
+                // this.spinner.hide();
+            });
     }
 }

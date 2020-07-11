@@ -8,15 +8,14 @@ export class ReportAmministrative {
     note: string;
     documentazione:string;
 
-    constructor() {
-       this.idRepAmministrative = 0;
-       this.qualifica = '';
-       this.dataPagamento= '';
-       this.numeroFaldone = 0;
-       this.ricordoCedu= '';
-       this.altro= '';
-       this.note= '';
-       this.documentazione = '';
-    }
-
+    // constructor() {
+       // this.idRepAmministrative = undefined;
+       // this.qualifica = '';
+       // this.dataPagamento= '';
+       // this.numeroFaldone = 0;
+       // this.ricordoCedu= '';
+       // this.altro= '';
+       // this.note= '';
+       // this.documentazione = '';
+    // }
 }

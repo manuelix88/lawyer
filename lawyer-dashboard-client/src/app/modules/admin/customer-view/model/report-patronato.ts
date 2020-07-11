@@ -3,29 +3,29 @@ export class ReportPatronato {
     convenzione?: string;
     spese?: string;
     decorrenzaSuccessiva?: string;
-    codice?: string;
+    codice?: Codice;
     tipoPratica?: string;
-    tribunale?: string;
+    tribunale?: Tribunale;
     ruoloGenerale?: string;
-    dataUltimaUdienza?: any;
+    dataUltimaUdienza?: any[];
     patronatoProvenienza?: string;
     giudice: string;
     avvocatoDelegato: string;
     note?: string;
+    status: Status;
+}
 
-    // constructor() {
-    //     this.idRepPatronato = null;
-    //     this.convenzione = '';
-    //     this.spese = '';
-    //     this.decorrenzaSuccessiva = '';
-    //     this.codice = '';
-    //     this.tipoPratica = '';
-    //     this.tribunale = '';
-    //     this.ruoloGenerale = '';
-    //     this.dataUltimaUdienza = '';
-    //     this.patronatoProvenienza = '';
-    //     this.giudice = '';
-    //     this.avvocatoDelegato = '';
-    //     this.note = '';
-    // }
+export class Status {
+    id: number;
+    status: string;
+}
+
+export class Codice {
+    id: number;
+    code: string;
+}
+
+export class Tribunale {
+    id: number;
+    tribunali?: string;
 }

@@ -6,6 +6,7 @@ import { AuthService } from 'app/core/auth/auth.service';
 import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
 import {ConfigModule} from './config/config-entry-point.service';
 import {HttpTokenInterceptor} from './config/http-token.interceptor';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 @NgModule({
     imports  : [
@@ -19,6 +20,10 @@ import {HttpTokenInterceptor} from './config/http-token.interceptor';
             useClass: AuthInterceptor,
             multi   : true
         },
+        {
+            provide: MAT_DATE_LOCALE,
+            useValue: 'it'
+        }
         // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     ]
 })

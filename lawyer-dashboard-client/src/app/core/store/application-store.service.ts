@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Store, StoreAction} from '../utils/common.api';
-import {GenericsStore} from '../store/generics.store';
+import {GenericsStore} from './generics.store';
 import * as genericData from './generics.store';
 @Injectable({
     providedIn: 'root'

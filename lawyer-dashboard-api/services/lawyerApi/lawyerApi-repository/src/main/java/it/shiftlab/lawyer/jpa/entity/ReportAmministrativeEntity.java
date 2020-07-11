@@ -5,9 +5,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "report_amministrative", schema = "lawyer2", catalog = "")
+@Table(name = "REPORT_AMMINISTRATIVE")
 public class ReportAmministrativeEntity {
-    private long idRepAmministrative;
+    private Long idRepAmministrative;
     private String altro;
     private Date dataPagamento;
     private String note;
@@ -17,13 +17,29 @@ public class ReportAmministrativeEntity {
     private String documentazione;
     private AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative;
 
+    public ReportAmministrativeEntity() {
+    }
+
+    public ReportAmministrativeEntity(Long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone,
+                                      String ricordoCedu, String altro, String note, String documentazione) {
+        this.idRepAmministrative = idRepAmministrative;
+        this.altro = altro;
+        this.dataPagamento = dataPagamento;
+        this.note = note;
+        this.numeroFaldone = numeroFaldone;
+        this.qualifica = qualifica;
+        this.ricordoCedu = ricordoCedu;
+        this.documentazione = documentazione;
+    }
+
     @Id
     @Column(name = "id_rep_amministrative")
-    public long getIdRepAmministrative() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getIdRepAmministrative() {
         return idRepAmministrative;
     }
 
-    public void setIdRepAmministrative(long idRepAmministrative) {
+    public void setIdRepAmministrative(Long idRepAmministrative) {
         this.idRepAmministrative = idRepAmministrative;
     }
 

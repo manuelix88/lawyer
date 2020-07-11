@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Host, Input, OnInit, Optional} from '@angular/core';
 import {CustomerService} from '../../../customer-service/customer.service';
 import {AnagraficaCliente} from '../../model/anagrafica-cliente';
 import {TreoAnimations} from '../../../../../../@treo/animations';
 import * as _ from 'lodash';
+import {ActivatedRoute} from '@angular/router';
+import {ReportPatronato} from '../../model/report-patronato';
+import {ReportAmministrative} from '../../model/report-amministrative';
+import moment from 'moment';
+import {SatPopover} from '@ncstate/sat-popover';
 
 @Component({
     selector: 'modify-customer',
@@ -12,23 +17,35 @@ import * as _ from 'lodash';
 })
 export class ModifyCustomerComponent implements OnInit {
 
+
+    /** Overrides the comment and provides a reset value when changes are cancelled. */
+
     anagrafica = new AnagraficaCliente();
     message: any;
-    constructor(private customerService: CustomerService) { }
+    constructor(private customerService: CustomerService,private activatedRouter: ActivatedRoute) { }
 
     // tslint:disable-next-line:typedef
     async ngOnInit() {
         this.message = null;
-        const req = {
-            anagraficaId: 8
+        if (this.activatedRouter.snapshot.params.id) {
+            const req = {
+                anagraficaId: this.activatedRouter.snapshot.params.id
+            }
+            await this.customerService.getAnagraficaById(req)
+                .then( value => {
+                    console.log('Inviata dal server ' + value.dataNascita);
+                   const data = moment(value.dataNascita).toISOString();
+                    console.log(data);
+                    this.anagrafica = value;
+                    this.anagrafica.dataNascita = data;
+
+                });
         }
-        await this.customerService.getAnagraficaById(req)
-            .then( value => {
-                this.anagrafica = value;
-            });
     }
 
     async sendForm($event: AnagraficaCliente) {
+        $event.reportAmministrative = this.checkReportAmministrativo($event.reportAmministrative);
+        // $event.reportPatronato = this.checkReportPatronato($event.reportPatronato);
         const clonesValue = _.cloneDeep($event);
         await this.customerService.updateAnagrafica($event)
             .then(value => {
@@ -51,6 +68,36 @@ export class ModifyCustomerComponent implements OnInit {
                 };
                 this.anagrafica = clonesValue;
             })
+    }
 
+    checkReportPatronato(rep: ReportPatronato): ReportPatronato {
+        if (rep) {
+            if (rep.idRepPatronato >= 1) {
+                return rep;
+            } else if (rep.spese && rep.note && rep.avvocatoDelegato
+            && rep.giudice && rep.dataUltimaUdienza && rep.tipoPratica && rep.convenzione
+            && rep.codice && rep.tribunale && rep.ruoloGenerale) {
+                rep = null;
+                return rep;
+            }else {
+                return rep;
+            }
+        }
+    }
+
+    checkReportAmministrativo(rep: ReportAmministrative): ReportAmministrative {
+        if (rep) {
+            if (rep.idRepAmministrative >= 1) {
+                return rep;
+            } else if (rep.documentazione && rep.note && rep.altro &&
+            rep.dataPagamento && rep.ricordoCedu
+                && rep.qualifica && rep.numeroFaldone) {
+                rep = null;
+                return rep;
+
+            } else {
+                return rep;
+            }
+        }
     }
 }

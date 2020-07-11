@@ -28,18 +28,18 @@ public class AnagraficaFactory {
     }
 
     public static ReportAmministrativeDto mapRepAmmEntitytoDto(ReportAmministrativeEntity entity){
-        return new ReportAmministrativeDto(entity.getIdRepAmministrative(),
+        return entity== null ? new ReportAmministrativeDto() : new ReportAmministrativeDto(entity.getIdRepAmministrative(),
                 entity.getQualifica(),
                 entity.getDataPagamento(),
                 entity.getNumeroFaldone(), entity.getRicordoCedu(), entity.getAltro(), entity.getNote(), entity.getDocumentazione());
     }
 
     public static ReportPatronatoDto mapRepPatronatoEntityToDto(ReportPatronatoEntity entity) {
-        return new ReportPatronatoDto(entity.getIdRepPatronato(),
-                entity.getConvenzione(),
-                entity.getSpese(), entity.getDecorrenzaSuccessiva(), entity.getCodice(),entity.getTipoPratica(),
-                entity.getTribunale(),entity.getRuoloGenerale(),entity.getDataUltimaUdienza(),entity.getPatronatoProvenienza(),
-                entity.getGiudice(),entity.getAvvocatoDelegato(),entity.getNote());
+        return entity == null ? new ReportPatronatoDto() : new ReportPatronatoDto(entity.getIdRepPatronato(),StatusFactory.mapToDto(entity.getStatusByStatusId()), entity.getConvenzione(), entity.getSpese(),
+                entity.getDecorrenzaSuccessiva(),CodiceFactory.mapToDto(entity.getCodiciReportByCodiciReportId()), entity.getTipoPratica(),
+                TribunaleFactory.mapToDto(entity.getTribunaliByTribunaliId()),entity.getRuoloGenerale(), DateUdienzeFactory.mapToDto(entity.getDateUdienzesByIdRepPatronato()),
+                entity.getPatronatoProvenienza(),entity.getGiudice(), entity.getAvvocatoDelegato(), entity.getNote());
+
     }
 
 
@@ -58,11 +58,8 @@ public class AnagraficaFactory {
 //                mapRepPatronatoDtoToEntity(dto.getReportPatronatoDto()),mapRepAmmDtoToEntity(dto.getReportAmministrativeDto()));
     }
     public static ReportPatronatoEntity mapRepPatronatoDtoToEntity(ReportPatronatoDto dto) {
-        return new ReportPatronatoEntity(dto.getIdRepPatronato(),
-                dto.getConvenzione(),
-                dto.getSpese(), dto.getDecorrenzaSuccessiva(), dto.getCodice(),dto.getTipoPratica(),
-                dto.getTribunale(),dto.getRuoloGenerale(),dto.getDataUltimaUdienza(),dto.getPatronatoProvenienza(),
-                dto.getGiudice(),dto.getAvvocatoDelegato(),dto.getNote());
+        return new ReportPatronatoEntity(dto.getIdRepPatronato(),dto.getAvvocatoDelegato(), dto.getConvenzione(),dto.getDecorrenzaSuccessiva(),
+                dto.getGiudice(), dto.getNote(), dto.getPatronatoProvenienza(), dto.getRuoloGenerale(), dto.getSpese(), dto.getTipoPratica());
     }
 
     public static ReportAmministrativeEntity mapRepAmmDtoToEntity(ReportAmministrativeDto dto){

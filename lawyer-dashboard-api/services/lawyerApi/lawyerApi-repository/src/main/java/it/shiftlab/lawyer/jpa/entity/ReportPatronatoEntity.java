@@ -1,14 +1,15 @@
 package it.shiftlab.lawyer.jpa.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "report_patronato", schema = "lawyer2", catalog = "")
+@Table(name = "REPORT_PATRONATO")
 public class ReportPatronatoEntity {
-    private long idRepPatronato;
+    private Long idRepPatronato;
     private String avvocatoDelegato;
     private String convenzione;
     private Date dataUltimaUdienza;
@@ -20,18 +21,35 @@ public class ReportPatronatoEntity {
     private String spese;
     private String tipoPratica;
     private AnagraficaClienteEntity anagraficaClientesByIdRepPatronato;
-    private Collection<DateUdienzeEntity> dateUdienzesByIdRepPatronato;
+    private List<DateUdienzeEntity> dateUdienzesByIdRepPatronato;
     private StatusEntity statusByStatusId;
     private CodiciReportEntity codiciReportByCodiciReportId;
     private TribunaliEntity tribunaliByTribunaliId;
 
+    public ReportPatronatoEntity() {
+    }
+
+    public ReportPatronatoEntity(Long idRepPatronato, String avvocatoDelegato, String convenzione,  String decorrenzaSuccessiva, String giudice, String note, String patronatoProvenienza, String ruoloGenerale, String spese, String tipoPratica) {
+        this.idRepPatronato = idRepPatronato;
+        this.avvocatoDelegato = avvocatoDelegato;
+        this.convenzione = convenzione;
+        this.decorrenzaSuccessiva = decorrenzaSuccessiva;
+        this.giudice = giudice;
+        this.note = note;
+        this.patronatoProvenienza = patronatoProvenienza;
+        this.ruoloGenerale = ruoloGenerale;
+        this.spese = spese;
+        this.tipoPratica = tipoPratica;
+    }
+
     @Id
     @Column(name = "id_rep_patronato")
-    public long getIdRepPatronato() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getIdRepPatronato() {
         return idRepPatronato;
     }
 
-    public void setIdRepPatronato(long idRepPatronato) {
+    public void setIdRepPatronato(Long idRepPatronato) {
         this.idRepPatronato = idRepPatronato;
     }
 
@@ -168,11 +186,11 @@ public class ReportPatronatoEntity {
     }
 
     @OneToMany(mappedBy = "reportPatronatoByIdRepPatronato")
-    public Collection<DateUdienzeEntity> getDateUdienzesByIdRepPatronato() {
+    public List<DateUdienzeEntity> getDateUdienzesByIdRepPatronato() {
         return dateUdienzesByIdRepPatronato;
     }
 
-    public void setDateUdienzesByIdRepPatronato(Collection<DateUdienzeEntity> dateUdienzesByIdRepPatronato) {
+    public void setDateUdienzesByIdRepPatronato(List<DateUdienzeEntity> dateUdienzesByIdRepPatronato) {
         this.dateUdienzesByIdRepPatronato = dateUdienzesByIdRepPatronato;
     }
 

@@ -1,11 +1,11 @@
 package it.shiftlab.lawyer.jpa.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "anagrafica_cliente", schema = "lawyer2", catalog = "")
+@Table(name = "ANAGRAFICA_CLIENTE")
 public class AnagraficaClienteEntity {
     private long idAnagrafica;
     private String citta;
@@ -20,8 +20,27 @@ public class AnagraficaClienteEntity {
     private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
 
+
+    public AnagraficaClienteEntity() {
+
+    }
+
+    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNascita) {
+        this.idAnagrafica = idAnagrafica;
+        this.citta = citta;
+        this.codiceFiscale = codiceFiscale;
+        this.cognome = cognome;
+        this.email = email;
+        this.indirizzo = indirizzo;
+        this.nazione = nazione;
+        this.nome = nome;
+        this.provincia = provincia;
+        this.dataNasacita = dataNascita;
+    }
+
     @Id
     @Column(name = "id_anagrafica")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getIdAnagrafica() {
         return idAnagrafica;
     }
@@ -61,6 +80,7 @@ public class AnagraficaClienteEntity {
     }
 
     @Basic
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_nasacita")
     public Date getDataNasacita() {
         return dataNasacita;

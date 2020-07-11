@@ -11,6 +11,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {MatTableModule} from '@angular/material/table';
         MatSelectModule,
         MatInputModule,
         MatFormFieldModule,
-        MatTableModule
+        MatTableModule,
+        MatPaginatorModule,
+        FormsModule
     ]
 })
 export class SearchReportModule { }
