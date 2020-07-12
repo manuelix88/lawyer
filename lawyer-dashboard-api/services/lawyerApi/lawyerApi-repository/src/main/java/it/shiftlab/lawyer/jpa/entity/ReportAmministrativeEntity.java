@@ -1,7 +1,7 @@
 package it.shiftlab.lawyer.jpa.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -54,6 +54,7 @@ public class ReportAmministrativeEntity {
     }
 
     @Basic
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_pagamento")
     public Date getDataPagamento() {
         return dataPagamento;

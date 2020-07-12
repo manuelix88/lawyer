@@ -18,6 +18,11 @@ public class DataUdienzaDto {
         this.dataUdienza = dataUdienza;
     }
 
+    public DataUdienzaDto(Boolean enable, Date dataUdienza) {
+        this.enable = enable;
+        this.dataUdienza = dataUdienza;
+    }
+
     public long getId() {
         return id;
     }

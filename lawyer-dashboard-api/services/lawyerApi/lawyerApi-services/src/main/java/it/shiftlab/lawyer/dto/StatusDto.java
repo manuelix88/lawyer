@@ -1,22 +1,26 @@
 package it.shiftlab.lawyer.dto;
 
 public class StatusDto {
-    private long id;
+    private Long id;
     private String status;
 
     public StatusDto() {
     }
 
-    public StatusDto(long id, String status) {
+    public StatusDto(String status) {
+        this.status = status;
+    }
+
+    public StatusDto(Long id, String status) {
         this.id = id;
         this.status = status;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -2,10 +2,10 @@ package it.shiftlab.lawyer.dto;
 
 public class CodiceDto {
 
-    private long id;
+    private Long id;
     private String code;
 
-    public CodiceDto(long id, String code) {
+    public CodiceDto(Long id, String code) {
         this.id = id;
         this.code = code;
     }
@@ -13,11 +13,15 @@ public class CodiceDto {
     public CodiceDto() {
     }
 
-    public long getId() {
+    public CodiceDto(String code) {
+        this.code = code;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

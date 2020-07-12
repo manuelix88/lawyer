@@ -49,6 +49,22 @@ public class AnagraficaDto {
         this.reportAmministrative = reportAmministrative;
     }
 
+    public AnagraficaDto() {
+
+    }
+
+    public AnagraficaDto(String nome, String codiceFiscale, String provincia, ReportAmministrativeDto reportAmministrative) {
+        this.nome = nome;
+        this.codiceFiscale = codiceFiscale;
+        this.provincia = provincia;
+        this.reportAmministrative = reportAmministrative;
+    }
+
+    public AnagraficaDto(String nome, ReportPatronatoDto reportPatronato) {
+        this.nome = nome;
+        this.reportPatronato = reportPatronato;
+    }
+
     public long getIdAnagrafica() {
         return idAnagrafica;
     }

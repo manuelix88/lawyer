@@ -2,22 +2,26 @@ package it.shiftlab.lawyer.dto;
 
 public class TribunaleDto {
 
-    private long id;
+    private Long id;
     private String tribunali;
 
     public TribunaleDto() {
     }
 
-    public TribunaleDto(long id, String tribunali) {
+    public TribunaleDto(Long id, String tribunali) {
         this.id = id;
         this.tribunali = tribunali;
     }
 
-    public long getId() {
+    public TribunaleDto(String tribunali) {
+        this.tribunali = tribunali;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

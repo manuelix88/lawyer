@@ -62,6 +62,22 @@ public class ReportPatronatoDto implements Serializable {
         this.note = note;
     }
 
+    public ReportPatronatoDto(StatusDto status, String convenzione, String spese, CodiceDto codice, String tipoPratica, TribunaleDto tribunale, String ruoloGenerale,
+                              List<DataUdienzaDto> dateUdienze, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note) {
+        this.status = status;
+        this.convenzione = convenzione;
+        this.spese = spese;
+        this.codice = codice;
+        this.tipoPratica = tipoPratica;
+        this.tribunale = tribunale;
+        this.ruoloGenerale = ruoloGenerale;
+        this.dateUdienze = dateUdienze;
+        this.patronatoProvenienza = patronatoProvenienza;
+        this.giudice = giudice;
+        this.avvocatoDelegato = avvocatoDelegato;
+        this.note = note;
+    }
+
     public Long getIdRepPatronato() {
         return idRepPatronato;
     }

@@ -1,8 +1,7 @@
 package it.shiftlab.lawyer.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
 
 public class ReportAmministrativeDto implements Serializable {
 
@@ -24,6 +23,17 @@ public class ReportAmministrativeDto implements Serializable {
         this.dataPagamento = dataPagamento;
         this.numeroFaldone = numeroFaldone;
         this.ricordoCedu = ricordoCedu;
+        this.altro = altro;
+        this.note = note;
+        this.documentazione = documentazione;
+    }
+
+    public ReportAmministrativeDto(String qualifica, Date pagamento, Integer faldone, String ricorso, String altro, String note, String documentazione) {
+
+        this.qualifica= qualifica;
+        this.dataPagamento = pagamento;
+        this.numeroFaldone = faldone;
+        this.ricordoCedu = ricorso;
         this.altro = altro;
         this.note = note;
         this.documentazione = documentazione;
