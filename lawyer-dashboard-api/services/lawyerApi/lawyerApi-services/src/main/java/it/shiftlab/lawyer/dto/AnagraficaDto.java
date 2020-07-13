@@ -160,4 +160,22 @@ public class AnagraficaDto {
     public void setReportAmministrative(ReportAmministrativeDto reportAmministrative) {
         this.reportAmministrative = reportAmministrative;
     }
+
+    @Override
+    public String toString() {
+        return "AnagraficaDto{" +
+                "idAnagrafica=" + idAnagrafica +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", codiceFiscale='" + codiceFiscale + '\'' +
+                ", nazione='" + nazione + '\'' +
+                ", indirizzo='" + indirizzo + '\'' +
+                ", citta='" + citta + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", dataNascita=" + dataNascita +
+                ", reportPatronato=" + reportPatronato +
+                ", reportAmministrative=" + reportAmministrative +
+                '}';
+    }
 }

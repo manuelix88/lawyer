@@ -31,7 +31,7 @@ public class AnagraficaController {
         return ResponseEntity.ok(anagraficaService.findById(id));
     }
 
-    @PostMapping("public/addAnagrafica")
+    @PostMapping("protected/addAnagrafica")
     public ResponseEntity<?> addAnagrafica(@RequestBody AnagraficaDto anagraficaDto) {
         anagraficaService.saveAnagrafica(anagraficaDto);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -43,7 +43,7 @@ public class AnagraficaController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("public/retrieveAllAnagrafica")
+    @GetMapping("protected/retrieveAllAnagrafica")
     public ResponseEntity<Page<AnagraficaDto>> listShipFilter(@Min(0) @Valid Integer page, @Min(0) @Max(100) @Valid Integer limit,
                                                                 @RequestParam(value = "faldone", required = false) Integer faldone,
                                                                 @RequestParam(value = "nome", required = false) String name,

@@ -8,7 +8,7 @@ import java.util.Objects;
 public class StatusEntity {
     private long id;
     private String status;
-    private ReportPatronatoEntity reportPatronatoesById;
+//    private ReportPatronatoEntity reportPatronatoesById;
 
     public StatusEntity() {
     }
@@ -53,12 +53,12 @@ public class StatusEntity {
         return Objects.hash(id, status);
     }
 
-    @OneToOne(mappedBy = "statusByStatusId")
-    public ReportPatronatoEntity getReportPatronatoesById() {
-        return reportPatronatoesById;
-    }
-
-    public void setReportPatronatoesById(ReportPatronatoEntity reportPatronatoesById) {
-        this.reportPatronatoesById = reportPatronatoesById;
-    }
+//    @OneToOne(mappedBy = "statusByStatusId")
+//    public ReportPatronatoEntity getReportPatronatoesById() {
+//        return reportPatronatoesById;
+//    }
+//
+//    public void setReportPatronatoesById(ReportPatronatoEntity reportPatronatoesById) {
+//        this.reportPatronatoesById = reportPatronatoesById;
+//    }
 }

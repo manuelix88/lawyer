@@ -84,12 +84,14 @@ public class AnagraficaServiceImpl implements AnagraficaService {
         //PATRONATO
         if(anagraficaDto.getReportPatronato() != null) {
             ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronato());
-            if (anagraficaDto.getReportPatronato().getCodice() != null) {
+
+            if (anagraficaDto.getReportPatronato().getCodice() != null && !"".equals(anagraficaDto.getReportPatronato().getCodice().getCode())) {
                 if (anagraficaDto.getReportPatronato().getCodice().getCode() != null) {
-                    if (anagraficaDto.getReportPatronato().getCodice().getId() != null) {
-                        Optional<CodiciReportEntity> byCode = codiciJpaRepository.findByCode(anagraficaDto.getReportPatronato().getStatus().getStatus());
-                        if(byCode.isPresent()) {
-                            anagraficaDto.getReportPatronato().getCodice().setId(byCode.get().getId());
+                    if (anagraficaDto.getReportPatronato().getCodice().getId() == null) {
+                        System.out.println(anagraficaDto.getReportPatronato().getCodice().getCode());
+                        CodiciReportEntity byCode = codiciJpaRepository.findByCode(anagraficaDto.getReportPatronato().getCodice().getCode());
+                        if(byCode != null ) {
+                            anagraficaDto.getReportPatronato().getCodice().setId(byCode.getId());
                         }
                     }
                     CodiciReportEntity codiciReportEntity = CodiceFactory.mapToEntity(anagraficaDto.getReportPatronato().getCodice());
@@ -98,8 +100,8 @@ public class AnagraficaServiceImpl implements AnagraficaService {
             }
 
             if (anagraficaDto.getReportPatronato().getTribunale()!= null) {
-                if (anagraficaDto.getReportPatronato().getTribunale().getTribunali() != null) {
-                    if (anagraficaDto.getReportPatronato().getTribunale().getId() != null) {
+                if (anagraficaDto.getReportPatronato().getTribunale().getTribunali() != null && !"".equals(anagraficaDto.getReportPatronato().getTribunale().getTribunali() )) {
+                    if (anagraficaDto.getReportPatronato().getTribunale().getId() == null) {
                         Optional<TribunaliEntity> byTribunali = tribunaliJpaRepository.findByTribunali(anagraficaDto.getReportPatronato().getTribunale().getTribunali());
                         if (byTribunali.isPresent()) {
                             anagraficaDto.getReportPatronato().getTribunale().setId(byTribunali.get().getId());
@@ -111,7 +113,7 @@ public class AnagraficaServiceImpl implements AnagraficaService {
             }
 
             if(anagraficaDto.getReportPatronato().getStatus() != null) {
-                if(anagraficaDto.getReportPatronato().getStatus().getStatus() != null) {
+                if(anagraficaDto.getReportPatronato().getStatus().getStatus() != null &&  !"".equals(anagraficaDto.getReportPatronato().getStatus().getStatus() )) {
                     if (anagraficaDto.getReportPatronato().getStatus().getId() == null) {
                         Optional<StatusEntity> byStatus = statusJpaRepository.findByStatus(anagraficaDto.getReportPatronato().getStatus().getStatus());
                         if (byStatus.isPresent()) {

@@ -204,7 +204,7 @@ public class ReportPatronatoEntity {
         this.statusByStatusId = statusByStatusId;
     }
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codici_report_id", referencedColumnName = "id", nullable = false)
     public CodiciReportEntity getCodiciReportByCodiciReportId() {
         return codiciReportByCodiciReportId;

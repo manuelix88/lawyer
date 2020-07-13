@@ -8,7 +8,7 @@ import java.util.Objects;
 public class TribunaliEntity {
     private long id;
     private String tribunali;
-    private ReportPatronatoEntity reportPatronatoesById;
+//    private ReportPatronatoEntity reportPatronatoesById;
 
     public TribunaliEntity() {
     }
@@ -53,12 +53,12 @@ public class TribunaliEntity {
         return Objects.hash(id, tribunali);
     }
 
-    @OneToOne(mappedBy = "tribunaliByTribunaliId")
-    public ReportPatronatoEntity getReportPatronatoesById() {
-        return reportPatronatoesById;
-    }
-
-    public void setReportPatronatoesById(ReportPatronatoEntity reportPatronatoesById) {
-        this.reportPatronatoesById = reportPatronatoesById;
-    }
+//    @OneToOne(mappedBy = "tribunaliByTribunaliId")
+//    public ReportPatronatoEntity getReportPatronatoesById() {
+//        return reportPatronatoesById;
+//    }
+//
+//    public void setReportPatronatoesById(ReportPatronatoEntity reportPatronatoesById) {
+//        this.reportPatronatoesById = reportPatronatoesById;
+//    }
 }

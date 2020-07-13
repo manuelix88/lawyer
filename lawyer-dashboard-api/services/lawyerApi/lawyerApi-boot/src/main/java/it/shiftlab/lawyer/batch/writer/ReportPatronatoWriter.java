@@ -43,7 +43,7 @@ public class ReportPatronatoWriter implements ItemWriter<BatchreportPatronatoDto
             reportPatronatoDto = new ReportPatronatoDto(statusDto,b.getConvenzione(),b.getSpese(),codiceDto,b.getTipoPratica(),tribunaleDto, b.getRuoloGenerale(),
                     udienzaDtoList, b.getPatronatoProvenienza(), b.getGiudice(), b.getAvvocatoDelegato(), b.getNote() );
             output = new AnagraficaDto(b.getNome(), reportPatronatoDto);
-            System.out.println("asdasd");
+            anagraficaService.saveAnagrafica(output);
 
         }
     }
