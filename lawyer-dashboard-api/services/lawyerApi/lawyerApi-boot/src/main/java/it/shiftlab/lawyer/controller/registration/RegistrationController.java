@@ -91,7 +91,7 @@ public class RegistrationController {
         String[] split = token.split(";");
         final String result = securityUserService.validatePasswordResetToken(split[0]);
         String urlPartial = new String(Base64.getDecoder().decode(split[1]));
-        String urlWebSite = urlPartial + "/";
+        String urlWebSite = urlPartial + "/lawyer/";
         if(result != null) {
             String message = messages.getMessage("auth.message." + result, null, locale);
             return new ModelAndView("redirect:" +urlWebSite+"login.html?lang=" + locale.getLanguage() + "&message=" + message)  ;

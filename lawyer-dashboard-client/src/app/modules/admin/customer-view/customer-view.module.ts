@@ -13,6 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {FormsModule} from '@angular/forms';
 import {SatPopoverModule} from '@ncstate/sat-popover';
 import {InlineEditComponent} from '../in-line-edit/in-line-edit.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {InlineEditComponent} from '../in-line-edit/in-line-edit.component';
         MatNativeDateModule,
         MatTabsModule,
         FormsModule,
-        SatPopoverModule
+        SatPopoverModule,
+        MatListModule
     ],
     providers: [
         MatDatepickerModule,

@@ -84,7 +84,7 @@ export class ModifyCustomerComponent implements OnInit {
             if (rep.idRepPatronato >= 1) {
                 return rep;
             } else if (rep.spese && rep.note && rep.avvocatoDelegato && rep.status && rep.patronatoProvenienza
-            && rep.giudice && rep.dataUltimaUdienza && rep.tipoPratica && rep.convenzione
+            && rep.giudice && rep.dateUdienze && rep.tipoPratica && rep.convenzione
             && rep.codice && rep.tribunale && rep.ruoloGenerale) {
                 rep = null;
                 return rep;

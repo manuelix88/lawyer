@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from 'app/layout/common/user/user.types';
 import { UserService } from 'app/layout/common/user/user.service';
+import {AuthService} from '../../../core/auth/auth.service';
 
 @Component({
     selector       : 'user',
@@ -21,6 +22,7 @@ export class UserComponent implements OnInit, OnDestroy
     // Private
     private _unsubscribeAll: Subject<any>;
     private _user: User;
+     username: string;
 
     /**
      * Constructor
@@ -28,11 +30,13 @@ export class UserComponent implements OnInit, OnDestroy
      * @param {ChangeDetectorRef} _changeDetectorRef
      * @param {Router} _router
      * @param {UserService} _userService
+     * @param _auth
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router,
-        private _userService: UserService
+        public _userService: UserService,
+        private _auth: AuthService
     )
     {
         // Set the private defaults
@@ -63,6 +67,7 @@ export class UserComponent implements OnInit, OnDestroy
 
     get user(): User
     {
+
         return this._user;
     }
 
@@ -75,12 +80,14 @@ export class UserComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.username = this._auth.getCurrentUser().username;
         // Subscribe to user changes
-        this._userService.user$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
-                this._user = user;
-            });
+        // this._userService.user$
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((user: User) => {
+        //         this._user = user;
+        //         console.log('asdasdasd           ' + JSON.stringify(this._user));
+        //     });
     }
 
     /**

@@ -1,18 +1,28 @@
 import { Component, Input, Optional, Host } from '@angular/core';
 import { SatPopover } from '@ncstate/sat-popover';
 import {filter} from 'rxjs/operators';
+import {DataUdienze} from '../customer-view/model/report-patronato';
 
 @Component({
     selector: 'inline-edit',
     styleUrls: ['in-line-edit.component.scss'],
     template: `
     <form (ngSubmit)="onSubmit()">
-      <div class="mat-subheading-2">Add a comment</div>
+      <div class="mat-subheading-2">Aggiungi Una Data Udienza</div>
 
-      <mat-form-field>
-        <input matInput maxLength="140" name="comment" [(ngModel)]="comment">
-        <mat-hint align="end">/140</mat-hint>
-      </mat-form-field>
+        <mat-selection-list #shoes>
+            <mat-list-option *ngFor="let shoe of date" [selected]="shoe.enable" (click)="shoe.enable = !shoe.enable">
+                <div class="flex justify-between flex-auto">
+                    <div> {{shoe.dataUdienza | date: 'dd/MM/yyyy'}}</div>
+                    <button mat-icon-button >
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+
+
+            </mat-list-option>
+
+        </mat-selection-list>
 
       <div class="actions">
         <button mat-button type="button" color="primary" (click)="onCancel()">Esci</button>
@@ -24,11 +34,7 @@ import {filter} from 'rxjs/operators';
 export class InlineEditComponent {
 
     /** Overrides the comment and provides a reset value when changes are cancelled. */
-    @Input()
-    get value(): string { return this._value; }
-    set value(x: string) {
-        this.comment = this._value = x;
-    }
+    @Input('dataUltimaUdienza') date: DataUdienze[];
     private _value = '';
 
     /** Form model for the input. */
@@ -37,11 +43,12 @@ export class InlineEditComponent {
     constructor(@Optional() @Host() public popover: SatPopover) { }
 
     ngOnInit(): void {
+        console.log(JSON.stringify(this.date));
         // subscribe to cancellations and reset form value
-        if (this.popover) {
-            this.popover.closed.pipe(filter(val => val == null))
-                .subscribe(() => this.comment = this.value || '');
-        }
+        // if (this.popover) {
+        //     this.popover.closed.pipe(filter(val => val == null))
+        //         .subscribe(() => this.comment = this.value || '');
+        // }
     }
 
     onSubmit(): void {

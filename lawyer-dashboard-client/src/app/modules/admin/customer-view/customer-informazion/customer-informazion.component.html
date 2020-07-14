@@ -220,6 +220,9 @@
                                   [svgIcon]="'heroicons_outline:library'"></mat-icon>
                     </mat-form-field>
 
+<!--                    <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px" >-->
+<!--                        Storico Udienza-->
+<!--                    </button>-->
                     <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px" [satPopoverAnchor]="p" (click)="p.open()">
                         Storico Udienza
                     </button>
@@ -265,10 +268,11 @@
             </button>
         </div>
     </form>
+<!--    <div>{{customer.reportPatronato.dateUdienze | json}}</div>-->
     <sat-popover #p
-                 hasBackdrop
+                 hasBackdrop lockAlignment
                  xAlign="start"
                  yAlign="start">
-        <inline-edit></inline-edit>
+        <inline-edit [dataUltimaUdienza]="customer.reportPatronato.dateUdienze"></inline-edit>
     </sat-popover>
 </div>

@@ -23,8 +23,8 @@ export class AddCustomerComponent implements OnInit {
     async sendForm($event: AnagraficaCliente) {
         await this.spinner.show();
 
-        $event.reportPatronato = null;
-        $event.reportAmministrative = null;
+        // $event.reportPatronato = null;
+        // $event.reportAmministrative = null;
         await this.customer.addAnagrafica($event)
             .then(value => {
 
@@ -42,7 +42,7 @@ export class AddCustomerComponent implements OnInit {
             .catch(error => {
                 this.message = {
                     appearance: 'outline',
-                    content   : error.message,
+                    content   : error.error.message,
                     shake     : true,
                     showIcon  : false,
                     type      : 'error'

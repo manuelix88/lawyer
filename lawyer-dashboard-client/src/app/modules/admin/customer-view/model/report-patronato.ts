@@ -7,7 +7,7 @@ export class ReportPatronato {
     tipoPratica?: string;
     tribunale?: Tribunale;
     ruoloGenerale?: string;
-    dataUltimaUdienza?: any[];
+    dateUdienze?: DataUdienze[];
     patronatoProvenienza?: string;
     giudice: string;
     avvocatoDelegato: string;
@@ -28,4 +28,10 @@ export class Codice {
 export class Tribunale {
     id: number;
     tribunali?: string;
+}
+
+export class DataUdienze {
+    id: number;
+    enable: boolean;
+    dataUdienza: string;
 }

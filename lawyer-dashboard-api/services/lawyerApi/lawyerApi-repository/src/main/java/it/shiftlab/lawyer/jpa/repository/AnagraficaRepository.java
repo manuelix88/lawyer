@@ -20,7 +20,7 @@ public interface AnagraficaRepository extends PagingAndSortingRepository<Anagraf
 
     @Query(value=" from AnagraficaClienteEntity a where (:name is null or upper(a.nome) like :name%) " +
             "and (:cognome is null or upper(a.cognome)  like :cognome%) " +
-            "and (:codiceFiscale is null or upper(a.codiceFiscale)  = :codiceFiscale) " +
+            "and (:codiceFiscale is null or upper(a.codiceFiscale)  like :codiceFiscale%) " +
             "and (:faldone is null or a.reportAmministrativeByIdRepAmministrative.numeroFaldone = :faldone) " +
             "and (:qualifica is null or upper(a.reportAmministrativeByIdRepAmministrative.qualifica) = :qualifica) " +
             "and (:documentazione is null or upper(a.reportAmministrativeByIdRepAmministrative.documentazione) like :documentazione%) ")

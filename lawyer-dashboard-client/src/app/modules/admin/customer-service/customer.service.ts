@@ -32,4 +32,10 @@ export class CustomerService {
             this.api.get('/protected/retrieveAllAnagrafica', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
         });
     }
+
+    deleteAnagraficaById(req): Promise<any> {
+        return new Promise<any>((res, rej) => {
+            this.api.get('/protected/deleteAnagraficaById', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
+        });
+    }
 }

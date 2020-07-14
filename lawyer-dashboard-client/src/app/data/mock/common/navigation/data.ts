@@ -21,14 +21,14 @@ export const defaultNavigation: TreoNavigationItem[] = [
                 icon : 'heroicons_outline:user-add',
                 link : '/customer/add',
                 type : 'basic'
-            },
-            {
-                id   : 'import',
-                title: 'Importa Reports',
-                icon : 'heroicons_outline:document-report',
-                type : 'basic',
-                link : '/customer/report'
             }
+            // {
+            //     id   : 'import',
+            //     title: 'Importa Reports',
+            //     icon : 'heroicons_outline:document-report',
+            //     type : 'basic',
+            //     link : '/customer/report'
+            // }
         ]
     }
 ];
