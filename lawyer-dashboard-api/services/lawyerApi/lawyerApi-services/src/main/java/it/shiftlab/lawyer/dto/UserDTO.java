@@ -8,21 +8,14 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
 public class UserDTO implements Serializable {
 
-    @NotNull
-    @NotEmpty
     private String email;
 
-    @NotNull
-    @NotEmpty
     private String password;
 
-
+    public UserDTO() {
+    }
 
     public String getEmail() {
         return email;

@@ -83,6 +83,14 @@ export class AuthService
     //     );
     // }
 
+    saveNewPassword(credentials): Observable<any> {
+        return this._api.post('/public/savePassword', credentials).pipe(map(
+            (value) => {
+                return value;
+            }
+        ));
+    }
+
     signUp(credentials): Observable<any> {
         return this._api.post('/public/registration', credentials).pipe(map(
             (value) => {

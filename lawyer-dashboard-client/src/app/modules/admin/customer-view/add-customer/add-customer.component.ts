@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CustomerService} from '../../customer-service/customer.service';
 import {AnagraficaCliente} from '../model/anagrafica-cliente';
 import {TreoAnimations} from '../../../../../@treo/animations';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
     selector: 'add-customer',
@@ -12,7 +13,7 @@ import {TreoAnimations} from '../../../../../@treo/animations';
 export class AddCustomerComponent implements OnInit {
     message: any;
     anagrafica = new AnagraficaCliente();
-    constructor(private customer: CustomerService) { }
+    constructor(private customer: CustomerService, private spinner: NgxSpinnerService) { }
 
     ngOnInit(): void {
         this.message = null;
@@ -20,6 +21,8 @@ export class AddCustomerComponent implements OnInit {
 
     // tslint:disable-next-line:typedef
     async sendForm($event: AnagraficaCliente) {
+        await this.spinner.show();
+
         $event.reportPatronato = null;
         $event.reportAmministrative = null;
         await this.customer.addAnagrafica($event)
@@ -34,6 +37,7 @@ export class AddCustomerComponent implements OnInit {
                     type      : 'success'
                 };
 
+               this.spinner.hide();
             })
             .catch(error => {
                 this.message = {
@@ -45,6 +49,7 @@ export class AddCustomerComponent implements OnInit {
                 };
 
                 this.anagrafica = $event;
+                this.spinner.hide();
             })
     }
 }

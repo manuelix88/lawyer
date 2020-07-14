@@ -77,14 +77,20 @@ export class AuthForgotPasswordComponent implements OnInit
                 // Show the message
                 this.message = {
                     appearance: 'outline',
-                    content   : 'Password reset sent! You\'ll receive an email if you are registered on our system.',
+                    content   : 'Reimpostazione password inviata! Riceverai un\'email se sei registrato sul nostro sistema. (verifica la cartella SPAM)',
                     shake     : false,
                     showIcon  : false,
                     type      : 'success'
                 };
             })
             .catch(error => {
-
+                this.message = {
+                    appearance: 'outline',
+                    content   : error.message,
+                    shake     : false,
+                    showIcon  : false,
+                    type      : 'error'
+                };
             });
         // Emulate server delay
         // setTimeout(() => {

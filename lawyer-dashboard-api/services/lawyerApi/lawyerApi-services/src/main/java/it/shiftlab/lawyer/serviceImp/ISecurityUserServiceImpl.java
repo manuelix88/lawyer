@@ -24,6 +24,12 @@ public class ISecurityUserServiceImpl implements ISecurityUserService {
                 : null;
     }
 
+    @Override
+    public String getUsernameByToken(String token) {
+        final PasswordResetTokenEntity passToken = passwordTokenRepository.findByToken(token);
+        return passToken.getUser().getUsername();
+    }
+
     private boolean isTokenFound(PasswordResetTokenEntity passToken) {
         return passToken != null;
     }

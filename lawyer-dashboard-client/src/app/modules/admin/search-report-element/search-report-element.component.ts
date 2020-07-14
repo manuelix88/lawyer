@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AnagraficaCliente} from '../customer-view/model/anagrafica-cliente';
 import {MatTableDataSource} from '@angular/material/table';
 import {CustomerService} from '../customer-service/customer.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 export class SearchFilter {
     nome: string;
     cognome: number;
@@ -28,7 +29,7 @@ export class SearchReportElementComponent implements OnInit {
     pageIndex = 0;
     pageSizeOption: number[] = [5, 10, 25, 100];
     data: any;
-    constructor(private customerService: CustomerService) { }
+    constructor(private customerService: CustomerService, private spinner: NgxSpinnerService) { }
 
     ngOnInit(): void {
     }
@@ -44,6 +45,7 @@ export class SearchReportElementComponent implements OnInit {
     }
 
     getPageAnagrafica(input?: SearchFilter): void {
+        this.spinner.show();
         const req = {
             page: this.pageIndex,
             limit: this.pageSize,
@@ -61,13 +63,13 @@ export class SearchReportElementComponent implements OnInit {
                 this.customers = this.data.content;
                 this.dataSource = new MatTableDataSource(this.customers);
                 this.length = this.data.totalElements;
-                // this.spinner.hide();
+                this.spinner.hide();
             })
             .catch(error => {
                 // this.notification.error(
                 //     error.message
                 // );
-                // this.spinner.hide();
+                this.spinner.hide();
             });
     }
 }

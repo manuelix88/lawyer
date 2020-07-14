@@ -15,10 +15,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -63,9 +67,10 @@ public class RegistrationController {
         if (userDetails == null) {
             throw new EntityNotFoundException("Indirizzo inesistente " + userEmail);
         }
+        String url = request.getHeader("Origin");
         String token = UUID.randomUUID().toString();
         userService.createPasswordResetTokenForUser(userDetails, token);
-        mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, userDetails));
+        mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token +";" + Base64.getEncoder().encodeToString(url.getBytes()), userDetails));
         return ResponseEntity.ok(new GenericResponseMessage("ok", "ok"));
     }
 
@@ -78,20 +83,27 @@ public class RegistrationController {
     }
 
     @GetMapping("/public/changePassword")
-    public String showChangePasswordPage(
+    public ModelAndView   showChangePasswordPage(
             final Locale locale,
             final Model model,
             @RequestParam("token") final String token
     ) {
-        final String result = securityUserService.validatePasswordResetToken(token);
+        String[] split = token.split(";");
+        final String result = securityUserService.validatePasswordResetToken(split[0]);
+        String urlPartial = new String(Base64.getDecoder().decode(split[1]));
+        String urlWebSite = urlPartial + "/";
         if(result != null) {
             String message = messages.getMessage("auth.message." + result, null, locale);
-            }
-        return null;
+            return new ModelAndView("redirect:" +urlWebSite+"login.html?lang=" + locale.getLanguage() + "&message=" + message)  ;
+        }else {
+//            model.addAttribute("token", token);
+            String usernameByToken = securityUserService.getUsernameByToken(split[0]);
+            return new ModelAndView("redirect:"+ urlWebSite +"reset-password?id=" +usernameByToken);
+        }
     }
 
     @PostMapping("/public/savePassword")
-    public ResponseEntity<?> savePassword(@Valid UserDTO userDto) {
+    public ResponseEntity<?> savePassword(@RequestBody UserDTO userDto) {
         userService.changeUserPassword(userDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

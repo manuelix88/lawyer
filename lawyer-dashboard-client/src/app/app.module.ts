@@ -12,6 +12,7 @@ import {mockDataServices} from 'app/data/mock';
 import {LayoutModule} from 'app/layout/layout.module';
 import {AppComponent} from 'app/app.component';
 import {appRoutes} from 'app/app.routing';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 const routerConfig: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
@@ -37,7 +38,7 @@ const routerConfig: ExtraOptions = {
 
         // Layout
         LayoutModule,
-
+        NgxSpinnerModule,
         // 3rd party modules
         MarkdownModule.forRoot({})
     ],

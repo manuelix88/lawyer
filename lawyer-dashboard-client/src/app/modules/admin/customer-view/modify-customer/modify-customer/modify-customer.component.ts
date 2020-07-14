@@ -8,6 +8,7 @@ import {ReportPatronato} from '../../model/report-patronato';
 import {ReportAmministrative} from '../../model/report-amministrative';
 import moment from 'moment';
 import {SatPopover} from '@ncstate/sat-popover';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
     selector: 'modify-customer',
@@ -22,31 +23,37 @@ export class ModifyCustomerComponent implements OnInit {
 
     anagrafica = new AnagraficaCliente();
     message: any;
-    constructor(private customerService: CustomerService,private activatedRouter: ActivatedRoute) { }
+    constructor(private customerService: CustomerService,private activatedRouter: ActivatedRoute,
+                private spinner: NgxSpinnerService) { }
 
     // tslint:disable-next-line:typedef
     async ngOnInit() {
         this.message = null;
         if (this.activatedRouter.snapshot.params.id) {
+            await this.spinner.show();
             const req = {
                 anagraficaId: this.activatedRouter.snapshot.params.id
             }
             await this.customerService.getAnagraficaById(req)
                 .then( value => {
-                    console.log('Inviata dal server ' + value.dataNascita);
                    const data = moment(value.dataNascita).toISOString();
                     console.log(data);
                     this.anagrafica = value;
                     this.anagrafica.dataNascita = data;
-
+                    this.spinner.hide();
+                })
+                .catch(error => {
+                    this.spinner.hide();
                 });
         }
     }
 
     async sendForm($event: AnagraficaCliente) {
+
         $event.reportAmministrative = this.checkReportAmministrativo($event.reportAmministrative);
-        // $event.reportPatronato = this.checkReportPatronato($event.reportPatronato);
+        $event.reportPatronato = this.checkReportPatronato($event.reportPatronato);
         const clonesValue = _.cloneDeep($event);
+        await this.spinner.show();
         await this.customerService.updateAnagrafica($event)
             .then(value => {
                 this.message = {
@@ -57,6 +64,7 @@ export class ModifyCustomerComponent implements OnInit {
                     type      : 'success'
                 };
                 this.anagrafica = clonesValue;
+                this.spinner.hide();
             })
             .catch(error=> {
                 this.message = {
@@ -67,6 +75,7 @@ export class ModifyCustomerComponent implements OnInit {
                     type      : 'error'
                 };
                 this.anagrafica = clonesValue;
+                this.spinner.hide();
             })
     }
 
@@ -74,7 +83,7 @@ export class ModifyCustomerComponent implements OnInit {
         if (rep) {
             if (rep.idRepPatronato >= 1) {
                 return rep;
-            } else if (rep.spese && rep.note && rep.avvocatoDelegato
+            } else if (rep.spese && rep.note && rep.avvocatoDelegato && rep.status && rep.patronatoProvenienza
             && rep.giudice && rep.dataUltimaUdienza && rep.tipoPratica && rep.convenzione
             && rep.codice && rep.tribunale && rep.ruoloGenerale) {
                 rep = null;

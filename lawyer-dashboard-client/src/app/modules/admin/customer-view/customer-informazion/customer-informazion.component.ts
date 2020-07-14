@@ -4,7 +4,6 @@ import {ReportAmministrative} from '../model/report-amministrative';
 import {Codice, ReportPatronato, Status, Tribunale} from '../model/report-patronato';
 import {ApplicationStoreService} from '../../../../core/store/application-store.service';
 import {NgForm} from '@angular/forms';
-import moment from 'moment';
 import {SatPopover} from '@ncstate/sat-popover';
 import {filter} from 'rxjs/operators';
 
