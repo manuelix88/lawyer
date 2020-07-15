@@ -36,7 +36,7 @@ export class AddCustomerComponent implements OnInit {
                     showIcon  : false,
                     type      : 'success'
                 };
-
+                $event = new AnagraficaCliente();
                this.spinner.hide();
             })
             .catch(error => {
@@ -50,6 +50,6 @@ export class AddCustomerComponent implements OnInit {
 
                 this.anagrafica = $event;
                 this.spinner.hide();
-            })
+            });
     }
 }

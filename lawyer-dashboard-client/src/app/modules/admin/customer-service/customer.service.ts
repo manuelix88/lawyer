@@ -10,14 +10,14 @@ export class CustomerService {
 
   constructor(private api: ApiService) { }
 
-    addAnagrafica(req): Promise<any> {
-        return new Promise<any>((res, rej) => {
+    addAnagrafica(req): Promise<AnagraficaCliente> {
+        return new Promise<AnagraficaCliente>((res, rej) => {
             this.api.post('/protected/addAnagrafica', req).subscribe(success => res(success), error => rej(error));
         });
     }
 
-    updateAnagrafica(req): Promise<any> {
-        return new Promise<any>((res, rej) => {
+    updateAnagrafica(req): Promise<AnagraficaCliente> {
+        return new Promise<AnagraficaCliente>((res, rej) => {
             this.api.post('/protected/updateAnagrafica', req).subscribe(success => res(success), error => rej(error));
         });
     }

@@ -36,7 +36,7 @@ export class ModifyCustomerComponent implements OnInit {
             }
             await this.customerService.getAnagraficaById(req)
                 .then( value => {
-                   const data = moment(value.dataNascita).toISOString();
+                    const data = moment(value.dataNascita).toISOString();
                     console.log(data);
                     this.anagrafica = value;
                     this.anagrafica.dataNascita = data;
@@ -63,8 +63,11 @@ export class ModifyCustomerComponent implements OnInit {
                     showIcon  : false,
                     type      : 'success'
                 };
-                this.anagrafica = clonesValue;
-                this.spinner.hide();
+                // this.anagrafica = new AnagraficaCliente();
+                // this.anagrafica = value;
+                // this.anagrafica.
+                // this.spinner.hide();
+                // window.location.reload();
             })
             .catch(error=> {
                 this.message = {
@@ -76,7 +79,22 @@ export class ModifyCustomerComponent implements OnInit {
                 };
                 this.anagrafica = clonesValue;
                 this.spinner.hide();
+            });
+        // await this.spinner.show();
+        const req = {
+            anagraficaId: $event.idAnagrafica
+        }
+        await this.customerService.getAnagraficaById(req)
+            .then( value => {
+                const data = moment(value.dataNascita).toISOString();
+                console.log(data);
+                this.anagrafica = value;
+                this.anagrafica.dataNascita = data;
+                this.spinner.hide();
             })
+            .catch(error => {
+                this.spinner.hide();
+            });
     }
 
     checkReportPatronato(rep: ReportPatronato): ReportPatronato {
@@ -84,8 +102,8 @@ export class ModifyCustomerComponent implements OnInit {
             if (rep.idRepPatronato >= 1) {
                 return rep;
             } else if (rep.spese && rep.note && rep.avvocatoDelegato && rep.status && rep.patronatoProvenienza
-            && rep.giudice && rep.dateUdienze && rep.tipoPratica && rep.convenzione
-            && rep.codice && rep.tribunale && rep.ruoloGenerale) {
+                && rep.giudice && rep.dateUdienze && rep.tipoPratica && rep.convenzione
+                && rep.codice && rep.tribunale && rep.ruoloGenerale) {
                 rep = null;
                 return rep;
             }else {
@@ -99,7 +117,7 @@ export class ModifyCustomerComponent implements OnInit {
             if (rep.idRepAmministrative >= 1) {
                 return rep;
             } else if (rep.documentazione && rep.note && rep.altro &&
-            rep.dataPagamento && rep.ricordoCedu
+                rep.dataPagamento && rep.ricordoCedu
                 && rep.qualifica && rep.numeroFaldone) {
                 rep = null;
                 return rep;
@@ -108,5 +126,9 @@ export class ModifyCustomerComponent implements OnInit {
                 return rep;
             }
         }
+    }
+
+    async getAnag(req) {
+
     }
 }

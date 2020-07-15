@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Host, Input, OnInit, Optional, Output} from '@angular/core';
 import {AnagraficaCliente} from '../model/anagrafica-cliente';
 import {ReportAmministrative} from '../model/report-amministrative';
-import {Codice, ReportPatronato, Status, Tribunale} from '../model/report-patronato';
+import {Codice, DataUdienze, ReportPatronato, Status, Tribunale} from '../model/report-patronato';
 import {ApplicationStoreService} from '../../../../core/store/application-store.service';
 import {NgForm} from '@angular/forms';
 import {SatPopover} from '@ncstate/sat-popover';
@@ -66,6 +66,20 @@ export class CustomerInformazionComponent implements OnInit {
         this.customer.reportAmministrative = new ReportAmministrative();
         this.customer.reportPatronato = new ReportPatronato();
 
+    }
+    saveDate(dataUdienza: DataUdienze) : void {
+        if(!dataUdienza.id) {
+            dataUdienza.enable = false;
+            this.customer.reportPatronato.dateUdienze.push(dataUdienza);
+        } else {
+            if (!this.customer.reportPatronato) {
+                this.customer.reportPatronato = new ReportPatronato();
+            }
+            this.customer.reportPatronato.dateUdienze = this.customer.reportPatronato.dateUdienze.filter(value1 => value1.id !== dataUdienza.id);
+            this.customer.reportPatronato.dateUdienze.push(dataUdienza);
+
+
+        }
     }
 
     // dataChange(form: NgForm): void {

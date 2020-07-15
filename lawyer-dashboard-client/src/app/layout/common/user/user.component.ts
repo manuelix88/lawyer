@@ -80,7 +80,11 @@ export class UserComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.username = this._auth.getCurrentUser().username;
+      this._auth.getCurrentUser().subscribe(
+            value => {
+                this.username = value.username;
+            }
+        );
         // Subscribe to user changes
         // this._userService.user$
         //     .pipe(takeUntil(this._unsubscribeAll))

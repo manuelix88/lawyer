@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
 import {SatPopoverModule} from '@ncstate/sat-popover';
 import {InlineEditComponent} from '../in-line-edit/in-line-edit.component';
 import {MatListModule} from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {MatListModule} from '@angular/material/list';
         MatTabsModule,
         FormsModule,
         SatPopoverModule,
-        MatListModule
+        MatListModule,
+        MatCheckboxModule
     ],
     providers: [
         MatDatepickerModule,

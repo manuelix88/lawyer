@@ -31,6 +31,14 @@ export class AuthService
     {
         // Set the defaults
         this._authenticated = false;
+
+        const token = this.jwtService.getToken();
+        if (token) {
+            const loggedUser = this.getLoggedUser(token);
+            console.log(JSON.stringify(loggedUser));
+            this.currentUserSubject.next(loggedUser);
+        }
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -104,7 +112,9 @@ export class AuthService
             value => {
                 this._authenticated = true;
                 this.jwtService.setToken(value.token);
-                this.currentUserSubject.next(this.getLoggedUser(value.token));
+                const loggedUser = this.getLoggedUser(value.token);
+                console.log(JSON.stringify(loggedUser));
+                this.currentUserSubject.next(loggedUser);
                 this.isAuthenticatedSubject.next(true);
                 return of (value);
             }
@@ -118,8 +128,8 @@ export class AuthService
         return user;
     }
 
-    public getCurrentUser(): User {
-        return this.currentUserSubject.value;
+    public getCurrentUser(): BehaviorSubject<User> {
+        return this.currentUserSubject;
     }
     /**
      * Sign in using the access token

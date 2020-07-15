@@ -268,11 +268,11 @@
             </button>
         </div>
     </form>
-<!--    <div>{{customer.reportPatronato.dateUdienze | json}}</div>-->
+    <div>{{customer.reportPatronato | json}}</div>
     <sat-popover #p
-                 hasBackdrop lockAlignment
+
                  xAlign="start"
                  yAlign="start">
-        <inline-edit [dataUltimaUdienza]="customer.reportPatronato.dateUdienze"></inline-edit>
+        <inline-edit [dataUltimaUdienza]="customer.reportPatronato.dateUdienze" (savaData)="saveDate($event)"></inline-edit>
     </sat-popover>
 </div>
