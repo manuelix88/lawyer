@@ -1,10 +1,9 @@
 package it.shiftlab.lawyer.jpa.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "REPORT_PATRONATO")
@@ -25,11 +24,14 @@ public class ReportPatronatoEntity {
     private StatusEntity statusByStatusId;
     private CodiciReportEntity codiciReportByCodiciReportId;
     private TribunaliEntity tribunaliByTribunaliId;
+    private UUID uuid;
 
     public ReportPatronatoEntity() {
     }
 
-    public ReportPatronatoEntity(Long idRepPatronato, String avvocatoDelegato, String convenzione,  String decorrenzaSuccessiva, String giudice, String note, String patronatoProvenienza, String ruoloGenerale, String spese, String tipoPratica) {
+    public ReportPatronatoEntity(Long idRepPatronato, String avvocatoDelegato, String convenzione,
+                                 String decorrenzaSuccessiva, String giudice, String note, String patronatoProvenienza,
+                                 String ruoloGenerale, String spese, String tipoPratica, UUID uuid) {
         this.idRepPatronato = idRepPatronato;
         this.avvocatoDelegato = avvocatoDelegato;
         this.convenzione = convenzione;
@@ -40,6 +42,7 @@ public class ReportPatronatoEntity {
         this.ruoloGenerale = ruoloGenerale;
         this.spese = spese;
         this.tipoPratica = tipoPratica;
+        this.uuid = uuid;
     }
 
     @Id
@@ -153,22 +156,14 @@ public class ReportPatronatoEntity {
         this.tipoPratica = tipoPratica;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ReportPatronatoEntity that = (ReportPatronatoEntity) o;
-        return idRepPatronato == that.idRepPatronato &&
-                Objects.equals(avvocatoDelegato, that.avvocatoDelegato) &&
-                Objects.equals(convenzione, that.convenzione) &&
-                Objects.equals(dataUltimaUdienza, that.dataUltimaUdienza) &&
-                Objects.equals(decorrenzaSuccessiva, that.decorrenzaSuccessiva) &&
-                Objects.equals(giudice, that.giudice) &&
-                Objects.equals(note, that.note) &&
-                Objects.equals(patronatoProvenienza, that.patronatoProvenienza) &&
-                Objects.equals(ruoloGenerale, that.ruoloGenerale) &&
-                Objects.equals(spese, that.spese) &&
-                Objects.equals(tipoPratica, that.tipoPratica);
+    @Column(name="uuid", unique = true)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     @Override

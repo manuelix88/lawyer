@@ -6,6 +6,7 @@ import it.shiftlab.lawyer.jpa.entity.ReportPatronatoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class DateUdienzeFactory {
 
@@ -15,7 +16,7 @@ public class DateUdienzeFactory {
         if (udienzeEntities != null) {
 
             for (DateUdienzeEntity entity  : udienzeEntities) {
-                dto = new DataUdienzaDto(entity.getId(), entity.getEnable(), entity.getDataUdienza());
+                dto = new DataUdienzaDto(entity.getId(), entity.getEnable(), entity.getDataUdienza(), entity.getUuid().toString());
                 list.add(dto);
             }
         }
@@ -26,7 +27,7 @@ public class DateUdienzeFactory {
         List<DateUdienzeEntity> list = new ArrayList<>();
         DateUdienzeEntity enity = new DateUdienzeEntity();
         for (DataUdienzaDto dto : dtos) {
-            enity = new DateUdienzeEntity(dto.getId(), dto.getEnable(), dto.getDataUdienza(),savePatronato);
+            enity = new DateUdienzeEntity(dto.getId(), dto.getEnable(), dto.getDataUdienza(),savePatronato, dto.getUuid() != null ? UUID.fromString(dto.getUuid()) : UUID.randomUUID());
             list.add(enity);
         }
         return list;

@@ -13,11 +13,14 @@ public class ReportAmministrativeDto implements Serializable {
     private String altro;
     private String note;
     private String documentazione;
+    private String uuid;
 
     public ReportAmministrativeDto() {
     }
 
-    public ReportAmministrativeDto(Long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone, String ricordoCedu, String altro, String note, String documentazione) {
+    public ReportAmministrativeDto(Long idRepAmministrative, String qualifica, Date dataPagamento,
+                                   Integer numeroFaldone, String ricordoCedu, String altro,
+                                   String note, String documentazione, String uuid) {
         this.idRepAmministrative = idRepAmministrative;
         this.qualifica = qualifica;
         this.dataPagamento = dataPagamento;
@@ -26,6 +29,7 @@ public class ReportAmministrativeDto implements Serializable {
         this.altro = altro;
         this.note = note;
         this.documentazione = documentazione;
+        this.uuid = uuid;
     }
 
     public ReportAmministrativeDto(String qualifica, Date pagamento, Integer faldone, String ricorso, String altro, String note, String documentazione) {
@@ -104,4 +108,11 @@ public class ReportAmministrativeDto implements Serializable {
         this.documentazione = documentazione;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 }

@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class ReportPatronatoWriter implements ItemWriter<BatchreportPatronatoDto> {
     @Autowired
@@ -34,15 +35,15 @@ public class ReportPatronatoWriter implements ItemWriter<BatchreportPatronatoDto
                 for (int i = 0; i < s.length; i++) {
                     if(!"".equalsIgnoreCase(s[i])) {
                         Date date =new SimpleDateFormat("dd/MM/yyyy").parse(s[i]);
-                        dataUdienzaDto = new DataUdienzaDto(false, date);
+                        dataUdienzaDto = new DataUdienzaDto(false, date,UUID.randomUUID().toString());
                         udienzaDtoList.add(dataUdienzaDto);
 
                     }
                 }
             }
             reportPatronatoDto = new ReportPatronatoDto(statusDto,b.getConvenzione(),b.getSpese(),codiceDto,b.getTipoPratica(),tribunaleDto, b.getRuoloGenerale(),
-                    udienzaDtoList, b.getPatronatoProvenienza(), b.getGiudice(), b.getAvvocatoDelegato(), b.getNote() );
-            output = new AnagraficaDto(b.getNome(), reportPatronatoDto);
+                    udienzaDtoList, b.getPatronatoProvenienza(), b.getGiudice(), b.getAvvocatoDelegato(), b.getNote(), UUID.randomUUID().toString());
+            output = new AnagraficaDto(b.getNome(), reportPatronatoDto, UUID.randomUUID().toString());
             anagraficaService.saveAnagrafica(output);
 
         }

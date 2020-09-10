@@ -1,8 +1,11 @@
 package it.shiftlab.lawyer.jpa.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "DATE_UDIENZE")
@@ -11,6 +14,7 @@ public class DateUdienzeEntity {
     private Boolean enable;
     private Date dataUdienza;
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
+    private UUID uuid;
 
     public DateUdienzeEntity() {
     }
@@ -21,11 +25,12 @@ public class DateUdienzeEntity {
         this.dataUdienza = dataUdienza;
     }
 
-    public DateUdienzeEntity(long id, Boolean enable, Date dataUdienza, ReportPatronatoEntity reportPatronatoByIdRepPatronato) {
+    public DateUdienzeEntity(long id, Boolean enable, Date dataUdienza, ReportPatronatoEntity reportPatronatoByIdRepPatronato,UUID uuid) {
         this.id = id;
         this.enable = enable;
         this.dataUdienza = dataUdienza;
         this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
+        this.uuid = uuid;
     }
 
     @Id
@@ -59,16 +64,15 @@ public class DateUdienzeEntity {
         this.dataUdienza = dataUdienza;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DateUdienzeEntity that = (DateUdienzeEntity) o;
-        return id == that.id &&
-                Objects.equals(enable, that.enable) &&
-                Objects.equals(dataUdienza, that.dataUdienza);
+    @Column(name="uuid", unique = true)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    public UUID getUuid() {
+        return uuid;
     }
 
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
     @Override
     public int hashCode() {
         return Objects.hash(id, enable, dataUdienza);

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class ReportInfoAmministrativeWriter implements ItemWriter<ReportInfoAmministrativeDto> {
 
@@ -28,12 +29,13 @@ public class ReportInfoAmministrativeWriter implements ItemWriter<ReportInfoAmmi
             repAmm.setRicordoCedu(rep.getRicorso());
             repAmm.setAltro(rep.getAltro());
             repAmm.setNote(rep.getNote());
+            repAmm.setUuid(UUID.randomUUID().toString());
             if (rep.getPagamento() != null && !rep.getPagamento().equals("")) {
                 Date date =new SimpleDateFormat("dd/MM/yyyy").parse(rep.getPagamento().trim());
                 repAmm.setDataPagamento(date);
             }
             repAmm.setDocumentazione(rep.getDocumentazione());
-            output = new AnagraficaDto(rep.getNome(), rep.getFiscale(),rep.getProvincia(), repAmm);
+            output = new AnagraficaDto(rep.getNome(), rep.getFiscale(),rep.getProvincia(), repAmm, UUID.randomUUID().toString());
             anagraficaService.saveAnagrafica(output);
         }
     }

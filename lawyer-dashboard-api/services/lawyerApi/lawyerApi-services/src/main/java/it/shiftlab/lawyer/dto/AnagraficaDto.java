@@ -34,7 +34,11 @@ public class AnagraficaDto {
 
     private ReportAmministrativeDto reportAmministrative;
 
-    public AnagraficaDto(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNascita, ReportPatronatoDto reportPatronato, ReportAmministrativeDto reportAmministrative) {
+    private String uuid;
+
+    public AnagraficaDto(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
+                         String nazione, String indirizzo, String citta, String provincia, Date dataNascita,
+                         ReportPatronatoDto reportPatronato, ReportAmministrativeDto reportAmministrative, String uuid) {
         this.idAnagrafica = idAnagrafica;
         this.nome = nome;
         this.cognome = cognome;
@@ -47,22 +51,25 @@ public class AnagraficaDto {
         this.dataNascita = dataNascita;
         this.reportPatronato = reportPatronato;
         this.reportAmministrative = reportAmministrative;
+        this.uuid = uuid;
     }
 
     public AnagraficaDto() {
 
     }
 
-    public AnagraficaDto(String nome, String codiceFiscale, String provincia, ReportAmministrativeDto reportAmministrative) {
+    public AnagraficaDto(String nome, String codiceFiscale, String provincia, ReportAmministrativeDto reportAmministrative, String uuid) {
         this.nome = nome;
         this.codiceFiscale = codiceFiscale;
         this.provincia = provincia;
         this.reportAmministrative = reportAmministrative;
+        this.uuid = uuid;
     }
 
-    public AnagraficaDto(String nome, ReportPatronatoDto reportPatronato) {
+    public AnagraficaDto(String nome, ReportPatronatoDto reportPatronato, String uuid) {
         this.nome = nome;
         this.reportPatronato = reportPatronato;
+        this.uuid = uuid;
     }
 
     public long getIdAnagrafica() {
@@ -159,6 +166,14 @@ public class AnagraficaDto {
 
     public void setReportAmministrative(ReportAmministrativeDto reportAmministrative) {
         this.reportAmministrative = reportAmministrative;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     @Override

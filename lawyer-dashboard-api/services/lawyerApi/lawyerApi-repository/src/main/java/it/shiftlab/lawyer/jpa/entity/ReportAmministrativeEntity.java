@@ -1,8 +1,11 @@
 package it.shiftlab.lawyer.jpa.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "REPORT_AMMINISTRATIVE")
@@ -16,12 +19,13 @@ public class ReportAmministrativeEntity {
     private String ricordoCedu;
     private String documentazione;
     private AnagraficaClienteEntity anagraficaClientesByIdRepAmministrative;
+    private UUID uuid;
 
     public ReportAmministrativeEntity() {
     }
 
     public ReportAmministrativeEntity(Long idRepAmministrative, String qualifica, Date dataPagamento, Integer numeroFaldone,
-                                      String ricordoCedu, String altro, String note, String documentazione) {
+                                      String ricordoCedu, String altro, String note, String documentazione, UUID uuid) {
         this.idRepAmministrative = idRepAmministrative;
         this.altro = altro;
         this.dataPagamento = dataPagamento;
@@ -30,6 +34,7 @@ public class ReportAmministrativeEntity {
         this.qualifica = qualifica;
         this.ricordoCedu = ricordoCedu;
         this.documentazione = documentazione;
+        this.uuid = uuid;
     }
 
     @Id
@@ -114,19 +119,14 @@ public class ReportAmministrativeEntity {
         this.documentazione = documentazione;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ReportAmministrativeEntity that = (ReportAmministrativeEntity) o;
-        return idRepAmministrative == that.idRepAmministrative &&
-                Objects.equals(altro, that.altro) &&
-                Objects.equals(dataPagamento, that.dataPagamento) &&
-                Objects.equals(note, that.note) &&
-                Objects.equals(numeroFaldone, that.numeroFaldone) &&
-                Objects.equals(qualifica, that.qualifica) &&
-                Objects.equals(ricordoCedu, that.ricordoCedu) &&
-                Objects.equals(documentazione, that.documentazione);
+    @Column(name="uuid", unique = true)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     @Override

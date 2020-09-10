@@ -1,8 +1,11 @@
 package it.shiftlab.lawyer.jpa.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "ANAGRAFICA_CLIENTE")
@@ -19,13 +22,15 @@ public class AnagraficaClienteEntity {
     private String provincia;
     private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
+    private UUID uuid;
 
 
     public AnagraficaClienteEntity() {
 
     }
 
-    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale, String nazione, String indirizzo, String citta, String provincia, Date dataNascita) {
+    public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
+                                   String nazione, String indirizzo, String citta, String provincia, Date dataNascita, UUID uuid) {
         this.idAnagrafica = idAnagrafica;
         this.citta = citta;
         this.codiceFiscale = codiceFiscale;
@@ -36,6 +41,7 @@ public class AnagraficaClienteEntity {
         this.nome = nome;
         this.provincia = provincia;
         this.dataNasacita = dataNascita;
+        this.uuid = uuid;
     }
 
     @Id
@@ -140,21 +146,14 @@ public class AnagraficaClienteEntity {
         this.provincia = provincia;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AnagraficaClienteEntity entity = (AnagraficaClienteEntity) o;
-        return idAnagrafica == entity.idAnagrafica &&
-                Objects.equals(citta, entity.citta) &&
-                Objects.equals(codiceFiscale, entity.codiceFiscale) &&
-                Objects.equals(cognome, entity.cognome) &&
-                Objects.equals(dataNasacita, entity.dataNasacita) &&
-                Objects.equals(email, entity.email) &&
-                Objects.equals(indirizzo, entity.indirizzo) &&
-                Objects.equals(nazione, entity.nazione) &&
-                Objects.equals(nome, entity.nome) &&
-                Objects.equals(provincia, entity.provincia);
+    @Column(name="uuid", unique = true)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     @Override
@@ -181,4 +180,5 @@ public class AnagraficaClienteEntity {
     public void setReportPatronatoByIdRepPatronato(ReportPatronatoEntity reportPatronatoByIdRepPatronato) {
         this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
     }
+
 }
