@@ -1,6 +1,8 @@
 <div class="max-w-full m-8 rich-text">
-<!--    {{ customer  | json}}-->
+
+<!--    {{ customerForm  | json}}-->
     <form #customerForm="ngForm" class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
+<!--            {{ customerForm.controls.cognome.errors}}-->
         <p class="text-lg font-medium mb-8">Anagrafica Cliente</p>
         <div class="flex flex-col gt-xs:flex-row">
             <mat-form-field class="flex-auto gt-xs:pr-3">
@@ -9,6 +11,7 @@
                        [placeholder]="'Nome'" required>
                 <mat-icon matPrefix
                           [svgIcon]="'account_circle'"></mat-icon>
+                <mat-error>Questo campo è obbligatorio</mat-error>
             </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Cognome</mat-label>
@@ -16,6 +19,7 @@
                        [placeholder]="'Cognome'" required>
                 <mat-icon matPrefix
                           [svgIcon]="'account_circle'"></mat-icon>
+                <mat-error *ngIf="customerForm.control.get('cognome').hasError('required')">Questo campo è obbligatorio</mat-error>
             </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Email</mat-label>
@@ -255,6 +259,13 @@
                 </div>
             </mat-tab>
         </mat-tab-group>
+        <treo-message *ngIf="message"
+                      [appearance]="message.appearance"
+                      [showIcon]="message.showIcon"
+                      [type]="message.type"
+                      [@shake]="message.shake">
+            {{message.content}}
+        </treo-message>
 
         <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 light:bg-cool-gray-50 dark:bg-cool-gray-700">
             <button mat-button type="button" (click)="reset()">
@@ -263,12 +274,13 @@
             <button class="px-6 ml-3" type="button"
                     mat-flat-button
                     [color]="'primary'"
-                    (click)="sendCustomer(customer, customerForm); reset()">
+                    (click)="sendCustomer(customer, customerForm);">
                 Salva
             </button>
         </div>
     </form>
-    <div>{{customer.reportPatronato | json}}</div>
+<!--    <div>{{customer.reportPatronato | json}}</div>-->
+
     <sat-popover #p
 
                  xAlign="start"

@@ -15,6 +15,7 @@ import {SatPopoverModule} from '@ncstate/sat-popover';
 import {InlineEditComponent} from '../in-line-edit/in-line-edit.component';
 import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {TreoMessageModule} from '../../../../@treo/components/message';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         FormsModule,
         SatPopoverModule,
         MatListModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        TreoMessageModule
     ],
     providers: [
         MatDatepickerModule,

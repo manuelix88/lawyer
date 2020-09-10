@@ -6,14 +6,18 @@ import {ApplicationStoreService} from '../../../../core/store/application-store.
 import {NgForm} from '@angular/forms';
 import {SatPopover} from '@ncstate/sat-popover';
 import {filter} from 'rxjs/operators';
+import {TreoAnimations} from '../../../../../@treo/animations';
 
 @Component({
     selector: 'customer-information',
     templateUrl: './customer-informazion.component.html',
-    styleUrls: ['./customer-informazion.component.scss']
+    styleUrls: ['./customer-informazion.component.scss'],
+    animations   : TreoAnimations
 })
 export class CustomerInformazionComponent implements OnInit {
 
+
+    message: any;
     @Input() customer = new AnagraficaCliente();
     @Output() sendForm = new EventEmitter<AnagraficaCliente>();
 
@@ -30,6 +34,7 @@ export class CustomerInformazionComponent implements OnInit {
     constructor(@Optional() @Host() public popover: SatPopover,public store: ApplicationStoreService) { }
 
     ngOnInit(): void {
+        this.message = null;
         if(this.customer.reportAmministrative === undefined) {
             this.customer.reportAmministrative = new ReportAmministrative();
         }
@@ -55,7 +60,13 @@ export class CustomerInformazionComponent implements OnInit {
 
     sendCustomer(anagrafica: AnagraficaCliente, form: NgForm): void {
         if(form.invalid) {
-            alert('InvalidForm');
+            this.message = {
+                appearance: 'outline',
+                content   : 'I dati inseriti non sono validi',
+                shake     : true,
+                showIcon  : false,
+                type      : 'error'
+            };
             return;
         }
         this.sendForm.emit(anagrafica);

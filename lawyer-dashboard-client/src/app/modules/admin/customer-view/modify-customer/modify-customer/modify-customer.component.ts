@@ -63,11 +63,6 @@ export class ModifyCustomerComponent implements OnInit {
                     showIcon  : false,
                     type      : 'success'
                 };
-                // this.anagrafica = new AnagraficaCliente();
-                // this.anagrafica = value;
-                // this.anagrafica.
-                // this.spinner.hide();
-                // window.location.reload();
             })
             .catch(error=> {
                 this.message = {
@@ -128,7 +123,4 @@ export class ModifyCustomerComponent implements OnInit {
         }
     }
 
-    async getAnag(req) {
-
-    }
 }

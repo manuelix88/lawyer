@@ -15,6 +15,7 @@ import {TreoValidators} from '../../../../@treo/validators';
 export class AuthSignUpComponent implements OnInit, OnDestroy
 {
     message: any;
+    minLength = 8;
     signUpForm: FormGroup;
 
     // Private
@@ -51,7 +52,7 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
         this.signUpForm = this._formBuilder.group({
                 // name      : ['', Validators.required],
                 email     : ['', [Validators.required, Validators.email]],
-                password  : ['', Validators.required],
+                password  : ['', [Validators.required, Validators.minLength(this.minLength)]],
                 passwordConfirm: ['', Validators.required]
             },
             {

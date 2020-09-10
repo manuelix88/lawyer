@@ -50,10 +50,10 @@
                                matInput
                                [formControlName]="'email'">
                         <mat-error *ngIf="signUpForm.get('email').hasError('required')">
-                            Email address is required
+                           Email obbligatoria
                         </mat-error>
                         <mat-error *ngIf="signUpForm.get('email').hasError('email')">
-                            Please enter a valid email address
+                            Inserisci un indirizzo email valido
                         </mat-error>
                     </mat-form-field>
 
@@ -77,9 +77,10 @@
                         <mat-error>
                             La Password è obbligatoria
                         </mat-error>
+                        <mat-error *ngIf="signUpForm.get('password').hasError('minlength')">La password richiede almeno {{minLength}} caratteri</mat-error>
                     </mat-form-field>
                     <mat-form-field>
-                        <mat-label>Password (Confirma)</mat-label>
+                        <mat-label>Password (Conferma)</mat-label>
                         <input id="password-confirm"
                                matInput
                                type="password"
