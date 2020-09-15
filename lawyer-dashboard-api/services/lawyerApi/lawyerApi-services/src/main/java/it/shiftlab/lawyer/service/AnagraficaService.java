@@ -12,5 +12,5 @@ public interface AnagraficaService {
 
     void updateAnagrafica(AnagraficaDto anagraficaDto);
 
-    Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica, String documentazione);
+    Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica, String documentazione , String ruoloGenerale);
 }

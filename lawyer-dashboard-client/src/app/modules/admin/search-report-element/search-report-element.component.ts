@@ -5,11 +5,12 @@ import {CustomerService} from '../customer-service/customer.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 export class SearchFilter {
     nome: string;
-    cognome: number;
+    cognome: string;
     codiceFiscale: string;
     qualifica: string;
     faldone: number;
     documentazione: string;
+    ruoloGenerale: string;
 }
 
 

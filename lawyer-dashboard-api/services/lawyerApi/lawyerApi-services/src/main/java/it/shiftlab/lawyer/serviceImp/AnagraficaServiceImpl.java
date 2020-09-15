@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,23 +33,31 @@ public class AnagraficaServiceImpl implements AnagraficaService {
 
     private final DateUdienzeJpaRepository dateUdienzeJpaRepository;
 
-    private final CodiciJpaRepository codiciJpaRepository;
-
     private final TribunaliJpaRepository tribunaliJpaRepository;
 
     private final StatusJpaRepository statusJpaRepository;
 
+    private final AvvocatoDelegatoRepository avvocatoDelegatoRepository;
 
+    private final PatronatiProvenienzaRepository patronatiProvenienzaRepository;
+
+    private final TipoPraticheRepository tipoPraticheRepository;
 
     @Autowired
-    public AnagraficaServiceImpl(AnagraficaRepository anagraficaRepository, ReportAmministrativeRepository reportAmministrativeRepository, ReportPatronatoRepository reportPatronatoRepository, DateUdienzeJpaRepository dateUdienzeJpaRepository, CodiciJpaRepository codiciJpaRepository, TribunaliJpaRepository tribunaliJpaRepository, StatusJpaRepository statusJpaRepository) {
+    public AnagraficaServiceImpl(AnagraficaRepository anagraficaRepository, ReportAmministrativeRepository reportAmministrativeRepository,
+                                 ReportPatronatoRepository reportPatronatoRepository, DateUdienzeJpaRepository dateUdienzeJpaRepository,
+                                 TribunaliJpaRepository tribunaliJpaRepository, StatusJpaRepository statusJpaRepository,
+                                 AvvocatoDelegatoRepository avvocatoDelegatoRepository,
+                                 PatronatiProvenienzaRepository patronatiProvenienzaRepository,  TipoPraticheRepository tipoPraticheRepository) {
         this.anagraficaRepository = anagraficaRepository;
         this.reportAmministrativeRepository = reportAmministrativeRepository;
         this.reportPatronatoRepository = reportPatronatoRepository;
         this.dateUdienzeJpaRepository = dateUdienzeJpaRepository;
-        this.codiciJpaRepository = codiciJpaRepository;
         this.tribunaliJpaRepository = tribunaliJpaRepository;
         this.statusJpaRepository = statusJpaRepository;
+        this.avvocatoDelegatoRepository = avvocatoDelegatoRepository;
+        this.patronatiProvenienzaRepository = patronatiProvenienzaRepository;
+        this.tipoPraticheRepository = tipoPraticheRepository;
     }
 
     @Override
@@ -85,21 +94,30 @@ public class AnagraficaServiceImpl implements AnagraficaService {
         if(anagraficaDto.getReportPatronato() != null) {
             ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronato());
 
-            if (anagraficaDto.getReportPatronato().getCodice() != null && !"".equals(anagraficaDto.getReportPatronato().getCodice().getCode())) {
-                if (anagraficaDto.getReportPatronato().getCodice().getCode() != null) {
-                    if (anagraficaDto.getReportPatronato().getCodice().getId() == null) {
-                        System.out.println(anagraficaDto.getReportPatronato().getCodice().getCode());
-                        CodiciReportEntity byCode = codiciJpaRepository.findByCode(anagraficaDto.getReportPatronato().getCodice().getCode());
-                        if(byCode != null ) {
-                            anagraficaDto.getReportPatronato().getCodice().setId(byCode.getId());
-                        }
-                    }
-                    CodiciReportEntity codiciReportEntity = CodiceFactory.mapToEntity(anagraficaDto.getReportPatronato().getCodice());
-                    patronatoEntity.setCodiciReportByCodiciReportId(codiciReportEntity);
+            if(anagraficaDto.getReportPatronato().getTipoPratica() != null) {
+                if(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica() != null && !"".equals(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())) {
+                    TipoPraticheEntity tipo_pratica_inesistente = tipoPraticheRepository.findByTipoPratica(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())
+                            .orElseThrow(() -> new EntityNotFoundException("Tipo Pratica inesistente " + anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica()));
+                    patronatoEntity.setTipoPratica(tipo_pratica_inesistente);
+                }
+            }
+            if(anagraficaDto.getReportPatronato().getAvvocatoDelegato() != null) {
+                if(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato() != null && !"".equals(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())) {
+                    AvvocatoDelegatoEntity avvocato_inesistente = avvocatoDelegatoRepository.findByAvvocatoDelegato(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())
+                            .orElseThrow(() -> new EntityNotFoundException("Avvocato inesistente" + anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato()));
+                    patronatoEntity.setAvvocatoDelegato(avvocato_inesistente);
                 }
             }
 
-            if (anagraficaDto.getReportPatronato().getTribunale()!= null) {
+            if(anagraficaDto.getReportPatronato().getPatronatoProvenienza() != null) {
+                if(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato() != null && !"".equals(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())) {
+                    PatronatiEntity patronato_di_provenienza_inesistente = patronatiProvenienzaRepository.findByPatronato(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())
+                            .orElseThrow(() -> new EntityNotFoundException("Patronato di provenienza inesistente " + anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato()));
+                    patronatoEntity.setPatronatoProvenienza(patronato_di_provenienza_inesistente);
+                }
+            }
+
+            if (anagraficaDto.getReportPatronato().getTribunale() != null) {
                 if (anagraficaDto.getReportPatronato().getTribunale().getTribunali() != null && !"".equals(anagraficaDto.getReportPatronato().getTribunale().getTribunali() )) {
                     if (anagraficaDto.getReportPatronato().getTribunale().getId() == null) {
                         Optional<TribunaliEntity> byTribunali = tribunaliJpaRepository.findByTribunali(anagraficaDto.getReportPatronato().getTribunale().getTribunali());
@@ -132,16 +150,10 @@ public class AnagraficaServiceImpl implements AnagraficaService {
                 dateUdienzeJpaRepository.saveAll(list);
 //                patronatoEntity.setDateUdienzesByIdRepPatronato(dateUdienzeEntities);
             }
-
-
         }
-
         anagraficaRepository.save(entity);
     }
 
-    private ReportPatronatoEntity patronato(ReportPatronatoDto reportPatronatoDto) {
-        return null;
-    }
 
     @Override
     @Transactional
@@ -163,13 +175,29 @@ public class AnagraficaServiceImpl implements AnagraficaService {
 
         ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronato());
         //PATRONATO
-        if (anagraficaDto.getReportPatronato().getCodice() != null) {
-            if (anagraficaDto.getReportPatronato().getCodice().getCode() != null) {
-                CodiciReportEntity codiciReportEntity = CodiceFactory.mapToEntity(anagraficaDto.getReportPatronato().getCodice());
-                patronatoEntity.setCodiciReportByCodiciReportId(codiciReportEntity);
+
+        if(anagraficaDto.getReportPatronato().getTipoPratica() != null) {
+            if(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica() != null && !"".equals(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())) {
+                TipoPraticheEntity tipo_pratica_inesistente = tipoPraticheRepository.findByTipoPratica(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())
+                        .orElseThrow(() -> new EntityNotFoundException("Tipo Pratica inesistente"));
+                patronatoEntity.setTipoPratica(tipo_pratica_inesistente);
+            }
+        }
+        if(anagraficaDto.getReportPatronato().getAvvocatoDelegato() != null) {
+            if(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato() != null && !"".equals(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())) {
+                AvvocatoDelegatoEntity avvocato_inesistente = avvocatoDelegatoRepository.findByAvvocatoDelegato(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())
+                        .orElseThrow(() -> new EntityNotFoundException("Avvocato inesistente"));
+                patronatoEntity.setAvvocatoDelegato(avvocato_inesistente);
             }
         }
 
+        if(anagraficaDto.getReportPatronato().getPatronatoProvenienza() != null) {
+            if(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato() != null && !"".equals(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())) {
+                PatronatiEntity patronato_di_provenienza_inesistente = patronatiProvenienzaRepository.findByPatronato(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())
+                        .orElseThrow(() -> new EntityNotFoundException("Patronato di provenienza inesistente"));
+                patronatoEntity.setPatronatoProvenienza(patronato_di_provenienza_inesistente);
+            }
+        }
         if (anagraficaDto.getReportPatronato().getTribunale()!= null) {
             if (anagraficaDto.getReportPatronato().getTribunale(). getTribunali() != null) {
                 TribunaliEntity tribunaliEntity = TribunaleFactory.mapToEntity(anagraficaDto.getReportPatronato().getTribunale());
@@ -195,13 +223,13 @@ public class AnagraficaServiceImpl implements AnagraficaService {
     }
 
     @Override
-    public Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica, String documentazione) {
-        String nameUpper = name == null ? null : name.toUpperCase();
-        String cognomeUpper = cognome == null ? null : cognome.toUpperCase();
-        String codiceFiscaleUpper = codiceFiscale == null ? null : codiceFiscale.toUpperCase();
-        String qualificaUpper = qualifica == null ? null : qualifica.toUpperCase();
-        String documentazioneUpper = documentazione == null ? null : documentazione.toUpperCase();
-        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.listAnagraficaFilter(pageable, faldone, nameUpper, cognomeUpper, codiceFiscaleUpper, qualificaUpper, documentazioneUpper);
+    public Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica, String documentazione, String ruoloGenerale) {
+        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.listAnagraficaFilter(pageable, faldone, convertStringUpperCase(name),
+                convertStringUpperCase(cognome), convertStringUpperCase(codiceFiscale), convertStringUpperCase(qualifica), convertStringUpperCase(documentazione), convertStringUpperCase(ruoloGenerale));
         return new PageImpl<>(anagraficaClienteEntities.stream().map(AnagraficaFactory::mapAnagraficaEntityToDto).collect(Collectors.toList()),pageable, anagraficaClienteEntities.getTotalElements());
+    }
+
+    public String convertStringUpperCase(String input) {
+        return input == null ? null: input.toUpperCase();
     }
 }

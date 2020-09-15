@@ -20,12 +20,17 @@ public interface AnagraficaRepository extends PagingAndSortingRepository<Anagraf
 
     @Query(value=" from AnagraficaClienteEntity a where (:name is null or upper(a.nome) like :name%) " +
             "and (:cognome is null or upper(a.cognome)  like :cognome%) " +
-            "and (:codiceFiscale is null or upper(a.codiceFiscale)  like :codiceFiscale%) " +
+            "and (:codiceFiscale is null or upper(a.codiceFiscale)  = :codiceFiscale) " +
             "and (:faldone is null or a.reportAmministrativeByIdRepAmministrative.numeroFaldone = :faldone) " +
             "and (:qualifica is null or upper(a.reportAmministrativeByIdRepAmministrative.qualifica) = :qualifica) " +
-            "and (:documentazione is null or upper(a.reportAmministrativeByIdRepAmministrative.documentazione) like :documentazione%) ")
+            "and (:documentazione is null or upper(a.reportAmministrativeByIdRepAmministrative.documentazione) like :documentazione%) " +
+            "and (:ruoloGenerale is null or a.reportPatronatoByIdRepPatronato.ruoloGenerale = :ruoloGenerale) ")
     Page<AnagraficaClienteEntity> listAnagraficaFilter(Pageable pageable,
                                                        @Param("faldone") Integer faldone,
-                                                       @Param("name") String name, @Param("cognome") String cognome,
-                                                       @Param("codiceFiscale") String codiceFiscale, @Param("qualifica") String qualifica, @Param("documentazione") String documentazione);
+                                                       @Param("name") String name,
+                                                       @Param("cognome") String cognome,
+                                                       @Param("codiceFiscale") String codiceFiscale,
+                                                       @Param("qualifica") String qualifica,
+                                                       @Param("ruoloGenerale") String ruoloGenerale,
+                                                       @Param("documentazione") String documentazione);
 }

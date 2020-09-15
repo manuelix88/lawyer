@@ -1,11 +1,9 @@
 package it.shiftlab.lawyer.mapper;
 
 import it.shiftlab.lawyer.dto.AvvocatoDelegatoDto;
-import it.shiftlab.lawyer.dto.CodiceDto;
 import it.shiftlab.lawyer.jpa.entity.AvvocatoDelegatoEntity;
-import it.shiftlab.lawyer.jpa.entity.CodiciReportEntity;
 
-public class AvvocatoDelegatoMapper {
+public class AvvocatoDelegatoFactory {
 
     public static AvvocatoDelegatoDto mapToDto(AvvocatoDelegatoEntity entity) {
         return entity == null ? new AvvocatoDelegatoDto() : new AvvocatoDelegatoDto(entity.getId(), entity.getAvvocatoDelegato());

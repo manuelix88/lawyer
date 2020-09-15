@@ -21,11 +21,11 @@ public class GenericsController {
         this.genericService = genericService;
     }
 
-    @GetMapping("public/generics/retrieveAllCode")
-    public ResponseEntity<List<CodiceDto>> getAllCodice() {
-        List<CodiceDto> allCodice = genericService.findAllCodice();
-        return ResponseEntity.ok(allCodice);
-    }
+//    @GetMapping("public/generics/retrieveAllCode")
+//    public ResponseEntity<List<CodiceDto>> getAllCodice() {
+//        List<CodiceDto> allCodice = genericService.findAllCodice();
+//        return ResponseEntity.ok(allCodice);
+//    }
 
     @GetMapping("public/generics/retrieveAllTribunali")
     public ResponseEntity<List<TribunaleDto>> getAllTribunali() {

@@ -7,7 +7,7 @@ export class ReportPatronato {
     tipoPratica?: string;
     tribunale?: Tribunale;
     ruoloGenerale?: string;
-    dateUdienze?: DataUdienze[];
+    dateUdienze?: DataUdienze[] = [];
     patronatoProvenienza?: string;
     giudice: string;
     avvocatoDelegato: string;

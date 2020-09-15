@@ -3,10 +3,8 @@ package it.shiftlab.lawyer.serviceImp;
 import it.shiftlab.lawyer.dto.CodiceDto;
 import it.shiftlab.lawyer.dto.StatusDto;
 import it.shiftlab.lawyer.dto.TribunaleDto;
-import it.shiftlab.lawyer.jpa.entity.CodiciReportEntity;
 import it.shiftlab.lawyer.jpa.entity.StatusEntity;
 import it.shiftlab.lawyer.jpa.entity.TribunaliEntity;
-import it.shiftlab.lawyer.jpa.repository.CodiciJpaRepository;
 import it.shiftlab.lawyer.jpa.repository.StatusJpaRepository;
 import it.shiftlab.lawyer.jpa.repository.TribunaliJpaRepository;
 import it.shiftlab.lawyer.service.GenericService;
@@ -21,27 +19,25 @@ public class GenericServiceImpl implements GenericService {
 
     private StatusJpaRepository statusJpaRepository;
 
-    private CodiciJpaRepository codiciJpaRepository;
-
     private TribunaliJpaRepository tribunaliJpaRepository;
 
     @Autowired
-    public GenericServiceImpl(StatusJpaRepository statusJpaRepository, CodiciJpaRepository codiciJpaRepository, TribunaliJpaRepository tribunaliJpaRepository) {
+    public GenericServiceImpl(StatusJpaRepository statusJpaRepository,TribunaliJpaRepository tribunaliJpaRepository) {
         this.statusJpaRepository = statusJpaRepository;
-        this.codiciJpaRepository = codiciJpaRepository;
+//        this.codiciJpaRepository = codiciJpaRepository;
         this.tribunaliJpaRepository = tribunaliJpaRepository;
     }
 
     @Override
     public List<CodiceDto> findAllCodice() {
-        List<CodiciReportEntity> all = codiciJpaRepository.findAll();
-        List<CodiceDto> output = new ArrayList<>();
-        CodiceDto dto;
-        for (CodiciReportEntity entity : all) {
-            dto = new CodiceDto(entity.getId(), entity.getCode());
-            output.add(dto);
-        }
-        return output;
+//        List<CodiciReportEntity> all = codiciJpaRepository.findAll();
+//        List<CodiceDto> output = new ArrayList<>();
+//        CodiceDto dto;
+//        for (CodiciReportEntity entity : all) {
+//            dto = new CodiceDto(entity.getId(), entity.getCode());
+//            output.add(dto);
+//        }
+        return null;
     }
 
     @Override

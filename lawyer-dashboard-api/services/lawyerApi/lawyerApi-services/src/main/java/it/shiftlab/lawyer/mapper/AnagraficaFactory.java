@@ -6,6 +6,7 @@ import it.shiftlab.lawyer.dto.ReportPatronatoDto;
 import it.shiftlab.lawyer.jpa.entity.AnagraficaClienteEntity;
 import it.shiftlab.lawyer.jpa.entity.ReportAmministrativeEntity;
 import it.shiftlab.lawyer.jpa.entity.ReportPatronatoEntity;
+import it.shiftlab.lawyer.jpa.entity.TipoPraticheEntity;
 
 import java.util.UUID;
 
@@ -39,10 +40,20 @@ public class AnagraficaFactory {
     }
 
     public static ReportPatronatoDto mapRepPatronatoEntityToDto(ReportPatronatoEntity entity) {
-        return entity == null ? new ReportPatronatoDto() : new ReportPatronatoDto(entity.getIdRepPatronato(),StatusFactory.mapToDto(entity.getStatusByStatusId()), entity.getConvenzione(), entity.getSpese(),
-                entity.getDecorrenzaSuccessiva(),CodiceFactory.mapToDto(entity.getCodiciReportByCodiciReportId()), entity.getTipoPratica(),
-                TribunaleFactory.mapToDto(entity.getTribunaliByTribunaliId()),entity.getRuoloGenerale(), DateUdienzeFactory.mapToDto(entity.getDateUdienzesByIdRepPatronato()),
-                entity.getPatronatoProvenienza(),entity.getGiudice(), entity.getAvvocatoDelegato(), entity.getNote(), entity.getUuid().toString());
+        return entity == null ? new ReportPatronatoDto() : new ReportPatronatoDto(
+                entity.getIdRepPatronato(),
+                StatusFactory.mapToDto(entity.getStatusByStatusId()),
+                entity.getConvenzione(),
+                entity.getSpese(),
+                entity.getDecorrenzaSuccessiva(),
+                entity.getCodiciReport(),
+                TipoPraticheFactory.mapToDto(entity.getTipoPratica()),
+                TribunaleFactory.mapToDto(entity.getTribunaliByTribunaliId()),
+                entity.getRuoloGenerale(),
+                DateUdienzeFactory.mapToDto(entity.getDateUdienzesByIdRepPatronato()),
+                PatronatoProvenienzaFactory.mapToDto(entity.getPatronatoProvenienza()),
+                entity.getGiudice(),
+                AvvocatoDelegatoFactory.mapToDto(entity.getAvvocatoDelegato()) , entity.getNote(), entity.getUuid().toString());
 
     }
 
@@ -64,15 +75,13 @@ public class AnagraficaFactory {
 
     public static ReportPatronatoEntity mapRepPatronatoDtoToEntity(ReportPatronatoDto dto) {
         return new ReportPatronatoEntity(dto.getIdRepPatronato(),
-                dto.getAvvocatoDelegato(),
+                dto.getCodice(),
                 dto.getConvenzione(),
                 dto.getDecorrenzaSuccessiva(),
                 dto.getGiudice(),
                 dto.getNote(),
-                dto.getPatronatoProvenienza(),
                 dto.getRuoloGenerale(),
                 dto.getSpese(),
-                dto.getTipoPratica(),
                 dto.getUuid() != null ? UUID.fromString(dto.getUuid()) : UUID.randomUUID()
         );
     }

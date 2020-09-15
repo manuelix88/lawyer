@@ -81,6 +81,7 @@ export class CustomerInformazionComponent implements OnInit {
     saveDate(dataUdienza: DataUdienze) : void {
         if(!dataUdienza.id) {
             dataUdienza.enable = false;
+
             this.customer.reportPatronato.dateUdienze.push(dataUdienza);
         } else {
             if (!this.customer.reportPatronato) {

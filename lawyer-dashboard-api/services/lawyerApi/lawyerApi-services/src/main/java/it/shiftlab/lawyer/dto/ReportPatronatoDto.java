@@ -23,9 +23,9 @@ public class ReportPatronatoDto implements Serializable {
 
     private String decorrenzaSuccessiva;
 
-    private CodiceDto codice;
+    private String codice;
 
-    private String tipoPratica;
+    private TipoPraticheDto tipoPratica;
 
     private TribunaleDto tribunale;
 
@@ -33,11 +33,11 @@ public class ReportPatronatoDto implements Serializable {
 
     private List<DataUdienzaDto> dateUdienze;
 
-    private String patronatoProvenienza;
+    private PatronatoProvenienzaDto patronatoProvenienza;
 
     private String giudice;
 
-    private String avvocatoDelegato;
+    private AvvocatoDelegatoDto avvocatoDelegato;
 
     private String note;
 
@@ -46,8 +46,8 @@ public class ReportPatronatoDto implements Serializable {
     public ReportPatronatoDto() {
     }
 
-    public ReportPatronatoDto(StatusDto status, String convenzione, String spese, CodiceDto codice, String tipoPratica, TribunaleDto tribunale, String ruoloGenerale,
-                              List<DataUdienzaDto> dateUdienze, String patronatoProvenienza, String giudice, String avvocatoDelegato, String note,String uuid) {
+    public ReportPatronatoDto(StatusDto status, String convenzione, String spese, String codice, TipoPraticheDto tipoPratica, TribunaleDto tribunale, String ruoloGenerale,
+                              List<DataUdienzaDto> dateUdienze, PatronatoProvenienzaDto patronatoProvenienza, String giudice, AvvocatoDelegatoDto avvocatoDelegato, String note, String uuid) {
         this.status = status;
         this.convenzione = convenzione;
         this.spese = spese;
@@ -66,8 +66,8 @@ public class ReportPatronatoDto implements Serializable {
     public ReportPatronatoDto(Long idRepPatronato, StatusDto status,
                               String convenzione, String spese,
                               String decorrenzaSuccessiva,
-                              CodiceDto codice, String tipoPratica, TribunaleDto tribunale, String ruoloGenerale, List<DataUdienzaDto> dateUdienze,
-                              String patronatoProvenienza, String giudice, String avvocatoDelegato, String note, String uuid) {
+                              String codice, TipoPraticheDto tipoPratica, TribunaleDto tribunale, String ruoloGenerale, List<DataUdienzaDto> dateUdienze,
+                              PatronatoProvenienzaDto patronatoProvenienza, String giudice, AvvocatoDelegatoDto avvocatoDelegato, String note, String uuid) {
         this.idRepPatronato = idRepPatronato;
         this.status = status;
         this.convenzione = convenzione;
@@ -125,19 +125,19 @@ public class ReportPatronatoDto implements Serializable {
         this.decorrenzaSuccessiva = decorrenzaSuccessiva;
     }
 
-    public CodiceDto getCodice() {
+    public String getCodice() {
         return codice;
     }
 
-    public void setCodice(CodiceDto codice) {
+    public void setCodice(String codice) {
         this.codice = codice;
     }
 
-    public String getTipoPratica() {
+    public TipoPraticheDto getTipoPratica() {
         return tipoPratica;
     }
 
-    public void setTipoPratica(String tipoPratica) {
+    public void setTipoPratica(TipoPraticheDto tipoPratica) {
         this.tipoPratica = tipoPratica;
     }
 
@@ -165,11 +165,11 @@ public class ReportPatronatoDto implements Serializable {
         this.dateUdienze = dateUdienze;
     }
 
-    public String getPatronatoProvenienza() {
+    public PatronatoProvenienzaDto getPatronatoProvenienza() {
         return patronatoProvenienza;
     }
 
-    public void setPatronatoProvenienza(String patronatoProvenienza) {
+    public void setPatronatoProvenienza(PatronatoProvenienzaDto patronatoProvenienza) {
         this.patronatoProvenienza = patronatoProvenienza;
     }
 
@@ -181,11 +181,11 @@ public class ReportPatronatoDto implements Serializable {
         this.giudice = giudice;
     }
 
-    public String getAvvocatoDelegato() {
+    public AvvocatoDelegatoDto getAvvocatoDelegato() {
         return avvocatoDelegato;
     }
 
-    public void setAvvocatoDelegato(String avvocatoDelegato) {
+    public void setAvvocatoDelegato(AvvocatoDelegatoDto avvocatoDelegato) {
         this.avvocatoDelegato = avvocatoDelegato;
     }
 

@@ -9,7 +9,7 @@ public class TribunaleFactory {
         return tribunaliEntity == null ? new TribunaleDto() : new TribunaleDto(tribunaliEntity.getId(), tribunaliEntity.getTribunali());
     }
 
-    public static TribunaliEntity mapToEntity(TribunaleDto tribunaliEntity){
-        return new TribunaliEntity(tribunaliEntity.getId(), tribunaliEntity.getTribunali());
+    public static TribunaliEntity mapToEntity(TribunaleDto dto){
+        return new TribunaliEntity(dto.getId(), dto.getTribunali());
     }
 }

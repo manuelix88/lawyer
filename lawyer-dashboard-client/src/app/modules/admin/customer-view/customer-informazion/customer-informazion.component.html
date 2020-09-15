@@ -2,9 +2,16 @@
 
 <!--    {{ customerForm  | json}}-->
     <form #customerForm="ngForm" class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
-<!--            {{ customerForm.controls.cognome.errors}}-->
         <p class="text-lg font-medium mb-8">Anagrafica Cliente</p>
         <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-label>Cognome</mat-label>
+                <input matInput [(ngModel)]="customer.cognome" name="cognome"
+                       [placeholder]="'Cognome'" required>
+                <mat-icon matPrefix
+                          [svgIcon]="'account_circle'"></mat-icon>
+                <mat-error>Questo campo è obbligatorio</mat-error>
+            </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Nome</mat-label>
                 <input matInput [(ngModel)]="customer.nome" name="nome"
@@ -12,14 +19,6 @@
                 <mat-icon matPrefix
                           [svgIcon]="'account_circle'"></mat-icon>
                 <mat-error>Questo campo è obbligatorio</mat-error>
-            </mat-form-field>
-            <mat-form-field class="flex-auto gt-xs:pr-3">
-                <mat-label>Cognome</mat-label>
-                <input matInput [(ngModel)]="customer.cognome" name="cognome"
-                       [placeholder]="'Cognome'" required>
-                <mat-icon matPrefix
-                          [svgIcon]="'account_circle'"></mat-icon>
-                <mat-error *ngIf="customerForm.control.get('cognome').hasError('required')">Questo campo è obbligatorio</mat-error>
             </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Email</mat-label>

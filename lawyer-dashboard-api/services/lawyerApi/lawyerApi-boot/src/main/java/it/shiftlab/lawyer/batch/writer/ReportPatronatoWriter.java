@@ -23,11 +23,16 @@ public class ReportPatronatoWriter implements ItemWriter<BatchreportPatronatoDto
         CodiceDto codiceDto;
         ReportPatronatoDto reportPatronatoDto;
         DataUdienzaDto dataUdienzaDto;
+        AvvocatoDelegatoDto avvocatoDelegatoDto;
+        PatronatoProvenienzaDto patronatoProvenienzaDto;
+        TipoPraticheDto tipoPraticheDto;
         List<DataUdienzaDto> udienzaDtoList;
         for (BatchreportPatronatoDto b : list) {
             statusDto = new StatusDto(b.getStatus());
             tribunaleDto = new TribunaleDto(b.getTribunale());
-            codiceDto = new CodiceDto(b.getCod());
+            avvocatoDelegatoDto = new AvvocatoDelegatoDto(b.getAvvocatoDelegato());
+            patronatoProvenienzaDto = new PatronatoProvenienzaDto(b.getPatronatoProvenienza());
+            tipoPraticheDto = new TipoPraticheDto(b.getTipoPratica());
             udienzaDtoList = new ArrayList<>();
             if (b.getDateUdienza() != null && !b.getDateUdienza().equals("")) {
                 String[] s = b.getDateUdienza().split(" ");
@@ -41,8 +46,8 @@ public class ReportPatronatoWriter implements ItemWriter<BatchreportPatronatoDto
                     }
                 }
             }
-            reportPatronatoDto = new ReportPatronatoDto(statusDto,b.getConvenzione(),b.getSpese(),codiceDto,b.getTipoPratica(),tribunaleDto, b.getRuoloGenerale(),
-                    udienzaDtoList, b.getPatronatoProvenienza(), b.getGiudice(), b.getAvvocatoDelegato(), b.getNote(), UUID.randomUUID().toString());
+            reportPatronatoDto = new ReportPatronatoDto(statusDto,b.getConvenzione(),b.getSpese(),b.getCod(),tipoPraticheDto,tribunaleDto, b.getRuoloGenerale(),
+                    udienzaDtoList, patronatoProvenienzaDto, b.getGiudice(), avvocatoDelegatoDto, b.getNote(), UUID.randomUUID().toString());
             output = new AnagraficaDto(b.getNome(), reportPatronatoDto, UUID.randomUUID().toString());
             anagraficaService.saveAnagrafica(output);
 

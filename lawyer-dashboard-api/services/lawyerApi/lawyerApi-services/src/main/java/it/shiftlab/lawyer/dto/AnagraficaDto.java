@@ -7,7 +7,8 @@ import lombok.Setter;
 import java.util.Date;
 
 @Builder
-@Getter @Setter
+@Getter
+@Setter
 public class AnagraficaDto {
 
     private long idAnagrafica;
@@ -55,7 +56,6 @@ public class AnagraficaDto {
     }
 
     public AnagraficaDto() {
-
     }
 
     public AnagraficaDto(String nome, String codiceFiscale, String provincia, ReportAmministrativeDto reportAmministrative, String uuid) {

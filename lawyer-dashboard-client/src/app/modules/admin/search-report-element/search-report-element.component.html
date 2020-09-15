@@ -56,6 +56,15 @@
                                   [svgIcon]="'all_inbox'"></mat-icon>
                     </mat-form-field>
                 </div>
+                <div>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Ruolo Generale</mat-label>
+                        <input matInput
+                               [placeholder]="'Ruolo Generale'" [(ngModel)]="searchFiler.ruoloGenerale" name="ruoloGenerale">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                </div>
 
                 <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 light:bg-cool-gray-50 dark:bg-cool-gray-700">
                     <button class="submit-button px-6 mt-8"  type="button"

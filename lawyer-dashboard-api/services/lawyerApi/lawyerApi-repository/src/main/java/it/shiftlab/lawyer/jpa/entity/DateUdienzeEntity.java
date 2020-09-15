@@ -19,12 +19,6 @@ public class DateUdienzeEntity {
     public DateUdienzeEntity() {
     }
 
-    public DateUdienzeEntity(long id, Boolean enable, Date dataUdienza) {
-        this.id = id;
-        this.enable = enable;
-        this.dataUdienza = dataUdienza;
-    }
-
     public DateUdienzeEntity(long id, Boolean enable, Date dataUdienza, ReportPatronatoEntity reportPatronatoByIdRepPatronato,UUID uuid) {
         this.id = id;
         this.enable = enable;

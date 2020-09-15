@@ -50,8 +50,9 @@ public class AnagraficaController {
                                                                 @RequestParam(value = "cognome", required = false) String cognome,
                                                                 @RequestParam(value = "codiceFiscale", required = false) String codiceFiscale,
                                                                 @RequestParam(value = "qualifica", required = false) String qualifica,
+                                                                @RequestParam(value = "ruoloGenerale", required = false) String ruoloGenerale,
                                                                 @RequestParam(value = "documentazione", required = false) String documentazione) {
-        Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilter(PageRequest.of(page, limit),faldone,name,cognome,codiceFiscale,qualifica,documentazione);
+        Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilter(PageRequest.of(page, limit),faldone,name,cognome,codiceFiscale,qualifica,documentazione, ruoloGenerale);
 
         return  ResponseEntity.ok(new PageImpl<>(pages.stream().collect(Collectors.toList()),pages.getPageable(),pages.getTotalElements()));
     }
