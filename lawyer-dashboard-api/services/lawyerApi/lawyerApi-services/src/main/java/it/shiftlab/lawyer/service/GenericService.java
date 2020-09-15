@@ -1,8 +1,6 @@
 package it.shiftlab.lawyer.service;
 
-import it.shiftlab.lawyer.dto.CodiceDto;
-import it.shiftlab.lawyer.dto.StatusDto;
-import it.shiftlab.lawyer.dto.TribunaleDto;
+import it.shiftlab.lawyer.dto.*;
 
 import java.util.List;
 
@@ -13,6 +11,12 @@ public interface GenericService {
     List<TribunaleDto> findAllTribunali();
 
     List<StatusDto> findAllStatus();
+
+    List<AvvocatoDelegatoDto> findAllAvvocati();
+
+    List<PatronatoProvenienzaDto> findAllPatronati();
+
+    List<TipoPraticheDto> findAllTipoPratiche();
 
 
 }

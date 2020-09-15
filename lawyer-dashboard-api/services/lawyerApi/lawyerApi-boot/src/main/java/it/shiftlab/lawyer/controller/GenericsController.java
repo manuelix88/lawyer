@@ -1,8 +1,6 @@
 package it.shiftlab.lawyer.controller;
 
-import it.shiftlab.lawyer.dto.CodiceDto;
-import it.shiftlab.lawyer.dto.StatusDto;
-import it.shiftlab.lawyer.dto.TribunaleDto;
+import it.shiftlab.lawyer.dto.*;
 import it.shiftlab.lawyer.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +34,24 @@ public class GenericsController {
     @GetMapping("public/generics/retrieveAllStatus")
     public ResponseEntity<List<StatusDto>> getAllStaus() {
         List<StatusDto> all = genericService.findAllStatus();
+        return ResponseEntity.ok(all);
+    }
+
+    @GetMapping("public/generics/retrieveAllAvvocati")
+    public ResponseEntity<List<AvvocatoDelegatoDto>> getAllAvvocati() {
+        List<AvvocatoDelegatoDto> all = genericService.findAllAvvocati();
+        return ResponseEntity.ok(all);
+    }
+
+    @GetMapping("public/generics/retrieveAllPatronati")
+    public ResponseEntity<List<PatronatoProvenienzaDto>> getAllPatronati() {
+        List<PatronatoProvenienzaDto> all = genericService.findAllPatronati();
+        return ResponseEntity.ok(all);
+    }
+
+    @GetMapping("public/generics/retrieveAllTipoPratiche")
+    public ResponseEntity<List<TipoPraticheDto>> getAllTipoPratiche() {
+        List<TipoPraticheDto> all = genericService.findAllTipoPratiche();
         return ResponseEntity.ok(all);
     }
 }
