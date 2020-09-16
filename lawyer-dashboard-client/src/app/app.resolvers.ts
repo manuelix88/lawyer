@@ -7,7 +7,16 @@ import {ApiService} from './core/services/api';
 import {GenericsService} from './core/services/generics.service';
 import {ApplicationStoreService} from './core/store/application-store.service';
 import {Codice, Status, Tribunale} from './modules/admin/customer-view/model/report-patronato';
-import {CodiceArray, StatusArray, TribunaleArray} from './core/store/generics.store';
+import {
+    AvvocatiDelegatiArray,
+    CodiceArray, PatronatiArray,
+    StatusArray,
+    TipoPraticheArray,
+    TribunaleArray
+} from './core/store/generics.store';
+import {Avvocati} from './modules/admin/customer-view/model/avvocati';
+import {TipoPratiche} from './modules/admin/customer-view/model/tipo-pratiche';
+import {PatronatoProvenienza} from './modules/admin/customer-view/model/patronatoProvenienza';
 
 @Injectable({
     providedIn: 'root'
@@ -98,6 +107,24 @@ export class InitialDataResolver implements Resolve<any>
             this._store.updateStore(new StatusArray(values));
         })
     }
+
+    private _loadAvvocati(): void {
+        this._genericService.retrieveAllAvvocati().then((values: Avvocati[]) => {
+            this._store.updateStore(new AvvocatiDelegatiArray(values));
+        })
+    }
+
+    private _loadTipoPratiche(): void {
+        this._genericService.retrieveAllTipoPratiche().then((values: TipoPratiche[]) => {
+            this._store.updateStore(new TipoPraticheArray(values));
+        })
+    }
+
+    private _loadPatronati(): void {
+        this._genericService.retrieveAllPatronati().then((values: PatronatoProvenienza[]) => {
+            this._store.updateStore(new PatronatiArray(values));
+        })
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -113,6 +140,9 @@ export class InitialDataResolver implements Resolve<any>
         this._loadCodici();
         this._loadStatus();
         this._loadTribunali()
+        this._loadTribunali();
+        this._loadAvvocati();
+        this._loadPatronati();
         return forkJoin([
 
             // Messages

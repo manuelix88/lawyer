@@ -20,7 +20,6 @@ public class ReportPatronatoWriter implements ItemWriter<BatchreportPatronatoDto
         AnagraficaDto output;
         StatusDto statusDto;
         TribunaleDto tribunaleDto;
-        CodiceDto codiceDto;
         ReportPatronatoDto reportPatronatoDto;
         DataUdienzaDto dataUdienzaDto;
         AvvocatoDelegatoDto avvocatoDelegatoDto;
@@ -46,9 +45,9 @@ public class ReportPatronatoWriter implements ItemWriter<BatchreportPatronatoDto
                     }
                 }
             }
-            reportPatronatoDto = new ReportPatronatoDto(statusDto,b.getConvenzione(),b.getSpese(),b.getCod(),tipoPraticheDto,tribunaleDto, b.getRuoloGenerale(),
+            reportPatronatoDto = new ReportPatronatoDto(statusDto,b.getConvenzione(),b.getSpese(),tipoPraticheDto,tribunaleDto, b.getRuoloGenerale(),
                     udienzaDtoList, patronatoProvenienzaDto, b.getGiudice(), avvocatoDelegatoDto, b.getNote(), UUID.randomUUID().toString());
-            output = new AnagraficaDto(b.getNome(), reportPatronatoDto, UUID.randomUUID().toString());
+            output = new AnagraficaDto(b.getNome(), reportPatronatoDto, UUID.randomUUID().toString(), b.getCod());
             anagraficaService.saveAnagrafica(output);
 
         }

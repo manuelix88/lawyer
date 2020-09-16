@@ -42,8 +42,6 @@ public class ReportPatronatoEntity {
 
     private StatusEntity statusByStatusId;
 
-    private String codiciReport;
-
     private TribunaliEntity tribunaliByTribunaliId;
 
     private UUID uuid;
@@ -51,11 +49,10 @@ public class ReportPatronatoEntity {
     public ReportPatronatoEntity() {
     }
 
-    public ReportPatronatoEntity(Long idRepPatronato, String codiciReport, String convenzione,
+    public ReportPatronatoEntity(Long idRepPatronato,  String convenzione,
                                  String decorrenzaSuccessiva, String giudice, String note,
                                  String ruoloGenerale, String spese, UUID uuid) {
         this.idRepPatronato = idRepPatronato;
-        this.codiciReport = codiciReport;
         this.convenzione = convenzione;
         this.decorrenzaSuccessiva = decorrenzaSuccessiva;
         this.giudice = giudice;
@@ -155,14 +152,14 @@ public class ReportPatronatoEntity {
     public void setPatronatoProvenienza(PatronatiEntity patronatoProvenienza) {
         this.patronatoProvenienza = patronatoProvenienza;
     }
-    @Column(name = "codici_report")
-    public String getCodiciReport() {
-        return codiciReport;
-    }
-
-    public void setCodiciReport(String codiciReport) {
-        this.codiciReport = codiciReport;
-    }
+//    @Column(name = "codici_report")
+//    public String getCodiciReport() {
+//        return codiciReport;
+//    }
+//
+//    public void setCodiciReport(String codiciReport) {
+//        this.codiciReport = codiciReport;
+//    }
 
     @Basic
     @Column(name = "ruolo_generale")

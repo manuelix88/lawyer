@@ -4,18 +4,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Builder
-@Getter
-@Setter
-public class AnagraficaDto {
+
+public class AnagraficaDto implements Serializable {
 
     private long idAnagrafica;
 
     private String nome;
 
     private String cognome;
+
+    private String codice;
 
     private String email;
 
@@ -39,7 +40,7 @@ public class AnagraficaDto {
 
     public AnagraficaDto(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
                          String nazione, String indirizzo, String citta, String provincia, Date dataNascita,
-                         ReportPatronatoDto reportPatronato, ReportAmministrativeDto reportAmministrative, String uuid) {
+                         ReportPatronatoDto reportPatronato, ReportAmministrativeDto reportAmministrative, String uuid, String codice) {
         this.idAnagrafica = idAnagrafica;
         this.nome = nome;
         this.cognome = cognome;
@@ -53,6 +54,7 @@ public class AnagraficaDto {
         this.reportPatronato = reportPatronato;
         this.reportAmministrative = reportAmministrative;
         this.uuid = uuid;
+        this.codice = codice;
     }
 
     public AnagraficaDto() {
@@ -66,10 +68,11 @@ public class AnagraficaDto {
         this.uuid = uuid;
     }
 
-    public AnagraficaDto(String nome, ReportPatronatoDto reportPatronato, String uuid) {
+    public AnagraficaDto(String nome, ReportPatronatoDto reportPatronato, String uuid, String codice) {
         this.nome = nome;
         this.reportPatronato = reportPatronato;
         this.uuid = uuid;
+        this.codice = codice;
     }
 
     public long getIdAnagrafica() {
@@ -174,6 +177,14 @@ public class AnagraficaDto {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getCodice() {
+        return codice;
+    }
+
+    public void setCodice(String codice) {
+        this.codice = codice;
     }
 
     @Override

@@ -23,8 +23,6 @@ public class ReportPatronatoDto implements Serializable {
 
     private String decorrenzaSuccessiva;
 
-    private String codice;
-
     private TipoPraticheDto tipoPratica;
 
     private TribunaleDto tribunale;
@@ -46,12 +44,13 @@ public class ReportPatronatoDto implements Serializable {
     public ReportPatronatoDto() {
     }
 
-    public ReportPatronatoDto(StatusDto status, String convenzione, String spese, String codice, TipoPraticheDto tipoPratica, TribunaleDto tribunale, String ruoloGenerale,
-                              List<DataUdienzaDto> dateUdienze, PatronatoProvenienzaDto patronatoProvenienza, String giudice, AvvocatoDelegatoDto avvocatoDelegato, String note, String uuid) {
+    public ReportPatronatoDto(StatusDto status, String convenzione, String spese, TipoPraticheDto tipoPratica,
+                              TribunaleDto tribunale, String ruoloGenerale,
+                              List<DataUdienzaDto> dateUdienze, PatronatoProvenienzaDto patronatoProvenienza,
+                              String giudice, AvvocatoDelegatoDto avvocatoDelegato, String note, String uuid) {
         this.status = status;
         this.convenzione = convenzione;
         this.spese = spese;
-        this.codice = codice;
         this.tipoPratica = tipoPratica;
         this.tribunale = tribunale;
         this.ruoloGenerale = ruoloGenerale;
@@ -66,14 +65,14 @@ public class ReportPatronatoDto implements Serializable {
     public ReportPatronatoDto(Long idRepPatronato, StatusDto status,
                               String convenzione, String spese,
                               String decorrenzaSuccessiva,
-                              String codice, TipoPraticheDto tipoPratica, TribunaleDto tribunale, String ruoloGenerale, List<DataUdienzaDto> dateUdienze,
-                              PatronatoProvenienzaDto patronatoProvenienza, String giudice, AvvocatoDelegatoDto avvocatoDelegato, String note, String uuid) {
+                              TipoPraticheDto tipoPratica, TribunaleDto tribunale, String ruoloGenerale, List<DataUdienzaDto> dateUdienze,
+                              PatronatoProvenienzaDto patronatoProvenienza, String giudice, AvvocatoDelegatoDto avvocatoDelegato,
+                              String note, String uuid) {
         this.idRepPatronato = idRepPatronato;
         this.status = status;
         this.convenzione = convenzione;
         this.spese = spese;
         this.decorrenzaSuccessiva = decorrenzaSuccessiva;
-        this.codice = codice;
         this.tipoPratica = tipoPratica;
         this.tribunale = tribunale;
         this.ruoloGenerale = ruoloGenerale;
@@ -125,13 +124,6 @@ public class ReportPatronatoDto implements Serializable {
         this.decorrenzaSuccessiva = decorrenzaSuccessiva;
     }
 
-    public String getCodice() {
-        return codice;
-    }
-
-    public void setCodice(String codice) {
-        this.codice = codice;
-    }
 
     public TipoPraticheDto getTipoPratica() {
         return tipoPratica;

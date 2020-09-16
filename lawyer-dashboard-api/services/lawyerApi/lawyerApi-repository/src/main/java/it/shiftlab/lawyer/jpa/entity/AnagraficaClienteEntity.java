@@ -20,6 +20,7 @@ public class AnagraficaClienteEntity {
     private String nazione;
     private String nome;
     private String provincia;
+    private String codice;
     private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
     private UUID uuid;
@@ -30,7 +31,7 @@ public class AnagraficaClienteEntity {
     }
 
     public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
-                                   String nazione, String indirizzo, String citta, String provincia, Date dataNascita, UUID uuid) {
+                                   String nazione, String indirizzo, String citta, String provincia, Date dataNascita, UUID uuid, String codice) {
         this.idAnagrafica = idAnagrafica;
         this.citta = citta;
         this.codiceFiscale = codiceFiscale;
@@ -42,6 +43,7 @@ public class AnagraficaClienteEntity {
         this.provincia = provincia;
         this.dataNasacita = dataNascita;
         this.uuid = uuid;
+        this.codice = codice;
     }
 
     @Id
@@ -53,6 +55,15 @@ public class AnagraficaClienteEntity {
 
     public void setIdAnagrafica(long idAnagrafica) {
         this.idAnagrafica = idAnagrafica;
+    }
+
+    public String getCodice() {
+        return codice;
+    }
+
+    @Column(name = "codice")
+    public void setCodice(String codice) {
+        this.codice = codice;
     }
 
     @Basic

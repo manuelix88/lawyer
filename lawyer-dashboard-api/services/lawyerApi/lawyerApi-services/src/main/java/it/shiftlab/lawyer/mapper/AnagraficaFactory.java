@@ -6,7 +6,6 @@ import it.shiftlab.lawyer.dto.ReportPatronatoDto;
 import it.shiftlab.lawyer.jpa.entity.AnagraficaClienteEntity;
 import it.shiftlab.lawyer.jpa.entity.ReportAmministrativeEntity;
 import it.shiftlab.lawyer.jpa.entity.ReportPatronatoEntity;
-import it.shiftlab.lawyer.jpa.entity.TipoPraticheEntity;
 
 import java.util.UUID;
 
@@ -29,14 +28,17 @@ public class AnagraficaFactory {
                 entity.getDataNasacita(),
                 mapRepPatronatoEntityToDto(entity.getReportPatronatoByIdRepPatronato()),
                 mapRepAmmEntitytoDto(entity.getReportAmministrativeByIdRepAmministrative()),
-                entity.getUuid().toString());
+                entity.getUuid().toString(),
+                entity.getCodice());
     }
 
     public static ReportAmministrativeDto mapRepAmmEntitytoDto(ReportAmministrativeEntity entity){
         return entity== null ? new ReportAmministrativeDto() : new ReportAmministrativeDto(entity.getIdRepAmministrative(),
                 entity.getQualifica(),
                 entity.getDataPagamento(),
-                entity.getNumeroFaldone(), entity.getRicordoCedu(), entity.getAltro(), entity.getNote(), entity.getDocumentazione(), entity.getUuid().toString());
+                entity.getNumeroFaldone(), entity.getRicordoCedu(),
+                entity.getAltro(), entity.getNote(),
+                entity.getDocumentazione(), entity.getUuid().toString());
     }
 
     public static ReportPatronatoDto mapRepPatronatoEntityToDto(ReportPatronatoEntity entity) {
@@ -46,7 +48,6 @@ public class AnagraficaFactory {
                 entity.getConvenzione(),
                 entity.getSpese(),
                 entity.getDecorrenzaSuccessiva(),
-                entity.getCodiciReport(),
                 TipoPraticheFactory.mapToDto(entity.getTipoPratica()),
                 TribunaleFactory.mapToDto(entity.getTribunaliByTribunaliId()),
                 entity.getRuoloGenerale(),
@@ -70,12 +71,12 @@ public class AnagraficaFactory {
                 dto.getCitta(),
                 dto.getProvincia(),
                 dto.getDataNascita(),
-                dto.getUuid() != null ? UUID.fromString(dto.getUuid()) : UUID.randomUUID());
+                dto.getUuid() != null ? UUID.fromString(dto.getUuid()) : UUID.randomUUID(),
+                dto.getCodice());
     }
 
     public static ReportPatronatoEntity mapRepPatronatoDtoToEntity(ReportPatronatoDto dto) {
         return new ReportPatronatoEntity(dto.getIdRepPatronato(),
-                dto.getCodice(),
                 dto.getConvenzione(),
                 dto.getDecorrenzaSuccessiva(),
                 dto.getGiudice(),
