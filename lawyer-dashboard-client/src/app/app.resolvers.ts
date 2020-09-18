@@ -137,10 +137,10 @@ export class InitialDataResolver implements Resolve<any>
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
     {
-        this._loadCodici();
+        // this._loadCodici();
         this._loadStatus();
         this._loadTribunali()
-        this._loadTribunali();
+        this._loadTipoPratiche();
         this._loadAvvocati();
         this._loadPatronati();
         return forkJoin([

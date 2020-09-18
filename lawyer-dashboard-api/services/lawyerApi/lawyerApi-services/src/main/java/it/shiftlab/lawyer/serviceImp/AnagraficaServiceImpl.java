@@ -225,7 +225,7 @@ public class AnagraficaServiceImpl implements AnagraficaService {
     @Override
     public Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica, String documentazione, String ruoloGenerale) {
         Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.listAnagraficaFilter(pageable, faldone, convertStringUpperCase(name),
-                convertStringUpperCase(cognome), convertStringUpperCase(codiceFiscale), convertStringUpperCase(qualifica), convertStringUpperCase(documentazione), convertStringUpperCase(ruoloGenerale));
+                convertStringUpperCase(cognome), convertStringUpperCase(codiceFiscale), convertStringUpperCase(qualifica), convertStringUpperCase(documentazione));
         return new PageImpl<>(anagraficaClienteEntities.stream().map(AnagraficaFactory::mapAnagraficaEntityToDto).collect(Collectors.toList()),pageable, anagraficaClienteEntities.getTotalElements());
     }
 

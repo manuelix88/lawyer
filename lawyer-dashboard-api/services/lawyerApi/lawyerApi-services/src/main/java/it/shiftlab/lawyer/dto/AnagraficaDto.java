@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class AnagraficaDto implements Serializable {
+public class AnagraficaDto{
 
     private long idAnagrafica;
 

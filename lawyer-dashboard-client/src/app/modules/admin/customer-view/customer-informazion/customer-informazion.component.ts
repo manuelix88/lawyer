@@ -7,6 +7,9 @@ import {NgForm} from '@angular/forms';
 import {SatPopover} from '@ncstate/sat-popover';
 import {filter} from 'rxjs/operators';
 import {TreoAnimations} from '../../../../../@treo/animations';
+import {Avvocati} from '../model/avvocati';
+import {PatronatoProvenienza} from '../model/patronatoProvenienza';
+import {TipoPratiche} from '../model/tipo-pratiche';
 
 @Component({
     selector: 'customer-information',
@@ -54,6 +57,16 @@ export class CustomerInformazionComponent implements OnInit {
         return o1?.status === o2?.status && o1?.id === o2?.id;
     }
 
+    compareAvvocati(o1: Avvocati, o2: Avvocati): boolean {
+        return o1?.avvocatoDelegato === o2?.avvocatoDelegato && o1?.id === o2?.id;
+    }
+    comparePatronaTiProvenienza(o1: PatronatoProvenienza, o2: PatronatoProvenienza): boolean {
+        return o1?.patronato === o2?.patronato && o1?.id === o2?.id;
+    }
+
+    compareTipoPratiche(o1: TipoPratiche, o2: TipoPratiche): boolean {
+        return o1?.tipoPratica === o2?.tipoPratica && o1?.id === o2?.id;
+    }
     compareCodice(o1: Codice, o2: Codice): boolean {
         return o1?.code === o2?.code && o1?.id === o2?.id;
     }

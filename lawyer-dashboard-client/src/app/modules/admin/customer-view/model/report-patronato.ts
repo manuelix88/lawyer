@@ -1,17 +1,22 @@
+import {TipoPratiche} from './tipo-pratiche';
+import {Avvocati} from './avvocati';
+import {PatronatoProvenienza} from './patronatoProvenienza';
+
 export class ReportPatronato {
     idRepPatronato: number;
     convenzione?: string;
     spese?: string;
     decorrenzaSuccessiva?: string;
     codice?: Codice;
-    tipoPratica?: string;
+    tipoPratica?: TipoPratiche;
     tribunale?: Tribunale;
     ruoloGenerale?: string;
     dateUdienze?: DataUdienze[] = [];
-    patronatoProvenienza?: string;
+    patronatoProvenienza?: PatronatoProvenienza;
     giudice: string;
-    avvocatoDelegato: string;
+    avvocatoDelegato?: Avvocati;
     note?: string;
+    uuid: string;
     status: Status;
 }
 

@@ -7,6 +7,7 @@ export class ReportAmministrative {
     altro: string;
     note: string;
     documentazione:string;
+    uuid:string;
 
     // constructor() {
        // this.idRepAmministrative = undefined;

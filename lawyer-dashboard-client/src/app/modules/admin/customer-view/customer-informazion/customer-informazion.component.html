@@ -1,6 +1,6 @@
 <div class="max-w-full m-8 rich-text">
 
-<!--    {{ customerForm  | json}}-->
+    <!--    {{ customerForm  | json}}-->
     <form #customerForm="ngForm" class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
         <p class="text-lg font-medium mb-8">Anagrafica Cliente</p>
         <div class="flex flex-col gt-xs:flex-row">
@@ -67,6 +67,14 @@
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Provincia</mat-label>
                 <input matInput [placeholder]="'Provincia'" [(ngModel)]="customer.provincia" name="provincia">
+                <mat-icon matPrefix
+                          [svgIcon]="'room'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-label>Codice</mat-label>
+                <input matInput [placeholder]="'Codice'" [(ngModel)]="customer.codice"  name="reportPatronatoCodice"  >
                 <mat-icon matPrefix
                           [svgIcon]="'room'"></mat-icon>
             </mat-form-field>
@@ -173,25 +181,21 @@
                     </mat-form-field>
                 </div>
                 <div class="flex flex-col gt-xs:flex-row">
+
                     <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Codice</mat-label>
-                        <mat-select [placeholder]="'Codice'" [(ngModel)]="customer.reportPatronato.codice"  name="reportPatronatoCodice"  [compareWith]="compareCodice" >
+                        <mat-label>Tipo Pratica</mat-label>
+                        <mat-placeholder>Tipo Pratica</mat-placeholder>
+                        <mat-select  [(ngModel)]="customer.reportPatronato.tipoPratica" name="reportPatronatoTipoPratica" [compareWith]="compareTipoPratiche" >
                             <mat-option></mat-option>
-                            <mat-option *ngFor="let codice of store.baseData.codici" [value]="codice"> {{codice.code}}</mat-option>
+                            <mat-option *ngFor="let pratica of store.baseData.tipoPratiche" [value]="pratica"> {{pratica.tipoPratica}}</mat-option>
                         </mat-select>
                         <mat-icon matPrefix
                                   [svgIcon]="'room'"></mat-icon>
                     </mat-form-field>
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Tipo Pratica</mat-label>
-                        <input matInput
-                               [placeholder]="'Tipo Pratica'" [(ngModel)]="customer.reportPatronato.tipoPratica" name="reportPatronatoTipoPratica">
-                        <mat-icon matPrefix
-                                  [svgIcon]="'room'"></mat-icon>
-                    </mat-form-field>
+
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Tribunale</mat-label>
-                        <mat-select [placeholder]="'Tribunale'"[(ngModel)]="customer.reportPatronato.tribunale" name="reportPatronatoTribunale"  [compareWith]="compareTribunale" >
+                        <mat-select [placeholder]="'Tribunale'" [(ngModel)]="customer.reportPatronato.tribunale" name="reportPatronatoTribunale"  [compareWith]="compareTribunale" >
                             <mat-option></mat-option>
                             <mat-option *ngFor="let tribunale of store.baseData.tribunali" [value]="tribunale">{{tribunale.tribunali}}</mat-option>
                         </mat-select>
@@ -223,9 +227,9 @@
                                   [svgIcon]="'heroicons_outline:library'"></mat-icon>
                     </mat-form-field>
 
-<!--                    <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px" >-->
-<!--                        Storico Udienza-->
-<!--                    </button>-->
+                    <!--                    <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px" >-->
+                    <!--                        Storico Udienza-->
+                    <!--                    </button>-->
                     <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px" [satPopoverAnchor]="p" (click)="p.open()">
                         Storico Udienza
                     </button>
@@ -233,15 +237,21 @@
                 <div class="flex flex-col gt-xs:flex-row">
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Patronato Di Provenienza</mat-label>
-                        <input matInput [(ngModel)]="customer.reportPatronato.patronatoProvenienza" name="reportPatronatoPatronatoProv"
-                               [placeholder]="'Patronato Di Provenienza'">
+                        <mat-placeholder>Patronato Di Provenienza</mat-placeholder>
+                        <mat-select [(ngModel)]="customer.reportPatronato.patronatoProvenienza" name="reportPatronatoPatronatoProv" [compareWith]="comparePatronaTiProvenienza" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let patronato of store.baseData.patronati" [value]="patronato"> {{patronato.patronato}}</mat-option>
+                        </mat-select>
                         <mat-icon matPrefix
                                   [svgIcon]="'mat_outline:gavel'"></mat-icon>
                     </mat-form-field>
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Avvocato Delegato</mat-label>
-                        <input matInput [(ngModel)]="customer.reportPatronato.avvocatoDelegato" name="reportPatronatoAvvDelegato"
-                               [placeholder]="'Avvocato Delegato'">
+                        <mat-placeholder>Avvocato Delegato</mat-placeholder>
+                        <mat-select [(ngModel)]="customer.reportPatronato.avvocatoDelegato" name="reportPatronatoAvvDelegato" [compareWith]="compareAvvocati" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let avvocato of store.baseData.avvocati" [value]="avvocato"> {{avvocato.avvocatoDelegato}}</mat-option>
+                        </mat-select>
                         <mat-icon matPrefix
                                   [svgIcon]="'mat_outline:gavel'"></mat-icon>
                     </mat-form-field>
@@ -278,7 +288,7 @@
             </button>
         </div>
     </form>
-<!--    <div>{{customer.reportPatronato | json}}</div>-->
+    <!--    <div>{{customer.reportPatronato | json}}</div>-->
 
     <sat-popover #p
 

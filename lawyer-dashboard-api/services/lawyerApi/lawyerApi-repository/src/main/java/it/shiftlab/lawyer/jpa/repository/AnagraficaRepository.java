@@ -23,14 +23,12 @@ public interface AnagraficaRepository extends PagingAndSortingRepository<Anagraf
             "and (:codiceFiscale is null or upper(a.codiceFiscale)  = :codiceFiscale) " +
             "and (:faldone is null or a.reportAmministrativeByIdRepAmministrative.numeroFaldone = :faldone) " +
             "and (:qualifica is null or upper(a.reportAmministrativeByIdRepAmministrative.qualifica) = :qualifica) " +
-            "and (:documentazione is null or upper(a.reportAmministrativeByIdRepAmministrative.documentazione) like :documentazione%) " +
-            "and (:ruoloGenerale is null or a.reportPatronatoByIdRepPatronato.ruoloGenerale = :ruoloGenerale) ")
+            "and (:documentazione is null or upper(a.reportAmministrativeByIdRepAmministrative.documentazione) like :documentazione%) ")
     Page<AnagraficaClienteEntity> listAnagraficaFilter(Pageable pageable,
                                                        @Param("faldone") Integer faldone,
                                                        @Param("name") String name,
                                                        @Param("cognome") String cognome,
                                                        @Param("codiceFiscale") String codiceFiscale,
                                                        @Param("qualifica") String qualifica,
-                                                       @Param("ruoloGenerale") String ruoloGenerale,
                                                        @Param("documentazione") String documentazione);
 }

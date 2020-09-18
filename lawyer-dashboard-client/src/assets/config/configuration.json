@@ -1,5 +1,5 @@
 {
     "api_endpoint": {
-        "url": "http://vmi417403.contaboserver.net:8080/lawyer-api"
+        "url": "http://localhost:8080"
     }
 }

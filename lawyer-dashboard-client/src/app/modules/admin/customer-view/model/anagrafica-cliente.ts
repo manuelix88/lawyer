@@ -6,6 +6,8 @@ export class AnagraficaCliente {
     nome: string;
     cognome: string;
     email?: string
+    codice?: string
+    uuid?: string
     codiceFiscale: string;
     nazione?: string;
     indirizzo?: string;
