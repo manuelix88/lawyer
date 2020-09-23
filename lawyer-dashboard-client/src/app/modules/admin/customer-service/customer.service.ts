@@ -33,6 +33,12 @@ export class CustomerService {
         });
     }
 
+    getPatronatoReportAll(req): Promise<any> {
+        return new Promise<any>((res, rej) => {
+            this.api.get('/protected/retrieveAllAnagraficaPatronato', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
+        });
+    }
+
     deleteAnagraficaById(req): Promise<any> {
         return new Promise<any>((res, rej) => {
             this.api.get('/protected/deleteAnagraficaById', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));

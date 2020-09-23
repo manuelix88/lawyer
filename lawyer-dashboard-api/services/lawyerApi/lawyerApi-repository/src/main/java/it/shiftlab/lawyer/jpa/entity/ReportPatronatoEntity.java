@@ -8,8 +8,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.*;
 
-@Data
-@ToString
 @Entity
 @Table(name = "REPORT_PATRONATO")
 public class ReportPatronatoEntity {
@@ -133,8 +131,8 @@ public class ReportPatronatoEntity {
 //        this.patronatoProvenienza = patronatoProvenienza;
 //    }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "avvocati_delegati_id", referencedColumnName = "id", nullable = false)
+    @OneToOne()
+    @JoinColumn(name = "avvocati_delegati_id", referencedColumnName = "id")
     public AvvocatoDelegatoEntity getAvvocatoDelegato() {
         return avvocatoDelegato;
     }
@@ -143,8 +141,8 @@ public class ReportPatronatoEntity {
         this.avvocatoDelegato = avvocatoDelegato;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patronati_id", referencedColumnName = "id", nullable = false)
+    @OneToOne()
+    @JoinColumn(name = "patronati_id", referencedColumnName = "id")
     public PatronatiEntity getPatronatoProvenienza() {
         return patronatoProvenienza;
     }
@@ -182,7 +180,7 @@ public class ReportPatronatoEntity {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipo_pratica_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "tipo_pratica_id", referencedColumnName = "id")
     public TipoPraticheEntity getTipoPratica() {
         return tipoPratica;
     }
@@ -205,9 +203,7 @@ public class ReportPatronatoEntity {
     public int hashCode() {
         return Objects.hash(idRepPatronato, avvocatoDelegato, convenzione, dataUltimaUdienza, decorrenzaSuccessiva, giudice, note, patronatoProvenienza, ruoloGenerale, spese, tipoPratica);
     }
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_anagrafica", referencedColumnName = "id_anagrafica")
-//    @OneToOne(mappedBy = "reportPatronatoByIdRepPatronato")
+    @OneToOne(mappedBy = "reportPatronatoByIdRepPatronato")
     public AnagraficaClienteEntity getAnagraficaClientesByIdRepPatronato() {
         return anagraficaClientesByIdRepPatronato;
     }
@@ -226,7 +222,7 @@ public class ReportPatronatoEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     public StatusEntity getStatusByStatusId() {
         return statusByStatusId;
     }
@@ -246,7 +242,7 @@ public class ReportPatronatoEntity {
 //    }
 
     @OneToOne
-    @JoinColumn(name = "tribunali_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "tribunali_id", referencedColumnName = "id")
     public TribunaliEntity getTribunaliByTribunaliId() {
         return tribunaliByTribunaliId;
     }

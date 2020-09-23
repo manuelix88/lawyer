@@ -27,7 +27,6 @@ public class AnagraficaFactory {
                 entity.getProvincia(),
                 entity.getDataNasacita(),
                 mapRepPatronatoEntityToDto(entity.getReportPatronatoByIdRepPatronato()),
-//                new ReportPatronatoDto(),
                 mapRepAmmEntitytoDto(entity.getReportAmministrativeByIdRepAmministrative()),
                 entity.getUuid().toString(),
                 entity.getCodice());

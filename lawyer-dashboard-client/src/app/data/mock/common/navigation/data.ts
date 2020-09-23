@@ -9,10 +9,17 @@ export const defaultNavigation: TreoNavigationItem[] = [
         icon    : 'apps',
         children: [
             {
-                id   : 'search',
-                title: 'Ricerca',
+                id   : 'search-report-amm',
+                title: 'Ricerca Amministrative',
                 type : 'basic',
                 link : '/customer/search',
+                icon : 'heroicons_outline:search',
+            },
+            {
+                id   : 'search-report-patro',
+                title: 'Ricerca Patronato',
+                type : 'basic',
+                link : '/customer/search-patronato',
                 icon : 'heroicons_outline:search',
             },
             {

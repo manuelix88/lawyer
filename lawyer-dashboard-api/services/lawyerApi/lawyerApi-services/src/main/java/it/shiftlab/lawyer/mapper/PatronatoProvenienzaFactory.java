@@ -10,6 +10,6 @@ public class PatronatoProvenienzaFactory {
     }
 
     public static PatronatoProvenienzaDto mapToDto(PatronatiEntity entity) {
-        return new PatronatoProvenienzaDto(entity.getId(), entity.getPatronato());
+        return entity == null ? null : new PatronatoProvenienzaDto(entity.getId(), entity.getPatronato());
     }
 }

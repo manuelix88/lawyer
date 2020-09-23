@@ -76,7 +76,8 @@ export const appRoutes: Route[] = [
             {path: 'add', loadChildren: () => import('app/modules/admin/customer-view/add-customer/add-customer.module').then(m => m.AddCustomerModule)},
             {path: 'modify/:id', loadChildren: () => import('app/modules/admin/customer-view/modify-customer/modify-customer.module').then(m => m.ModifyCustomerModule)},
             {path: 'report', loadChildren: () => import('app/modules/admin/report-views/report-views.module').then(m => m.ReportViewsModule)},
-            {path: 'search', loadChildren: () => import('app/modules/admin/search-report-element/search-report.module').then(m => m.SearchReportModule)}
+            {path: 'search', loadChildren: () => import('app/modules/admin/search-report-element/search-report.module').then(m => m.SearchReportModule)},
+            {path: 'search-patronato', loadChildren: () => import('app/modules/admin/search-report-element/search-report-patronato/search-report-patronato.module').then(m => m.SearchReportPatronatoModule)}
 
            // 404 & Catch all
            //  {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/errors/error-404/error-404.module').then(m => m.Error404Module)},

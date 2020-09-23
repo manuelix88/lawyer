@@ -1,33 +1,21 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {AnagraficaCliente} from '../customer-view/model/anagrafica-cliente';
+import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {CustomerService} from '../customer-service/customer.service';
+import {AnagraficaCliente} from '../../customer-view/model/anagrafica-cliente';
+import {CustomerService} from '../../customer-service/customer.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {Avvocati} from '../customer-view/model/avvocati';
-import {PatronatoProvenienza} from '../customer-view/model/patronatoProvenienza';
-import {ApplicationStoreService} from '../../../core/store/application-store.service';
-export class SearchFilter {
-    nome: string;
-    cognome: string;
-    codiceFiscale: string;
-    qualifica: string;
-    faldone: number;
-    documentazione: string;
-    ruoloGenerale: string;
-    avvocatoDelegato: string;
-    patronatoProvenienza: string;
-}
-
+import {ApplicationStoreService} from '../../../../core/store/application-store.service';
+import {Avvocati} from '../../customer-view/model/avvocati';
+import {PatronatoProvenienza} from '../../customer-view/model/patronatoProvenienza';
+import {SearchFilter} from '../search-report-element.component';
 
 @Component({
-    selector: 'search-report-element',
-    templateUrl: './search-report-element.component.html',
-    styleUrls: ['./search-report-element.component.scss'],
-    encapsulation  : ViewEncapsulation.None,
+  selector: 'app-search-report-patronato',
+  templateUrl: './search-report-patronato.component.html',
+  styleUrls: ['./search-report-patronato.component.scss']
 })
-export class SearchReportElementComponent implements OnInit {
+export class SearchReportPatronatoComponent implements OnInit {
     searchFiler = new SearchFilter();
-    displayedColumns: string[] = ['name', 'surname', 'cf','qualifica', 'documentazione', 'details'];
+    displayedColumns: string[] = ['name', 'surname', 'cf','ruoloGenerale', 'patronato', 'avvocato'];
     dataSource: MatTableDataSource<AnagraficaCliente>;
     customers: Array<AnagraficaCliente> = [];
     length = 0;
@@ -43,7 +31,6 @@ export class SearchReportElementComponent implements OnInit {
     searchData(input: SearchFilter): void {
         this.pageSize = 10;
         this.pageIndex = 0;
-        this.length = 0;
         this.getPageAnagrafica(input);
     }
     compareAvvocati(o1: Avvocati, o2: Avvocati): boolean {
@@ -66,14 +53,14 @@ export class SearchReportElementComponent implements OnInit {
             nome: input === undefined ? null : input.nome,
             cognome:  input === undefined ? null : input.cognome,
             codiceFiscale: input === undefined ? null : input.codiceFiscale,
-            qualifica: input === undefined ? null : input.qualifica,
-            faldone: input === undefined ? null : input.faldone,
-            documentazione: input === undefined ? null : input.documentazione,
+            // qualifica: input === undefined ? null : input.qualifica,
+            // faldone: input === undefined ? null : input.faldone,
+            // documentazione: input === undefined ? null : input.documentazione,
             // ruoloGenerale: input === undefined ? null : input.ruoloGenerale,
             // avvocatoDelegato: input === undefined ? null : input.avvocatoDelegato,
             // patronatoProvenienza: input === undefined ? null : input.patronatoProvenienza,
         };
-        this.customerService.getAnagraficaAll(req)
+        this.customerService.getPatronatoReportAll(req)
             .then( value => {
                 this.data = value;
 
@@ -89,4 +76,5 @@ export class SearchReportElementComponent implements OnInit {
                 this.spinner.hide();
             });
     }
+
 }

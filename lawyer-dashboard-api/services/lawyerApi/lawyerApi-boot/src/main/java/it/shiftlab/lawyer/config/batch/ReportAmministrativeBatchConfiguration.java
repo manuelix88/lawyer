@@ -41,7 +41,7 @@ public class ReportAmministrativeBatchConfiguration {
     @Bean
     public Step step() {
         return stepBuilderFactory.get("step")
-                .<ReportInfoAmministrativeDto, ReportInfoAmministrativeDto>chunk(5)
+                .<ReportInfoAmministrativeDto, ReportInfoAmministrativeDto>chunk(20)
                 .reader(employeeItemReader())
                 .writer(anagraficaItemWrite())
                 .build();

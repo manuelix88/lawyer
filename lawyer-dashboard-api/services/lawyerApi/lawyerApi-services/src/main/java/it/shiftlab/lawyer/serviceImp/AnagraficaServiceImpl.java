@@ -84,13 +84,12 @@ public class AnagraficaServiceImpl implements AnagraficaService {
             }
         }
 
-        AnagraficaClienteEntity entityMapped = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
-        AnagraficaClienteEntity saved = anagraficaRepository.save(entityMapped);
+        AnagraficaClienteEntity entity = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
 
         if(anagraficaDto.getReportAmministrative() != null) {
             ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrative());
-            repAmm.setAnagraficaClientesByIdRepAmministrative(saved);
-            reportAmministrativeRepository.save(repAmm);
+            ReportAmministrativeEntity save = reportAmministrativeRepository.save(repAmm);
+            entity.setReportAmministrativeByIdRepAmministrative(save);
         }
         //PATRONATO
         if(anagraficaDto.getReportPatronato() != null) {
@@ -144,9 +143,8 @@ public class AnagraficaServiceImpl implements AnagraficaService {
                     patronatoEntity.setStatusByStatusId(statusEntity);
                 }
             }
-            patronatoEntity.setAnagraficaClientesByIdRepPatronato(saved);
             ReportPatronatoEntity savePatronato = reportPatronatoRepository.save(patronatoEntity);
-//            entity.setReportPatronatoByIdRepPatronato(savePatronato);
+            entity.setReportPatronatoByIdRepPatronato(savePatronato);
 
             if (anagraficaDto.getReportPatronato().getDateUdienze() != null) {
                 List<DateUdienzeEntity> list = DateUdienzeFactory.mapToEntity(anagraficaDto.getReportPatronato().getDateUdienze(), savePatronato);
@@ -154,7 +152,7 @@ public class AnagraficaServiceImpl implements AnagraficaService {
 //                patronatoEntity.setDateUdienzesByIdRepPatronato(dateUdienzeEntities);
             }
         }
-//        anagraficaRepository.save(entity);
+        anagraficaRepository.save(entity);
     }
 
 
@@ -171,60 +169,72 @@ public class AnagraficaServiceImpl implements AnagraficaService {
         AnagraficaClienteEntity entity = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
         if(anagraficaDto.getReportAmministrative() != null) {
             ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrative());
-            repAmm.setAnagraficaClientesByIdRepAmministrative(entity);
             ReportAmministrativeEntity save = reportAmministrativeRepository.save(repAmm);
-//            entity.setReportAmministrativeByIdRepAmministrative(save);
+            entity.setReportAmministrativeByIdRepAmministrative(save);
         }
 
-
-        ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronato());
         //PATRONATO
+        if(anagraficaDto.getReportPatronato() != null) {
+            ReportPatronatoEntity patronatoEntity = AnagraficaFactory.mapRepPatronatoDtoToEntity(anagraficaDto.getReportPatronato());
 
-        if(anagraficaDto.getReportPatronato().getTipoPratica() != null) {
-            if(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica() != null && !"".equals(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())) {
-                TipoPraticheEntity tipo_pratica_inesistente = tipoPraticheRepository.findByTipoPratica(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())
-                        .orElseThrow(() -> new EntityNotFoundException("Tipo Pratica inesistente"));
-                patronatoEntity.setTipoPratica(tipo_pratica_inesistente);
+            if(anagraficaDto.getReportPatronato().getTipoPratica() != null) {
+                if(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica() != null && !"".equals(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())) {
+                    TipoPraticheEntity tipo_pratica_inesistente = tipoPraticheRepository.findByTipoPratica(anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica())
+                            .orElseThrow(() -> new EntityNotFoundException("Tipo Pratica inesistente " + anagraficaDto.getReportPatronato().getTipoPratica().getTipoPratica()));
+                    patronatoEntity.setTipoPratica(tipo_pratica_inesistente);
+                }
             }
-        }
-        if(anagraficaDto.getReportPatronato().getAvvocatoDelegato() != null) {
-            if(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato() != null && !"".equals(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())) {
-                AvvocatoDelegatoEntity avvocato_inesistente = avvocatoDelegatoRepository.findByAvvocatoDelegato(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())
-                        .orElseThrow(() -> new EntityNotFoundException("Avvocato inesistente"));
-                patronatoEntity.setAvvocatoDelegato(avvocato_inesistente);
+            if(anagraficaDto.getReportPatronato().getAvvocatoDelegato() != null) {
+                if(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato() != null && !"".equals(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())) {
+                    AvvocatoDelegatoEntity avvocato_inesistente = avvocatoDelegatoRepository.findByAvvocatoDelegato(anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato())
+                            .orElseThrow(() -> new EntityNotFoundException("Avvocato inesistente" + anagraficaDto.getReportPatronato().getAvvocatoDelegato().getAvvocatoDelegato()));
+                    patronatoEntity.setAvvocatoDelegato(avvocato_inesistente);
+                }
             }
-        }
 
-        if(anagraficaDto.getReportPatronato().getPatronatoProvenienza() != null) {
-            if(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato() != null && !"".equals(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())) {
-                PatronatiEntity patronato_di_provenienza_inesistente = patronatiProvenienzaRepository.findByPatronato(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())
-                        .orElseThrow(() -> new EntityNotFoundException("Patronato di provenienza inesistente"));
-                patronatoEntity.setPatronatoProvenienza(patronato_di_provenienza_inesistente);
+            if(anagraficaDto.getReportPatronato().getPatronatoProvenienza() != null) {
+                if(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato() != null && !"".equals(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())) {
+                    PatronatiEntity patronato_di_provenienza_inesistente = patronatiProvenienzaRepository.findByPatronato(anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato())
+                            .orElseThrow(() -> new EntityNotFoundException("Patronato di provenienza inesistente " + anagraficaDto.getReportPatronato().getPatronatoProvenienza().getPatronato()));
+                    patronatoEntity.setPatronatoProvenienza(patronato_di_provenienza_inesistente);
+                }
             }
-        }
-        if (anagraficaDto.getReportPatronato().getTribunale()!= null) {
-            if (anagraficaDto.getReportPatronato().getTribunale(). getTribunali() != null) {
-                TribunaliEntity tribunaliEntity = TribunaleFactory.mapToEntity(anagraficaDto.getReportPatronato().getTribunale());
-                patronatoEntity.setTribunaliByTribunaliId(tribunaliEntity);
-            }
-        }
 
-        if(anagraficaDto.getReportPatronato().getStatus() != null) {
-            if(anagraficaDto.getReportPatronato().getStatus().getStatus() != null) {
-                StatusEntity statusEntity = StatusFactory.mapToEntity(anagraficaDto.getReportPatronato().getStatus());
-                patronatoEntity.setStatusByStatusId(statusEntity);
+            if (anagraficaDto.getReportPatronato().getTribunale() != null) {
+                if (anagraficaDto.getReportPatronato().getTribunale().getTribunali() != null && !"".equals(anagraficaDto.getReportPatronato().getTribunale().getTribunali() )) {
+                    if (anagraficaDto.getReportPatronato().getTribunale().getId() == null) {
+                        Optional<TribunaliEntity> byTribunali = tribunaliJpaRepository.findByTribunali(anagraficaDto.getReportPatronato().getTribunale().getTribunali());
+                        if (byTribunali.isPresent()) {
+                            anagraficaDto.getReportPatronato().getTribunale().setId(byTribunali.get().getId());
+                        }
+                    }
+                    TribunaliEntity tribunaliEntity = TribunaleFactory.mapToEntity(anagraficaDto.getReportPatronato().getTribunale());
+                    patronatoEntity.setTribunaliByTribunaliId(tribunaliEntity);
+                }
+            }
+
+            if(anagraficaDto.getReportPatronato().getStatus() != null) {
+                if(anagraficaDto.getReportPatronato().getStatus().getStatus() != null &&  !"".equals(anagraficaDto.getReportPatronato().getStatus().getStatus() )) {
+                    if (anagraficaDto.getReportPatronato().getStatus().getId() == null) {
+                        Optional<StatusEntity> byStatus = statusJpaRepository.findByStatus(anagraficaDto.getReportPatronato().getStatus().getStatus());
+                        if (byStatus.isPresent()) {
+                            anagraficaDto.getReportPatronato().getStatus().setId(byStatus.get().getId());
+                        }
+                    }
+                    StatusEntity statusEntity = StatusFactory.mapToEntity(anagraficaDto.getReportPatronato().getStatus());
+                    patronatoEntity.setStatusByStatusId(statusEntity);
+                }
+            }
+            ReportPatronatoEntity savePatronato = reportPatronatoRepository.save(patronatoEntity);
+            entity.setReportPatronatoByIdRepPatronato(savePatronato);
+
+            if (anagraficaDto.getReportPatronato().getDateUdienze() != null) {
+                List<DateUdienzeEntity> list = DateUdienzeFactory.mapToEntity(anagraficaDto.getReportPatronato().getDateUdienze(), savePatronato);
+                dateUdienzeJpaRepository.saveAll(list);
+//                patronatoEntity.setDateUdienzesByIdRepPatronato(dateUdienzeEntities);
             }
         }
-        patronatoEntity.setAnagraficaClientesByIdRepPatronato(entity);
-        ReportPatronatoEntity savePatronato = reportPatronatoRepository.save(patronatoEntity);
-
-        if (anagraficaDto.getReportPatronato().getDateUdienze() != null) {
-            List<DateUdienzeEntity> list = DateUdienzeFactory.mapToEntity(anagraficaDto.getReportPatronato().getDateUdienze(), savePatronato);
-            dateUdienzeJpaRepository.saveAll(list);
-        }
-//        entity.setReportPatronatoByIdRepPatronato(savePatronato);
-//
-//        anagraficaRepository.save(entity);
+        anagraficaRepository.save(entity);
     }
 
     @Override
@@ -245,7 +255,12 @@ public class AnagraficaServiceImpl implements AnagraficaService {
     @Override
     @Transactional(readOnly = true)
     public Page<AnagraficaDto> listAnagraficaFilterReportPatronato(Pageable pageable, String name, String cognome, String codiceFiscale, String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato) {
-        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.findAnagraficaFilterReportPatronato(pageable,
+
+//        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.filterCazz(pageable,
+//                convertStringUpperCase(name),
+//                convertStringUpperCase(cognome)
+//        );
+        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.filterReportPatronato(pageable,
                 convertStringUpperCase(name),
                 convertStringUpperCase(cognome),
                 convertStringUpperCase(codiceFiscale),
@@ -264,6 +279,6 @@ public class AnagraficaServiceImpl implements AnagraficaService {
     }
 
     public String convertStringUpperCase(String input) {
-        return (input == null || input.equals("")) ? null: input.toUpperCase();
+        return (input == null || "".equals(input)) ? null: input.toUpperCase();
     }
 }

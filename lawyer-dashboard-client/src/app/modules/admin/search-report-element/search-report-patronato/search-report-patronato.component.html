@@ -35,25 +35,31 @@
                 </div>
                 <div class="flex flex-col gt-xs:flex-row">
                     <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-select [placeholder]="'Documentazione'" [(ngModel)]="searchFiler.documentazione" name="documentazione">
-                            <mat-option value="country-1">SI</mat-option>
-                            <mat-option value="country-2">NO</mat-option>
+                        <mat-label>Ruolo Generale</mat-label>
+                        <input matInput
+                               [placeholder]="'Ruolo Generale'" [(ngModel)]="searchFiler.ruoloGenerale" name="ruoloGenerale">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Patronato Di Provenienza</mat-label>
+                        <mat-placeholder>Patronato Di Provenienza</mat-placeholder>
+                        <mat-select [(ngModel)]="searchFiler.patronatoProvenienza" name="patronatoProvenienza" [compareWith]="comparePatronaTiProvenienza" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let patronato of store.baseData.patronati" [value]="patronato.patronato"> {{patronato.patronato}}</mat-option>
                         </mat-select>
                         <mat-icon matPrefix
-                                  [svgIcon]="'feather:archive'"></mat-icon>
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
                     </mat-form-field>
                     <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <input matInput
-                               [placeholder]="'Qualifica'" [(ngModel)]="searchFiler.qualifica" name="qualifica">
+                        <mat-label>Avvocato Delegato</mat-label>
+                        <mat-placeholder>Avvocato Delegato</mat-placeholder>
+                        <mat-select [(ngModel)]="searchFiler.avvocatoDelegato" name="avvocatoDelegato" [compareWith]="compareAvvocati" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let avvocato of store.baseData.avvocati" [value]="avvocato.avvocatoDelegato"> {{avvocato.avvocatoDelegato}}</mat-option>
+                        </mat-select>
                         <mat-icon matPrefix
-                                  [svgIcon]="'data_usage'"></mat-icon>
-                    </mat-form-field>
-
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <input matInput type="number" min="0"
-                               [placeholder]="'Faldone'" [(ngModel)]="searchFiler.faldone" name="faldone">
-                        <mat-icon matPrefix
-                                  [svgIcon]="'all_inbox'"></mat-icon>
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
                     </mat-form-field>
                 </div>
 
@@ -74,10 +80,10 @@
                       The actual rendered columns are set as a property on the row definition" -->
 
                 <!-- Position Column -->
-<!--                <ng-container matColumnDef="position">-->
-<!--                    <th mat-header-cell *matHeaderCellDef> No. </th>-->
-<!--                    <td mat-cell *matCellDef="let element"> {{element.idAnagrafica}} </td>-->
-<!--                </ng-container>-->
+                <!--                <ng-container matColumnDef="position">-->
+                <!--                    <th mat-header-cell *matHeaderCellDef> No. </th>-->
+                <!--                    <td mat-cell *matCellDef="let element"> {{element.idAnagrafica}} </td>-->
+                <!--                </ng-container>-->
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
@@ -97,16 +103,16 @@
                     <td mat-cell *matCellDef="let element"> {{element.cf}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="qualifica">
-                    <th mat-header-cell *matHeaderCellDef> Qualifica </th>
-                    <td mat-cell *matCellDef="let element"> {{element.reportAmministrative.qualifica}} </td>
+                <ng-container matColumnDef="ruoloGenerale">
+                    <th mat-header-cell *matHeaderCellDef> Ruolo Generale </th>
+                    <td mat-cell *matCellDef="let element"> {{element.reportPatronato.ruoloGenerale}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="documentazione">
-                    <th mat-header-cell *matHeaderCellDef> Qualifica </th>
-                    <td mat-cell *matCellDef="let element"> {{element.reportAmministrative.documentazione}} </td>
+                <ng-container matColumnDef="patronato">
+                    <th mat-header-cell *matHeaderCellDef> Patronato </th>
+                    <td mat-cell *matCellDef="let element"> {{element.reportPatronato.patronatoProvenienza?.patronato}} </td>
                 </ng-container>
-                <ng-container matColumnDef="details">
+                <ng-container matColumnDef="avvocato">
                     <th mat-header-cell *matHeaderCellDef> Dettaglio </th>
                     <td mat-cell *matCellDef="let element">
                         <button mat-icon-button type="button" color="warn">

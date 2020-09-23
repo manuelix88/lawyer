@@ -24,7 +24,7 @@ export class AddCustomerComponent implements OnInit {
         await this.spinner.show();
 
         // $event.reportPatronato = null;
-        // $event.reportAmministrative = null;
+        $event.reportAmministrative = null;
         await this.customer.addAnagrafica($event)
             .then(value => {
 
