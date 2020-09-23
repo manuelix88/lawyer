@@ -17,5 +17,7 @@ public interface AnagraficaService {
     void deleteAnagrafica(UUID anagraficaId);
 
     Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica,
-                                             String documentazione ,  String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato, Integer page, Integer limit);
+                                             String documentazione );
+
+    Page<AnagraficaDto> listAnagraficaFilterReportPatronato(Pageable pageable, String name, String cognome, String codiceFiscale, String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato);
 }

@@ -45,18 +45,29 @@ public class AnagraficaController {
     }
 
     @GetMapping("protected/retrieveAllAnagrafica")
-    public ResponseEntity<Page<AnagraficaDto>> listShipFilter(@Min(0) @Valid Integer page, @Min(0) @Max(100) @Valid Integer limit,
+    public ResponseEntity<Page<AnagraficaDto>> listAmministrativeFilter(@Min(0) @Valid Integer page, @Min(0) @Max(100) @Valid Integer limit,
                                                                 @RequestParam(value = "faldone", required = false) Integer faldone,
                                                                 @RequestParam(value = "nome", required = false) String name,
                                                                 @RequestParam(value = "cognome", required = false) String cognome,
                                                                 @RequestParam(value = "codiceFiscale", required = false) String codiceFiscale,
                                                                 @RequestParam(value = "qualifica", required = false) String qualifica,
-                                                                @RequestParam(value = "ruoloGenerale", required = false) String ruoloGenerale,
-                                                                @RequestParam(value = "documentazione", required = false) String documentazione,
-                                                                @RequestParam(value = "patronatoProvenienza", required = false) String patronatoProvenienza,
-                                                                @RequestParam(value = "avvocatoDelegato", required = false) String avvocatoDelegato
+                                                                @RequestParam(value = "documentazione", required = false) String documentazione
                                                               ) {
-        Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilter(PageRequest.of(page, limit),faldone,name,cognome,codiceFiscale,qualifica,documentazione, ruoloGenerale,patronatoProvenienza,avvocatoDelegato, page, limit);
+        Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilter(PageRequest.of(page, limit),faldone,name,cognome,codiceFiscale,qualifica,documentazione);
+
+        return  ResponseEntity.ok(new PageImpl<>(pages.stream().collect(Collectors.toList()),pages.getPageable(),pages.getTotalElements()));
+    }
+
+    @GetMapping("protected/retrieveAllAnagraficaPatronato")
+    public ResponseEntity<Page<AnagraficaDto>> listPatronatoFilter(@Min(0) @Valid Integer page, @Min(0) @Max(100) @Valid Integer limit,
+                                                              @RequestParam(value = "nome", required = false) String name,
+                                                              @RequestParam(value = "cognome", required = false) String cognome,
+                                                              @RequestParam(value = "codiceFiscale", required = false) String codiceFiscale,
+                                                              @RequestParam(value = "ruoloGenerale", required = false) String ruoloGenerale,
+                                                              @RequestParam(value = "patronatoProvenienza", required = false) String patronatoProvenienza,
+                                                              @RequestParam(value = "avvocatoDelegato", required = false) String avvocatoDelegato
+    ) {
+        Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilterReportPatronato(PageRequest.of(page, limit),name,cognome,codiceFiscale,ruoloGenerale,patronatoProvenienza,avvocatoDelegato);
 
         return  ResponseEntity.ok(new PageImpl<>(pages.stream().collect(Collectors.toList()),pages.getPageable(),pages.getTotalElements()));
     }

@@ -230,21 +230,32 @@ public class AnagraficaServiceImpl implements AnagraficaService {
     @Override
     @Transactional(readOnly = true)
     public Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome,
-                                                    String codiceFiscale, String qualifica, String documentazione,
-                                                    String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato,  Integer page, Integer limit) {
-        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.findAnagraficaFilter(pageable,
+                                                    String codiceFiscale, String qualifica, String documentazione) {
+        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.findAnagraficaFilterReportAmministrative(pageable,
                 faldone,
                 convertStringUpperCase(name),
                 convertStringUpperCase(cognome),
                 convertStringUpperCase(codiceFiscale),
                 convertStringUpperCase(qualifica),
-                convertStringUpperCase(documentazione),
+                convertStringUpperCase(documentazione)
+        );
+        return new PageImpl<>(anagraficaClienteEntities.stream().map(AnagraficaFactory::mapAnagraficaEntityToDto).collect(Collectors.toList()),pageable, anagraficaClienteEntities.getTotalElements());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<AnagraficaDto> listAnagraficaFilterReportPatronato(Pageable pageable, String name, String cognome, String codiceFiscale, String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato) {
+        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.findAnagraficaFilterReportPatronato(pageable,
+                convertStringUpperCase(name),
+                convertStringUpperCase(cognome),
+                convertStringUpperCase(codiceFiscale),
                 convertStringUpperCase(ruoloGenerale),
                 convertStringUpperCase(patronatoProvenienza),
                 convertStringUpperCase(avvocatoDelegato)
         );
         return new PageImpl<>(anagraficaClienteEntities.stream().map(AnagraficaFactory::mapAnagraficaEntityToDto).collect(Collectors.toList()),pageable, anagraficaClienteEntities.getTotalElements());
     }
+
 
     @Override
     public void deleteAnagrafica(UUID anagraficaId) {
