@@ -134,7 +134,8 @@ public class ReportAmministrativeEntity {
         return Objects.hash(idRepAmministrative, altro, dataPagamento, note, numeroFaldone, qualifica, ricordoCedu, documentazione);
     }
 
-    @OneToOne(mappedBy = "reportAmministrativeByIdRepAmministrative")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_anagrafica", referencedColumnName = "id_anagrafica")
     public AnagraficaClienteEntity getAnagraficaClientesByIdRepAmministrative() {
         return anagraficaClientesByIdRepAmministrative;
     }

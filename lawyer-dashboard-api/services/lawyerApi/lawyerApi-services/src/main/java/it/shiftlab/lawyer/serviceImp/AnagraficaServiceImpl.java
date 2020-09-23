@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,12 +84,13 @@ public class AnagraficaServiceImpl implements AnagraficaService {
             }
         }
 
-        AnagraficaClienteEntity entity = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
+        AnagraficaClienteEntity entityMapped = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
+        AnagraficaClienteEntity saved = anagraficaRepository.save(entityMapped);
 
         if(anagraficaDto.getReportAmministrative() != null) {
             ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrative());
-            ReportAmministrativeEntity save = reportAmministrativeRepository.save(repAmm);
-            entity.setReportAmministrativeByIdRepAmministrative(save);
+            repAmm.setAnagraficaClientesByIdRepAmministrative(saved);
+            reportAmministrativeRepository.save(repAmm);
         }
         //PATRONATO
         if(anagraficaDto.getReportPatronato() != null) {
@@ -142,8 +144,9 @@ public class AnagraficaServiceImpl implements AnagraficaService {
                     patronatoEntity.setStatusByStatusId(statusEntity);
                 }
             }
+            patronatoEntity.setAnagraficaClientesByIdRepPatronato(saved);
             ReportPatronatoEntity savePatronato = reportPatronatoRepository.save(patronatoEntity);
-            entity.setReportPatronatoByIdRepPatronato(savePatronato);
+//            entity.setReportPatronatoByIdRepPatronato(savePatronato);
 
             if (anagraficaDto.getReportPatronato().getDateUdienze() != null) {
                 List<DateUdienzeEntity> list = DateUdienzeFactory.mapToEntity(anagraficaDto.getReportPatronato().getDateUdienze(), savePatronato);
@@ -151,7 +154,7 @@ public class AnagraficaServiceImpl implements AnagraficaService {
 //                patronatoEntity.setDateUdienzesByIdRepPatronato(dateUdienzeEntities);
             }
         }
-        anagraficaRepository.save(entity);
+//        anagraficaRepository.save(entity);
     }
 
 
@@ -168,8 +171,9 @@ public class AnagraficaServiceImpl implements AnagraficaService {
         AnagraficaClienteEntity entity = AnagraficaFactory.mapAnagraficaDtoToEntity(anagraficaDto);
         if(anagraficaDto.getReportAmministrative() != null) {
             ReportAmministrativeEntity repAmm = AnagraficaFactory.mapRepAmmDtoToEntity(anagraficaDto.getReportAmministrative());
+            repAmm.setAnagraficaClientesByIdRepAmministrative(entity);
             ReportAmministrativeEntity save = reportAmministrativeRepository.save(repAmm);
-            entity.setReportAmministrativeByIdRepAmministrative(save);
+//            entity.setReportAmministrativeByIdRepAmministrative(save);
         }
 
 
@@ -211,25 +215,44 @@ public class AnagraficaServiceImpl implements AnagraficaService {
                 patronatoEntity.setStatusByStatusId(statusEntity);
             }
         }
+        patronatoEntity.setAnagraficaClientesByIdRepPatronato(entity);
         ReportPatronatoEntity savePatronato = reportPatronatoRepository.save(patronatoEntity);
 
         if (anagraficaDto.getReportPatronato().getDateUdienze() != null) {
             List<DateUdienzeEntity> list = DateUdienzeFactory.mapToEntity(anagraficaDto.getReportPatronato().getDateUdienze(), savePatronato);
             dateUdienzeJpaRepository.saveAll(list);
         }
-        entity.setReportPatronatoByIdRepPatronato(savePatronato);
-
-        anagraficaRepository.save(entity);
+//        entity.setReportPatronatoByIdRepPatronato(savePatronato);
+//
+//        anagraficaRepository.save(entity);
     }
 
     @Override
-    public Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica, String documentazione, String ruoloGenerale) {
-        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.listAnagraficaFilter(pageable, faldone, convertStringUpperCase(name),
-                convertStringUpperCase(cognome), convertStringUpperCase(codiceFiscale), convertStringUpperCase(qualifica), convertStringUpperCase(documentazione));
+    @Transactional(readOnly = true)
+    public Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome,
+                                                    String codiceFiscale, String qualifica, String documentazione,
+                                                    String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato,  Integer page, Integer limit) {
+        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.findAnagraficaFilter(pageable,
+                faldone,
+                convertStringUpperCase(name),
+                convertStringUpperCase(cognome),
+                convertStringUpperCase(codiceFiscale),
+                convertStringUpperCase(qualifica),
+                convertStringUpperCase(documentazione),
+                convertStringUpperCase(ruoloGenerale),
+                convertStringUpperCase(patronatoProvenienza),
+                convertStringUpperCase(avvocatoDelegato)
+        );
         return new PageImpl<>(anagraficaClienteEntities.stream().map(AnagraficaFactory::mapAnagraficaEntityToDto).collect(Collectors.toList()),pageable, anagraficaClienteEntities.getTotalElements());
     }
 
+    @Override
+    public void deleteAnagrafica(UUID anagraficaId) {
+        anagraficaRepository.deleteAllByUuid(anagraficaId
+        );
+    }
+
     public String convertStringUpperCase(String input) {
-        return input == null ? null: input.toUpperCase();
+        return (input == null || input.equals("")) ? null: input.toUpperCase();
     }
 }

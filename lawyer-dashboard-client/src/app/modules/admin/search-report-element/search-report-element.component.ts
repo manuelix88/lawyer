@@ -3,6 +3,9 @@ import {AnagraficaCliente} from '../customer-view/model/anagrafica-cliente';
 import {MatTableDataSource} from '@angular/material/table';
 import {CustomerService} from '../customer-service/customer.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {Avvocati} from '../customer-view/model/avvocati';
+import {PatronatoProvenienza} from '../customer-view/model/patronatoProvenienza';
+import {ApplicationStoreService} from '../../../core/store/application-store.service';
 export class SearchFilter {
     nome: string;
     cognome: string;
@@ -11,6 +14,8 @@ export class SearchFilter {
     faldone: number;
     documentazione: string;
     ruoloGenerale: string;
+    avvocatoDelegato: string;
+    patronatoProvenienza: string;
 }
 
 
@@ -30,15 +35,22 @@ export class SearchReportElementComponent implements OnInit {
     pageIndex = 0;
     pageSizeOption: number[] = [5, 10, 25, 100];
     data: any;
-    constructor(private customerService: CustomerService, private spinner: NgxSpinnerService) { }
+    constructor(private customerService: CustomerService, private spinner: NgxSpinnerService, public store: ApplicationStoreService) { }
 
     ngOnInit(): void {
     }
 
     searchData(input: SearchFilter): void {
-     this.getPageAnagrafica(input);
+        // this.pageSize = 10;
+        // this.pageIndex = 0;
+        this.getPageAnagrafica(input);
     }
-
+    compareAvvocati(o1: Avvocati, o2: Avvocati): boolean {
+        return o1?.avvocatoDelegato === o2?.avvocatoDelegato && o1?.id === o2?.id;
+    }
+    comparePatronaTiProvenienza(o1: PatronatoProvenienza, o2: PatronatoProvenienza): boolean {
+        return o1?.patronato === o2?.patronato && o1?.id === o2?.id;
+    }
     pageChanged(event, searchFiler: SearchFilter): void {
         this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
@@ -56,6 +68,9 @@ export class SearchReportElementComponent implements OnInit {
             qualifica: input === undefined ? null : input.qualifica,
             faldone: input === undefined ? null : input.faldone,
             documentazione: input === undefined ? null : input.documentazione,
+            ruoloGenerale: input === undefined ? null : input.ruoloGenerale,
+            avvocatoDelegato: input === undefined ? null : input.avvocatoDelegato,
+            patronatoProvenienza: input === undefined ? null : input.patronatoProvenienza,
         };
         this.customerService.getAnagraficaAll(req)
             .then( value => {

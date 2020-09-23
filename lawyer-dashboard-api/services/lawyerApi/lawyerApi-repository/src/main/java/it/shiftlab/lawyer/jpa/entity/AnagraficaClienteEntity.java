@@ -172,8 +172,8 @@ public class AnagraficaClienteEntity {
         return Objects.hash(idAnagrafica, citta, codiceFiscale, cognome, dataNasacita, email, indirizzo, nazione, nome, provincia);
     }
 
-    @OneToOne
-    @JoinColumn(name = "id_rep_amministrative", referencedColumnName = "id_rep_amministrative")
+    @OneToOne(mappedBy = "anagraficaClientesByIdRepAmministrative", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "id_rep_amministrative", referencedColumnName = "id_rep_amministrative")
     public ReportAmministrativeEntity getReportAmministrativeByIdRepAmministrative() {
         return reportAmministrativeByIdRepAmministrative;
     }
@@ -181,9 +181,9 @@ public class AnagraficaClienteEntity {
     public void setReportAmministrativeByIdRepAmministrative(ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative) {
         this.reportAmministrativeByIdRepAmministrative = reportAmministrativeByIdRepAmministrative;
     }
-
-    @OneToOne
-    @JoinColumn(name = "id_rep_patronato", referencedColumnName = "id_rep_patronato")
+    @OneToOne(mappedBy = "anagraficaClientesByIdRepPatronato", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_rep_patronato", referencedColumnName = "id_rep_patronato")
     public ReportPatronatoEntity getReportPatronatoByIdRepPatronato() {
         return reportPatronatoByIdRepPatronato;
     }

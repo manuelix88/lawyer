@@ -205,8 +205,9 @@ public class ReportPatronatoEntity {
     public int hashCode() {
         return Objects.hash(idRepPatronato, avvocatoDelegato, convenzione, dataUltimaUdienza, decorrenzaSuccessiva, giudice, note, patronatoProvenienza, ruoloGenerale, spese, tipoPratica);
     }
-
-    @OneToOne(mappedBy = "reportPatronatoByIdRepPatronato")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_anagrafica", referencedColumnName = "id_anagrafica")
+//    @OneToOne(mappedBy = "reportPatronatoByIdRepPatronato")
     public AnagraficaClienteEntity getAnagraficaClientesByIdRepPatronato() {
         return anagraficaClientesByIdRepPatronato;
     }

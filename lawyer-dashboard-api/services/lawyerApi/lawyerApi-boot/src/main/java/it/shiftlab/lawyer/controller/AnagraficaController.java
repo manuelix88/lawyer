@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -51,9 +52,19 @@ public class AnagraficaController {
                                                                 @RequestParam(value = "codiceFiscale", required = false) String codiceFiscale,
                                                                 @RequestParam(value = "qualifica", required = false) String qualifica,
                                                                 @RequestParam(value = "ruoloGenerale", required = false) String ruoloGenerale,
-                                                                @RequestParam(value = "documentazione", required = false) String documentazione) {
-        Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilter(PageRequest.of(page, limit),faldone,name,cognome,codiceFiscale,qualifica,documentazione, ruoloGenerale);
+                                                                @RequestParam(value = "documentazione", required = false) String documentazione,
+                                                                @RequestParam(value = "patronatoProvenienza", required = false) String patronatoProvenienza,
+                                                                @RequestParam(value = "avvocatoDelegato", required = false) String avvocatoDelegato
+                                                              ) {
+        Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilter(PageRequest.of(page, limit),faldone,name,cognome,codiceFiscale,qualifica,documentazione, ruoloGenerale,patronatoProvenienza,avvocatoDelegato, page, limit);
 
         return  ResponseEntity.ok(new PageImpl<>(pages.stream().collect(Collectors.toList()),pages.getPageable(),pages.getTotalElements()));
+    }
+
+
+    @PostMapping("protected/deleteAnagrafica/{anagraficaId}")
+    public ResponseEntity<?> deleteAnagrafica(@PathVariable(name = "anagraficaId", required = true) UUID anagraficaId) {
+        anagraficaService.deleteAnagrafica(anagraficaId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

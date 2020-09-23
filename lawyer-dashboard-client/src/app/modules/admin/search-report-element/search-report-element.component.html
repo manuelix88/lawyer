@@ -56,13 +56,33 @@
                                   [svgIcon]="'all_inbox'"></mat-icon>
                     </mat-form-field>
                 </div>
-                <div>
+                <div class="flex flex-col gt-xs:flex-row">
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Ruolo Generale</mat-label>
                         <input matInput
                                [placeholder]="'Ruolo Generale'" [(ngModel)]="searchFiler.ruoloGenerale" name="ruoloGenerale">
                         <mat-icon matPrefix
                                   [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Patronato Di Provenienza</mat-label>
+                        <mat-placeholder>Patronato Di Provenienza</mat-placeholder>
+                        <mat-select [(ngModel)]="searchFiler.patronatoProvenienza" name="patronatoProvenienza" [compareWith]="comparePatronaTiProvenienza" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let patronato of store.baseData.patronati" [value]="patronato.patronato"> {{patronato.patronato}}</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Avvocato Delegato</mat-label>
+                        <mat-placeholder>Avvocato Delegato</mat-placeholder>
+                        <mat-select [(ngModel)]="searchFiler.avvocatoDelegato" name="avvocatoDelegato" [compareWith]="compareAvvocati" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let avvocato of store.baseData.avvocati" [value]="avvocato.avvocatoDelegato"> {{avvocato.avvocatoDelegato}}</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
                     </mat-form-field>
                 </div>
 
