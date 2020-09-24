@@ -1,6 +1,7 @@
 package it.shiftlab.lawyer.jpa.repository;
 
 import it.shiftlab.lawyer.jpa.entity.AnagraficaClienteEntity;
+import it.shiftlab.lawyer.jpa.entity.PatronatiEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -46,33 +47,17 @@ public interface AnagraficaRepository extends PagingAndSortingRepository<Anagraf
             "and (:cognome is null or upper(a.cognome)  like :cognome%) " +
             "and (:codiceFiscale is null or upper(a.codiceFiscale)  = :codiceFiscale) " +
             "and (:ruoloGenerale is null or upper(a.reportPatronatoByIdRepPatronato.ruoloGenerale) = :ruoloGenerale) " +
-            "and (:patronato is null or upper(a.reportPatronatoByIdRepPatronato.patronatoProvenienza.patronato) = :patronato) " +
-            "and (:avvocatoDelegato is null or upper(a.reportPatronatoByIdRepPatronato.avvocatoDelegato.avvocatoDelegato) = :avvocatoDelegato) "
-//            "and a.reportPatronatoByIdRepPatronato.idRepPatronato is not null"
+            "and (:patronato is null or a.reportPatronatoByIdRepPatronato.patronatoProvenienza.id = :patronato) " +
+            "and (:avvocatoDelegato is null or upper(a.reportPatronatoByIdRepPatronato.avvocatoDelegato.id) = :avvocatoDelegato) "
     )
     Page<AnagraficaClienteEntity> filterReportPatronato(Pageable pageable,
                                              @Param("nome") String name,
                                              @Param("cognome") String cognome,
                                              @Param("codiceFiscale") String codiceFiscale,
                                              @Param("ruoloGenerale") String ruoloGenerale,
-                                             @Param("patronato") String patronato,
-                                             @Param("avvocatoDelegato") String avvocatoDelegato
+                                             @Param("patronato") Long patronato,
+                                             @Param("avvocatoDelegato") Long avvocatoDelegato
     );
 
-
-//    @Query(nativeQuery=true, value = "select * from ANAGRAFICA_CLIENTE a inner join REPORT_PATRONATO rep on " +
-//            "a.id_rep_patronato = rep.id_rep_patronato where  (:nome is null or upper(a.nome) like :nome%) " +
-//            "and (:cognome is null or upper(a.cognome)  like :cognome%) " +
-//            "and (:codiceFiscale is null or upper(a.codiceFiscale)  = :codiceFiscale) " +
-//            "and (:ruoloGenerale is null or upper(rep.ruoloGenerale) = :ruoloGenerale) "
-//    )
-//    Page<AnagraficaClienteEntity> asd(Pageable pageable,
-//                                      @Param("nome") String name,
-//                                      @Param("cognome") String cognome,
-//                                      @Param("codiceFiscale") String codiceFiscale,
-//                                      @Param("ruoloGenerale") String ruoloGenerale,
-//                                      @Param("patronato") String patronato,
-//                                      @Param("avvocatoDelegato") String avvocatoDelegato
-//    );
 
 }

@@ -64,8 +64,8 @@ public class AnagraficaController {
                                                               @RequestParam(value = "cognome", required = false) String cognome,
                                                               @RequestParam(value = "codiceFiscale", required = false) String codiceFiscale,
                                                               @RequestParam(value = "ruoloGenerale", required = false) String ruoloGenerale,
-                                                              @RequestParam(value = "patronatoProvenienza", required = false) String patronatoProvenienza,
-                                                              @RequestParam(value = "avvocatoDelegato", required = false) String avvocatoDelegato
+                                                              @RequestParam(value = "patronatoProvenienza", required = false) Long patronatoProvenienza,
+                                                              @RequestParam(value = "avvocatoDelegato", required = false) Long avvocatoDelegato
     ) {
         Page<AnagraficaDto> pages = anagraficaService.listAnagraficaFilterReportPatronato(PageRequest.of(page, limit),name,cognome,codiceFiscale,ruoloGenerale,patronatoProvenienza,avvocatoDelegato);
 

@@ -19,5 +19,7 @@ public interface AnagraficaService {
     Page<AnagraficaDto> listAnagraficaFilter(Pageable pageable, Integer faldone, String name, String cognome, String codiceFiscale, String qualifica,
                                              String documentazione );
 
-    Page<AnagraficaDto> listAnagraficaFilterReportPatronato(Pageable pageable, String name, String cognome, String codiceFiscale, String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato);
+    Page<AnagraficaDto> listAnagraficaFilterReportPatronato(Pageable pageable, String name, String cognome,
+                                                            String codiceFiscale, String ruoloGenerale,
+                                                            Long patronatoProvenienza, Long avvocatoDelegato);
 }

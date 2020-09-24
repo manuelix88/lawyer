@@ -1,16 +1,17 @@
 package it.shiftlab.lawyer.jpa.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "REPORT_PATRONATO")
-public class ReportPatronatoEntity {
+public class ReportPatronatoEntity implements Serializable {
 
     private Long idRepPatronato;
 

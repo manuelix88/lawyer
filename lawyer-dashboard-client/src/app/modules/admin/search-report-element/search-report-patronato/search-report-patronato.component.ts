@@ -53,12 +53,9 @@ export class SearchReportPatronatoComponent implements OnInit {
             nome: input === undefined ? null : input.nome,
             cognome:  input === undefined ? null : input.cognome,
             codiceFiscale: input === undefined ? null : input.codiceFiscale,
-            // qualifica: input === undefined ? null : input.qualifica,
-            // faldone: input === undefined ? null : input.faldone,
-            // documentazione: input === undefined ? null : input.documentazione,
-            // ruoloGenerale: input === undefined ? null : input.ruoloGenerale,
-            // avvocatoDelegato: input === undefined ? null : input.avvocatoDelegato,
-            // patronatoProvenienza: input === undefined ? null : input.patronatoProvenienza,
+            ruoloGenerale: input === undefined ? null : input.ruoloGenerale,
+            avvocatoDelegato: input === undefined ? null : input.avvocatoDelegato,
+            patronatoProvenienza: input === undefined ? null : input.patronatoProvenienza,
         };
         this.customerService.getPatronatoReportAll(req)
             .then( value => {

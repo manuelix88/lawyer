@@ -254,19 +254,20 @@ public class AnagraficaServiceImpl implements AnagraficaService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<AnagraficaDto> listAnagraficaFilterReportPatronato(Pageable pageable, String name, String cognome, String codiceFiscale, String ruoloGenerale, String patronatoProvenienza, String avvocatoDelegato) {
+    public Page<AnagraficaDto> listAnagraficaFilterReportPatronato(Pageable pageable, String name, String cognome, String codiceFiscale, String ruoloGenerale, Long patronatoProvenienza, Long avvocatoDelegato) {
 
 //        Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.filterCazz(pageable,
 //                convertStringUpperCase(name),
 //                convertStringUpperCase(cognome)
 //        );
+
         Page<AnagraficaClienteEntity> anagraficaClienteEntities = anagraficaRepository.filterReportPatronato(pageable,
                 convertStringUpperCase(name),
                 convertStringUpperCase(cognome),
                 convertStringUpperCase(codiceFiscale),
                 convertStringUpperCase(ruoloGenerale),
-                convertStringUpperCase(patronatoProvenienza),
-                convertStringUpperCase(avvocatoDelegato)
+                patronatoProvenienza,
+                avvocatoDelegato
         );
         return new PageImpl<>(anagraficaClienteEntities.stream().map(AnagraficaFactory::mapAnagraficaEntityToDto).collect(Collectors.toList()),pageable, anagraficaClienteEntities.getTotalElements());
     }
