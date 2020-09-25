@@ -82,7 +82,7 @@
         <mat-divider class="mt-6 mb-10"></mat-divider>
 
         <mat-tab-group>
-            <mat-tab label="Informazioni Amministrative">
+            <mat-tab label="Informazioni Amministrative" *ngIf="showReportInfo">
                 <div class="flex flex-col gt-xs:flex-row mt-6">
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Qualifica</mat-label>
@@ -147,11 +147,12 @@
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Patronato">
+            <mat-tab label="Patronato" *ngIf="showReportPatronato">
                 <div class="flex flex-col gt-xs:flex-row mt-6">
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Convenzione</mat-label>
-                        <mat-select [placeholder]="'Convenzione'" [(value)]="customer.reportPatronato.convenzione" [(ngModel)]="customer.reportPatronato.convenzione" name="reportPatronatoConv">
+                        <mat-select [placeholder]="'Convenzione'" [(value)]="customer.reportPatronato.convenzione" [(ngModel)]="customer.reportPatronato.convenzione"
+                                    name="reportPatronatoConv">
                             <mat-option value="SI">SI</mat-option>
                             <mat-option value="NO">NO</mat-option>
                         </mat-select>
@@ -185,7 +186,7 @@
                     <mat-form-field class="flex-auto gt-xs:pr-3">
                         <mat-label>Tipo Pratica</mat-label>
                         <mat-placeholder>Tipo Pratica</mat-placeholder>
-                        <mat-select  [(ngModel)]="customer.reportPatronato.tipoPratica" name="reportPatronatoTipoPratica" [compareWith]="compareTipoPratiche" >
+                        <mat-select  [value]="customer.reportPatronato.tipoPratica"  [(ngModel)]="customer.reportPatronato.tipoPratica"  name="reportPatronatoTipoPratica" [compareWith]="compareTipoPratiche" >
                             <mat-option></mat-option>
                             <mat-option *ngFor="let pratica of store.baseData.tipoPratiche" [value]="pratica"> {{pratica.tipoPratica}}</mat-option>
                         </mat-select>
@@ -284,8 +285,8 @@
                 Salva
             </button>
         </div>
+
     </form>
-    <!--    <div>{{customer.reportPatronato | json}}</div>-->
 
     <sat-popover #p
 

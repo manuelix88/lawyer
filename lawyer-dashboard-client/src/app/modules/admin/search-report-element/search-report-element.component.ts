@@ -6,6 +6,10 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {Avvocati} from '../customer-view/model/avvocati';
 import {PatronatoProvenienza} from '../customer-view/model/patronatoProvenienza';
 import {ApplicationStoreService} from '../../../core/store/application-store.service';
+import {ToastrService} from 'ngx-toastr';
+import {DeleteModalComponent} from '../../../shared/components/delete-modal/delete-modal.component';
+import {MatDialog} from '@angular/material/dialog';
+
 export class SearchFilter {
     nome: string;
     cognome: string;
@@ -14,8 +18,8 @@ export class SearchFilter {
     faldone: number;
     documentazione: string;
     ruoloGenerale: string;
-    avvocatoDelegato: string;
-    patronatoProvenienza: string;
+    avvocatoDelegato: number;
+    patronatoProvenienza: number;
 }
 
 
@@ -26,7 +30,7 @@ export class SearchFilter {
     encapsulation  : ViewEncapsulation.None,
 })
 export class SearchReportElementComponent implements OnInit {
-    searchFiler = new SearchFilter();
+    searchFiler: SearchFilter;
     displayedColumns: string[] = ['name', 'surname', 'cf','qualifica', 'documentazione', 'details'];
     dataSource: MatTableDataSource<AnagraficaCliente>;
     customers: Array<AnagraficaCliente> = [];
@@ -35,9 +39,33 @@ export class SearchReportElementComponent implements OnInit {
     pageIndex = 0;
     pageSizeOption: number[] = [5, 10, 25, 100];
     data: any;
-    constructor(private customerService: CustomerService, private spinner: NgxSpinnerService, public store: ApplicationStoreService) { }
+    constructor(private customerService: CustomerService,  public dialog: MatDialog,
+                private notificationService: ToastrService , private spinner: NgxSpinnerService, public store: ApplicationStoreService) { }
 
     ngOnInit(): void {
+        this.searchFiler = new SearchFilter();
+        this.searchFiler.avvocatoDelegato = this.store.baseData.avvocati[0].id;
+        this.searchFiler.patronatoProvenienza = this.store.baseData.patronati[0].id;
+    }
+
+    openDialog(uuid): void {
+        const dialogRef = this.dialog.open(DeleteModalComponent, {
+            width: '300px',
+            data: {uuid:uuid}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.spinner.show()
+            this.customerService.deleteAnagraficaById(result).then(data => {
+                this.dataSource = new MatTableDataSource();
+                this.notificationService.success('Elemento eliminato con successo','SUCCESSO');
+                this.spinner.hide();
+
+            }).catch(error => {
+                this.spinner.hide();
+                this.notificationService.error('Elemento non eliminato con successo','ERRORE');
+            });
+        });
     }
 
     searchData(input: SearchFilter): void {
@@ -85,7 +113,8 @@ export class SearchReportElementComponent implements OnInit {
             .catch(error => {
                 // this.notification.error(
                 //     error.message
-                // );
+                // );vv
+                this.notificationService.error(  error.error.errors,'ERRORE');
                 this.spinner.hide();
             });
     }

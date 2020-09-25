@@ -41,7 +41,7 @@ export class CustomerService {
 
     deleteAnagraficaById(req): Promise<any> {
         return new Promise<any>((res, rej) => {
-            this.api.get('/protected/deleteAnagraficaById', UtilsService.buildQueryParams(req)).subscribe(success => res(success), error => rej(error));
+            this.api.delete('/protected/deleteAnagrafica/'+ req).subscribe(success => res(success), error => rej(error));
         });
     }
 }

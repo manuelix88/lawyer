@@ -26,7 +26,7 @@ import moment from 'moment';
                 </ng-container>
                 <mat-form-field  class="flex-auto gt-xs:pr-3">
                     <mat-label>Data Udienza</mat-label>
-                    <input matInput  type="text" [placeholder]="'Data Udienza'" [matDatepicker]="picker"  [(ngModel)]="dataUdienza.dataUdienza" name="dataUdienza">
+                    <input matInput  type="text" [placeholder]="'Data Udienza'" [matDatepicker]="picker"  [(ngModel)]="dataUdienza.dataUdienza" name="dataUdienza" readonly>
                     <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

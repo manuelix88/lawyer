@@ -13,6 +13,7 @@ import {LayoutModule} from 'app/layout/layout.module';
 import {AppComponent} from 'app/app.component';
 import {appRoutes} from 'app/app.routing';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {ToastrModule} from 'ngx-toastr';
 
 const routerConfig: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
@@ -27,7 +28,11 @@ const routerConfig: ExtraOptions = {
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
-
+        ToastrModule.forRoot({
+            timeOut: 10000,
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true,
+        }),
         // Treo & Treo Mock API
         TreoModule,
         TreoConfigModule.forRoot(appConfig),

@@ -9,6 +9,8 @@ import {ReportAmministrative} from '../../model/report-amministrative';
 import moment from 'moment';
 import {SatPopover} from '@ncstate/sat-popover';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {ApplicationStoreService} from '../../../../../core/store/application-store.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'modify-customer',
@@ -23,8 +25,12 @@ export class ModifyCustomerComponent implements OnInit {
 
     anagrafica = new AnagraficaCliente();
     message: any;
+    showReportPatronato: boolean;
+    showReportInfo: boolean;
+    loadComponent = false;
     constructor(private customerService: CustomerService,private activatedRouter: ActivatedRoute,
-                private spinner: NgxSpinnerService) { }
+                private spinner: NgxSpinnerService,
+                private notificationService: ToastrService ) { }
 
     // tslint:disable-next-line:typedef
     async ngOnInit() {
@@ -40,19 +46,31 @@ export class ModifyCustomerComponent implements OnInit {
                     console.log(data);
                     this.anagrafica = value;
                     this.anagrafica.dataNascita = data;
+                    if(this.anagrafica !== undefined) {
+                        if (this.anagrafica.reportPatronato.uuid !== null) {
+                            this.showReportInfo = false;
+                            this.showReportPatronato = true;
+                        }
+                        if (this.anagrafica.reportAmministrative.uuid !== null) {
+                            this.showReportPatronato = false;
+                            this.showReportInfo = true;
+                        }
+                    }
+                    this.loadComponent = true;
                     this.spinner.hide();
                 })
                 .catch(error => {
+                    this.notificationService.error(  error.error.errors,'ERRORE');
                     this.spinner.hide();
                 });
         }
     }
 
     async sendForm($event: AnagraficaCliente) {
-
-        $event.reportAmministrative = this.checkReportAmministrativo($event.reportAmministrative);
-        $event.reportPatronato = this.checkReportPatronato($event.reportPatronato);
         const clonesValue = _.cloneDeep($event);
+        $event.reportAmministrative = $event.reportAmministrative.uuid === null ? null : $event.reportAmministrative;
+        $event.reportPatronato = $event.reportPatronato.uuid === null ? null : $event.reportPatronato
+
         await this.spinner.show();
         await this.customerService.updateAnagrafica($event)
             .then(value => {
@@ -65,13 +83,14 @@ export class ModifyCustomerComponent implements OnInit {
                 };
             })
             .catch(error=> {
-                this.message = {
-                    appearance: 'outline',
-                    content   : error.message,
-                    shake     : true,
-                    showIcon  : false,
-                    type      : 'error'
-                };
+                this.notificationService.error(  error.error.errors,'ERRORE');
+                // this.message = {
+                //     appearance: 'outline',
+                //     content   : error.message,
+                //     shake     : true,
+                //     showIcon  : false,
+                //     type      : 'error'
+                // };
                 this.anagrafica = clonesValue;
                 this.spinner.hide();
             });
@@ -88,12 +107,13 @@ export class ModifyCustomerComponent implements OnInit {
                 this.spinner.hide();
             })
             .catch(error => {
+                this.notificationService.error(  error.error.errors,'ERRORE');
                 this.spinner.hide();
             });
     }
 
     checkReportPatronato(rep: ReportPatronato): ReportPatronato {
-        if (rep) {
+        if (rep !== undefined && rep !== null && rep.uuid !== null) {
             if (rep.idRepPatronato >= 1) {
                 return rep;
             } else if (rep.spese && rep.note && rep.avvocatoDelegato && rep.status && rep.patronatoProvenienza
@@ -105,10 +125,11 @@ export class ModifyCustomerComponent implements OnInit {
                 return rep;
             }
         }
+        return rep;
     }
 
     checkReportAmministrativo(rep: ReportAmministrative): ReportAmministrative {
-        if (rep) {
+        if (rep !== undefined && rep !== null && rep.uuid !== null) {
             if (rep.idRepAmministrative >= 1) {
                 return rep;
             } else if (rep.documentazione && rep.note && rep.altro &&
@@ -121,6 +142,7 @@ export class ModifyCustomerComponent implements OnInit {
                 return rep;
             }
         }
+        return rep;
     }
 
 }

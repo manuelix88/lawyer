@@ -1,0 +1,66 @@
+<!-- Navigation -->
+<treo-vertical-navigation [appearance]="'classic'"
+                          [mode]="isScreenSmall ? 'over' : 'side'"
+                          [name]="'mainNavigation'"
+                          [navigation]="data.navigation.default"
+                          [opened]="!isScreenSmall">
+
+    <div treoVerticalNavigationHeader>
+        <div class="logo">
+<!--            <img class="logo-text-on-dark"-->
+<!--                 src="assets/images/logo/logo-text-on-dark.svg">-->
+<!--            <img class="logo-text"-->
+<!--                 src="assets/images/logo/logo-text.svg">-->
+        </div>
+    </div>
+
+</treo-vertical-navigation>
+
+<!-- Wrapper -->
+<div class="wrapper">
+
+    <!-- Header -->
+    <div class="header">
+
+        <!-- Navigation toggle button -->
+        <button class="navigation-toggle-button"
+                mat-icon-button
+                (click)="toggleNavigation('mainNavigation')">
+            <mat-icon [svgIcon]="'menu'"></mat-icon>
+        </button>
+
+<!--        &lt;!&ndash; Spacer &ndash;&gt;-->
+<!--        <div class="spacer"></div>-->
+
+<!--        &lt;!&ndash; Search &ndash;&gt;-->
+<!--        <search [appearance]="'bar'"></search>-->
+
+<!--        &lt;!&ndash; Shortcuts &ndash;&gt;-->
+<!--        <shortcuts [shortcuts]="data.shortcuts"></shortcuts>-->
+
+<!--        &lt;!&ndash; Messages &ndash;&gt;-->
+<!--        <messages [messages]="data.messages"></messages>-->
+
+<!--        &lt;!&ndash; Notifications &ndash;&gt;-->
+<!--        <notifications [notifications]="data.notifications"></notifications>-->
+
+<!--        &lt;!&ndash; User &ndash;&gt;-->
+<!--        <user [user]="data.user"></user>-->
+
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+        <!-- *ngIf="true" hack is required here for router-outlet to work correctly. Otherwise,
+             it won't register the changes on the layout and won't update the view. -->
+        <router-outlet *ngIf="true"></router-outlet>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Lawyer &copy; {{currentYear}}
+    </div>
+
+</div>

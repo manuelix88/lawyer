@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TreoAnimations } from '@treo/animations';
 import {ForgotPasswordService} from '../../../core/auth/forgot-password.service';
+import {ApplicationStoreService} from '../../../core/store/application-store.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector     : 'auth-forgot-password',
@@ -21,7 +23,7 @@ export class AuthForgotPasswordComponent implements OnInit
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-        private _formBuilder: FormBuilder, private _forgotPasswordservice: ForgotPasswordService
+        private _formBuilder: FormBuilder, private notificationService: ToastrService ,private _forgotPasswordservice: ForgotPasswordService
     )
     {
         // Set the defaults
@@ -86,11 +88,12 @@ export class AuthForgotPasswordComponent implements OnInit
             .catch(error => {
                 this.message = {
                     appearance: 'outline',
-                    content   : error.message,
+                    content   : error.error.errors,
                     shake     : false,
                     showIcon  : false,
                     type      : 'error'
                 };
+                // this.notificationService.error(  error.error.errors,'ERRORE');
             });
         // Emulate server delay
         // setTimeout(() => {

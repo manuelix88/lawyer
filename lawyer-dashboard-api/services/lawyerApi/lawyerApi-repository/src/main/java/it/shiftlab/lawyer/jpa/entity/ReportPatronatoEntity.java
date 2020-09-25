@@ -213,13 +213,20 @@ public class ReportPatronatoEntity implements Serializable {
         this.anagraficaClientesByIdRepPatronato = anagraficaClientesByIdRepPatronato;
     }
 
-    @OneToMany(mappedBy = "reportPatronatoByIdRepPatronato")
+    @OneToMany(mappedBy = "reportPatronatoByIdRepPatronato", cascade = CascadeType.ALL,  orphanRemoval = true)
     public List<DateUdienzeEntity> getDateUdienzesByIdRepPatronato() {
         return dateUdienzesByIdRepPatronato;
     }
 
     public void setDateUdienzesByIdRepPatronato(List<DateUdienzeEntity> dateUdienzesByIdRepPatronato) {
-        this.dateUdienzesByIdRepPatronato = dateUdienzesByIdRepPatronato;
+        if (this.dateUdienzesByIdRepPatronato == null) {
+            this.dateUdienzesByIdRepPatronato = dateUdienzesByIdRepPatronato;
+        } else if(this.dateUdienzesByIdRepPatronato != dateUdienzesByIdRepPatronato) { // not the same instance, in other case we can get ConcurrentModificationException from hibernate AbstractPersistentCollection
+            this.dateUdienzesByIdRepPatronato.clear();
+            if(dateUdienzesByIdRepPatronato != null){
+                this.dateUdienzesByIdRepPatronato.addAll(dateUdienzesByIdRepPatronato);
+            }
+        }
     }
 
     @OneToOne

@@ -274,6 +274,7 @@ public class AnagraficaServiceImpl implements AnagraficaService {
 
 
     @Override
+    @Transactional
     public void deleteAnagrafica(UUID anagraficaId) {
         anagraficaRepository.deleteAllByUuid(anagraficaId
         );

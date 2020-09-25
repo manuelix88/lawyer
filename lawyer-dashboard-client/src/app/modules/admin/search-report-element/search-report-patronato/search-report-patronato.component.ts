@@ -7,11 +7,14 @@ import {ApplicationStoreService} from '../../../../core/store/application-store.
 import {Avvocati} from '../../customer-view/model/avvocati';
 import {PatronatoProvenienza} from '../../customer-view/model/patronatoProvenienza';
 import {SearchFilter} from '../search-report-element.component';
+import {MatDialog} from '@angular/material/dialog';
+import {DeleteModalComponent} from '../../../../shared/components/delete-modal/delete-modal.component';
+import {Toast, ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-search-report-patronato',
-  templateUrl: './search-report-patronato.component.html',
-  styleUrls: ['./search-report-patronato.component.scss']
+    selector: 'app-search-report-patronato',
+    templateUrl: './search-report-patronato.component.html',
+    styleUrls: ['./search-report-patronato.component.scss']
 })
 export class SearchReportPatronatoComponent implements OnInit {
     searchFiler = new SearchFilter();
@@ -23,11 +26,33 @@ export class SearchReportPatronatoComponent implements OnInit {
     pageIndex = 0;
     pageSizeOption: number[] = [5, 10, 25, 100];
     data: any;
-    constructor(private customerService: CustomerService, private spinner: NgxSpinnerService, public store: ApplicationStoreService) { }
+    constructor(private customerService: CustomerService, private spinner: NgxSpinnerService,
+                public dialog: MatDialog,public store: ApplicationStoreService, private notificationService: ToastrService ) { }
 
     ngOnInit(): void {
+
+        this.searchFiler = new SearchFilter();
     }
 
+    openDialog(uuid): void {
+        const dialogRef = this.dialog.open(DeleteModalComponent, {
+            width: '300px',
+            data: {uuid:uuid}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.spinner.show()
+            this.customerService.deleteAnagraficaById(result).then(data => {
+                this.dataSource = new MatTableDataSource();
+                this.notificationService.success('Elemento eliminato con successo','SUCCESSO');
+                this.spinner.hide();
+
+            }).catch(error => {
+                this.spinner.hide();
+                this.notificationService.error('Elemento non eliminato con successo','ERRORE');
+            });
+        });
+    }
     searchData(input: SearchFilter): void {
         this.pageSize = 10;
         this.pageIndex = 0;
@@ -70,6 +95,7 @@ export class SearchReportPatronatoComponent implements OnInit {
                 // this.notification.error(
                 //     error.message
                 // );
+                this.notificationService.error(  error.error.errors,'ERRORE');
                 this.spinner.hide();
             });
     }

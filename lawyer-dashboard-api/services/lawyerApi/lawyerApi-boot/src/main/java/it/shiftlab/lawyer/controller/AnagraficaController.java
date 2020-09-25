@@ -73,7 +73,7 @@ public class AnagraficaController {
     }
 
 
-    @PostMapping("protected/deleteAnagrafica/{anagraficaId}")
+    @DeleteMapping("protected/deleteAnagrafica/{anagraficaId}")
     public ResponseEntity<?> deleteAnagrafica(@PathVariable(name = "anagraficaId", required = true) UUID anagraficaId) {
         anagraficaService.deleteAnagrafica(anagraficaId);
         return new ResponseEntity<>(HttpStatus.OK);

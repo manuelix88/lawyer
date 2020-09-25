@@ -21,6 +21,8 @@ export class CustomerInformazionComponent implements OnInit {
 
 
     message: any;
+    @Input() showReportPatronato;
+    @Input() showReportInfo;
     @Input() customer = new AnagraficaCliente();
     @Output() sendForm = new EventEmitter<AnagraficaCliente>();
 
@@ -34,16 +36,21 @@ export class CustomerInformazionComponent implements OnInit {
     /** Form model for the input. */
     comment = '';
 
-    constructor(@Optional() @Host() public popover: SatPopover,public store: ApplicationStoreService) { }
+    constructor(@Optional() @Host() public popover: SatPopover,public store: ApplicationStoreService) {
+        this.showReportPatronato = true;
+        this.showReportInfo = true;
+    }
 
     ngOnInit(): void {
         this.message = null;
         if(this.customer.reportAmministrative === undefined) {
             this.customer.reportAmministrative = new ReportAmministrative();
         }
+
         if(this.customer.reportPatronato === undefined) {
             this.customer.reportPatronato = new ReportPatronato();
         }
+
         if (this.popover) {
             this.popover.closed.pipe(filter(val => val == null))
                 .subscribe(() => this.comment = this.value || '');
@@ -82,7 +89,12 @@ export class CustomerInformazionComponent implements OnInit {
             };
             return;
         }
+
         this.sendForm.emit(anagrafica);
+
+        if(anagrafica.uuid === undefined) {
+            this.reset()
+        }
     }
 
     reset(): void {

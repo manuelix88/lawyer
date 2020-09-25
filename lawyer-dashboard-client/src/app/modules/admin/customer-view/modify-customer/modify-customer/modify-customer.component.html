@@ -15,5 +15,7 @@
                   [@shake]="message.shake">
         {{message.content}}
     </treo-message>
-    <customer-information [customer]="anagrafica" (sendForm)="sendForm($event)"></customer-information>
+    <ng-template [ngIf]="loadComponent">
+        <customer-information [customer]="anagrafica" [showReportInfo]="showReportInfo" [showReportPatronato]="showReportPatronato" (sendForm)="sendForm($event)"></customer-information>
+    </ng-template>
 </div>
