@@ -31,7 +31,7 @@ export class SearchFilter {
 })
 export class SearchReportElementComponent implements OnInit {
     searchFiler: SearchFilter;
-    displayedColumns: string[] = ['name', 'surname', 'cf','qualifica', 'documentazione', 'details'];
+    displayedColumns: string[] = ['name', 'surname', 'cf','qualifica', 'numeroFaldone', 'details'];
     dataSource: MatTableDataSource<AnagraficaCliente>;
     customers: Array<AnagraficaCliente> = [];
     length = 0;

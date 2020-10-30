@@ -18,7 +18,7 @@ import {Toast, ToastrService} from 'ngx-toastr';
 })
 export class SearchReportPatronatoComponent implements OnInit {
     searchFiler = new SearchFilter();
-    displayedColumns: string[] = ['name', 'surname', 'cf','ruoloGenerale', 'patronato', 'avvocato'];
+    displayedColumns: string[] = ['name', 'surname', 'status','ruoloGenerale', 'patronato', 'avvocato'];
     dataSource: MatTableDataSource<AnagraficaCliente>;
     customers: Array<AnagraficaCliente> = [];
     length = 0;
@@ -30,7 +30,6 @@ export class SearchReportPatronatoComponent implements OnInit {
                 public dialog: MatDialog,public store: ApplicationStoreService, private notificationService: ToastrService ) { }
 
     ngOnInit(): void {
-
         this.searchFiler = new SearchFilter();
     }
 
