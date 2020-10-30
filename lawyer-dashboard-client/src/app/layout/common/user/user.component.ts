@@ -51,7 +51,7 @@ export class UserComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Setter and getter for user
+     * Setter and getter for user aaa
      *
      * @param value
      */

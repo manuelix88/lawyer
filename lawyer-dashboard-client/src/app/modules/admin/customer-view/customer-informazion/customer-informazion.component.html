@@ -21,15 +21,6 @@
                 <mat-error>Questo campo è obbligatorio</mat-error>
             </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
-                <mat-label>Email</mat-label>
-                <input matInput  [(ngModel)]="customer.email" name="email" email="true"
-                       [placeholder]="'Email'">
-                <mat-icon matPrefix
-                          [svgIcon]="'mail'"></mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="flex flex-col gt-xs:flex-row">
-            <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Codice Fiscale</mat-label>
                 <input matInput
                        [(ngModel)]="customer.codiceFiscale" name="codicefiscale"
@@ -37,24 +28,14 @@
                 <mat-icon matPrefix
                           [svgIcon]="'assignment_turned_in'"></mat-icon>
             </mat-form-field>
+
+        </div>
+        <div class="flex flex-col gt-xs:flex-row">
+
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Indirizzo Completo</mat-label>
                 <input matInput  [(ngModel)]="customer.indirizzo" name="indirizzo"
                        [placeholder]="'Indirizzo Completo'">
-                <mat-icon matPrefix
-                          [svgIcon]="'room'"></mat-icon>
-            </mat-form-field>
-            <mat-form-field  class="flex-auto gt-xs:pr-3">
-                <mat-label>Data di Nascita</mat-label>
-                <input matInput  [(ngModel)]="customer.dataNascita" name="dataNascita" [placeholder]="'Data di Nascita'" [matDatepicker]="picker" readonly>
-                <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="flex flex-col gt-xs:flex-row">
-            <mat-form-field class="flex-auto gt-xs:pr-3">
-                <mat-label>Nazione</mat-label>
-                <input matInput [placeholder]="'Nazione'"  [(ngModel)]="customer.nazione" name="nazione">
                 <mat-icon matPrefix
                           [svgIcon]="'room'"></mat-icon>
             </mat-form-field>
@@ -70,15 +51,38 @@
                 <mat-icon matPrefix
                           [svgIcon]="'room'"></mat-icon>
             </mat-form-field>
+
+<!--            <mat-form-field  class="flex-auto gt-xs:pr-3">-->
+<!--                <mat-label>Data di Nascita</mat-label>-->
+<!--                <input matInput  [(ngModel)]="customer.dataNascita" name="dataNascita" [placeholder]="'Data di Nascita'" [matDatepicker]="picker" readonly>-->
+<!--                <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>-->
+<!--                <mat-datepicker #picker></mat-datepicker>-->
+<!--            </mat-form-field>-->
         </div>
         <div class="flex flex-col gt-xs:flex-row">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-label>Nazione</mat-label>
+                <input matInput [placeholder]="'Nazione'"  [(ngModel)]="customer.nazione" name="nazione">
+                <mat-icon matPrefix
+                          [svgIcon]="'room'"></mat-icon>
+            </mat-form-field>
             <mat-form-field class="flex-auto gt-xs:pr-3">
                 <mat-label>Codice</mat-label>
                 <input matInput [placeholder]="'Codice'" [(ngModel)]="customer.codice"  name="reportPatronatoCodice"  >
                 <mat-icon matPrefix
                           [svgIcon]="'room'"></mat-icon>
             </mat-form-field>
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-label>Email</mat-label>
+                <input matInput  [(ngModel)]="customer.email" name="email" email="true"
+                       [placeholder]="'Email'">
+                <mat-icon matPrefix
+                          [svgIcon]="'mail'"></mat-icon>
+            </mat-form-field>
         </div>
+<!--        <div class="flex flex-col gt-xs:flex-row">-->
+<!--          -->
+<!--        </div>-->
         <mat-divider class="mt-6 mb-10"></mat-divider>
 
         <mat-tab-group>
@@ -149,10 +153,88 @@
             </mat-tab>
             <mat-tab label="Patronato" *ngIf="showReportPatronato">
                 <div class="flex flex-col gt-xs:flex-row mt-6">
+<!--                    <mat-form-field class="flex-auto gt-xs:pr-3">-->
+<!--                        <mat-label>Convenzione</mat-label>-->
+<!--                        <mat-select [placeholder]="'Convenzione'" [(value)]="customer.reportPatronato.convenzione" [(ngModel)]="customer.reportPatronato.convenzione"-->
+<!--                                    name="reportPatronatoConv">-->
+<!--                            <mat-option value="SI">SI</mat-option>-->
+<!--                            <mat-option value="NO">NO</mat-option>-->
+<!--                        </mat-select>-->
+<!--                        <mat-icon matPrefix-->
+<!--                                  [svgIcon]="'feather:archive'"></mat-icon>-->
+<!--                    </mat-form-field>-->
                     <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Convenzione</mat-label>
-                        <mat-select [placeholder]="'Convenzione'" [(value)]="customer.reportPatronato.convenzione" [(ngModel)]="customer.reportPatronato.convenzione"
-                                    name="reportPatronatoConv">
+                        <mat-label>Tipo Pratica</mat-label>
+                        <mat-placeholder>Tipo Pratica</mat-placeholder>
+                        <mat-select  [value]="customer.reportPatronato.tipoPratica"  [(ngModel)]="customer.reportPatronato.tipoPratica"  name="reportPatronatoTipoPratica" [compareWith]="compareTipoPratiche" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let pratica of store.baseData.tipoPratiche" [value]="pratica"> {{pratica.tipoPratica}}</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Ruolo Generale</mat-label>
+                        <input matInput
+                               [placeholder]="'Ruolo Generale'" [(ngModel)]="customer.reportPatronato.ruoloGenerale" name="reportPatronatoRuoloGen">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Tribunale</mat-label>
+                        <mat-select [placeholder]="'Tribunale'" [(ngModel)]="customer.reportPatronato.tribunale" name="reportPatronatoTribunale"  [compareWith]="compareTribunale" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let tribunale of store.baseData.tribunali" [value]="tribunale">{{tribunale.tribunali}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Giudice</mat-label>
+                        <input matInput
+                               [placeholder]="'Giudice'" [(ngModel)]="customer.reportPatronato.giudice" name="reportPatronatoGiudice">
+                        <mat-icon matPrefix
+                                  [svgIcon]="'heroicons_outline:library'"></mat-icon>
+                    </mat-form-field>
+                    <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px; margin-right: 8px" [satPopoverAnchor]="p" (click)="p.open()">
+                        Storico Udienza
+                    </button>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Status</mat-label>
+                        <mat-placeholder>Status</mat-placeholder>
+                        <mat-select [(ngModel)]="customer.reportPatronato.status" name="reportPatronatostatus" [compareWith]="compareStatus" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let status of store.baseData.status" [value]="status"> {{status.status}}</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'room'"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Patronato Di Provenienza</mat-label>
+                        <mat-placeholder>Patronato Di Provenienza</mat-placeholder>
+                        <mat-select [(ngModel)]="customer.reportPatronato.patronatoProvenienza" name="reportPatronatoPatronatoProv" [compareWith]="comparePatronaTiProvenienza" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let patronato of store.baseData.patronati" [value]="patronato"> {{patronato.patronato}}</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Avvocato Delegato</mat-label>
+                        <mat-placeholder>Avvocato Delegato</mat-placeholder>
+                        <mat-select [(ngModel)]="customer.reportPatronato.avvocatoDelegato" name="reportPatronatoAvvDelegato" [compareWith]="compareAvvocati" >
+                            <mat-option></mat-option>
+                            <mat-option *ngFor="let avvocato of store.baseData.avvocati" [value]="avvocato"> {{avvocato.avvocatoDelegato}}</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix
+                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex-auto gt-xs:pr-3">
+                        <mat-label>Decorrenza Successiva</mat-label>
+                        <mat-select [placeholder]="'Decorrenza Successiva'" [(ngModel)]="customer.reportPatronato.decorrenzaSuccessiva" name="reportPatronatoDecSucc">
                             <mat-option value="SI">SI</mat-option>
                             <mat-option value="NO">NO</mat-option>
                         </mat-select>
@@ -170,90 +252,8 @@
                         <mat-icon matPrefix
                                   [svgIcon]="'feather:archive'"></mat-icon>
                     </mat-form-field>
-
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Decorrenza Successiva</mat-label>
-                        <mat-select [placeholder]="'Decorrenza Successiva'" [(ngModel)]="customer.reportPatronato.decorrenzaSuccessiva" name="reportPatronatoDecSucc">
-                            <mat-option value="SI">SI</mat-option>
-                            <mat-option value="NO">NO</mat-option>
-                        </mat-select>
-                        <mat-icon matPrefix
-                                  [svgIcon]="'feather:archive'"></mat-icon>
-                    </mat-form-field>
                 </div>
-                <div class="flex flex-col gt-xs:flex-row">
-
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Tipo Pratica</mat-label>
-                        <mat-placeholder>Tipo Pratica</mat-placeholder>
-                        <mat-select  [value]="customer.reportPatronato.tipoPratica"  [(ngModel)]="customer.reportPatronato.tipoPratica"  name="reportPatronatoTipoPratica" [compareWith]="compareTipoPratiche" >
-                            <mat-option></mat-option>
-                            <mat-option *ngFor="let pratica of store.baseData.tipoPratiche" [value]="pratica"> {{pratica.tipoPratica}}</mat-option>
-                        </mat-select>
-                        <mat-icon matPrefix
-                                  [svgIcon]="'room'"></mat-icon>
-                    </mat-form-field>
-
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Tribunale</mat-label>
-                        <mat-select [placeholder]="'Tribunale'" [(ngModel)]="customer.reportPatronato.tribunale" name="reportPatronatoTribunale"  [compareWith]="compareTribunale" >
-                            <mat-option></mat-option>
-                            <mat-option *ngFor="let tribunale of store.baseData.tribunali" [value]="tribunale">{{tribunale.tribunali}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="flex flex-col gt-xs:flex-row">
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Status</mat-label>
-                        <mat-placeholder>Status</mat-placeholder>
-                        <mat-select [(ngModel)]="customer.reportPatronato.status" name="reportPatronatostatus" [compareWith]="compareStatus" >
-                            <mat-option></mat-option>
-                            <mat-option *ngFor="let status of store.baseData.status" [value]="status"> {{status.status}}</mat-option>
-                        </mat-select>
-                        <mat-icon matPrefix
-                                  [svgIcon]="'room'"></mat-icon>
-                    </mat-form-field>
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Ruolo Generale</mat-label>
-                        <input matInput
-                               [placeholder]="'Ruolo Generale'" [(ngModel)]="customer.reportPatronato.ruoloGenerale" name="reportPatronatoRuoloGen">
-                        <mat-icon matPrefix
-                                  [svgIcon]="'room'"></mat-icon>
-                    </mat-form-field>
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Giudice</mat-label>
-                        <input matInput
-                               [placeholder]="'Giudice'" [(ngModel)]="customer.reportPatronato.giudice" name="reportPatronatoGiudice">
-                        <mat-icon matPrefix
-                                  [svgIcon]="'heroicons_outline:library'"></mat-icon>
-                    </mat-form-field>
-
-                    <button mat-flat-button type="button" color="primary" routerLink="/customer/modify" style="margin-top: 27px" [satPopoverAnchor]="p" (click)="p.open()">
-                        Storico Udienza
-                    </button>
-                </div>
-                <div class="flex flex-col gt-xs:flex-row">
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Patronato Di Provenienza</mat-label>
-                        <mat-placeholder>Patronato Di Provenienza</mat-placeholder>
-                        <mat-select [(ngModel)]="customer.reportPatronato.patronatoProvenienza" name="reportPatronatoPatronatoProv" [compareWith]="comparePatronaTiProvenienza" >
-                            <mat-option></mat-option>
-                            <mat-option *ngFor="let patronato of store.baseData.patronati" [value]="patronato"> {{patronato.patronato}}</mat-option>
-                        </mat-select>
-                        <mat-icon matPrefix
-                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
-                    </mat-form-field>
-                    <mat-form-field class="flex-auto gt-xs:pr-3">
-                        <mat-label>Avvocato Delegato</mat-label>
-                        <mat-placeholder>Avvocato Delegato</mat-placeholder>
-                        <mat-select [(ngModel)]="customer.reportPatronato.avvocatoDelegato" name="reportPatronatoAvvDelegato" [compareWith]="compareAvvocati" >
-                            <mat-option></mat-option>
-                            <mat-option *ngFor="let avvocato of store.baseData.avvocati" [value]="avvocato"> {{avvocato.avvocatoDelegato}}</mat-option>
-                        </mat-select>
-                        <mat-icon matPrefix
-                                  [svgIcon]="'mat_outline:gavel'"></mat-icon>
-                    </mat-form-field>
-                </div>
+<!--                <div class="flex flex-col gt-xs:flex-row"> </div>-->
                 <div class="flex flex-col gt-xs:flex-row">
                     <mat-form-field class="treo-mat-textarea flex-auto">
                         <mat-label>Note</mat-label>

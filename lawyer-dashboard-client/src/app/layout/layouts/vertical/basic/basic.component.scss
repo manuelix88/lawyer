@@ -207,3 +207,13 @@ basic-layout {
         }
     }
 }
+.logo-basic {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    opacity: 5.0;
+    /* min-height: 65px; */
+    /* max-height: 65px; */
+    /* padding: 0 24px; */
+    border-bottom-width: 1px;
+}
