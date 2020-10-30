@@ -10,7 +10,7 @@ export const defaultNavigation: TreoNavigationItem[] = [
         children: [
             {
                 id   : 'search-report-amm',
-                title: 'Ricerca Amministrative',
+                title: 'Ricerca Vigili del fuoco',
                 type : 'basic',
                 link : '/customer/search',
                 icon : 'heroicons_outline:search',

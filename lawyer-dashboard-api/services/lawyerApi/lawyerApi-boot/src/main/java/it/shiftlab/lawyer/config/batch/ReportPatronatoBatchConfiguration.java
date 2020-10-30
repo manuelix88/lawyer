@@ -52,7 +52,7 @@ public class ReportPatronatoBatchConfiguration {
         FlatFileItemReader<BatchreportPatronatoDto> itemReader = new FlatFileItemReader<BatchreportPatronatoDto>();
         itemReader.setLineMapper(lineMapper2());
         itemReader.setLinesToSkip(1);
-        itemReader.setResource(new ClassPathResource("patronati.csv"));
+        itemReader.setResource(new ClassPathResource("patronati-salerno.csv"));
         return itemReader;
     }
     @Bean
