@@ -21,6 +21,7 @@ public class AnagraficaClienteEntity {
     private String nome;
     private String provincia;
     private String codice;
+    private String cap;
     private ReportAmministrativeEntity reportAmministrativeByIdRepAmministrative;
     private ReportPatronatoEntity reportPatronatoByIdRepPatronato;
     private UUID uuid;
@@ -31,7 +32,7 @@ public class AnagraficaClienteEntity {
     }
 
     public AnagraficaClienteEntity(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
-                                   String nazione, String indirizzo, String citta, String provincia, Date dataNascita, UUID uuid, String codice) {
+                                   String nazione, String indirizzo, String citta, String provincia, Date dataNascita, UUID uuid, String codice, String cap) {
         this.idAnagrafica = idAnagrafica;
         this.citta = citta;
         this.codiceFiscale = codiceFiscale;
@@ -44,6 +45,7 @@ public class AnagraficaClienteEntity {
         this.dataNasacita = dataNascita;
         this.uuid = uuid;
         this.codice = codice;
+        this.cap = cap;
     }
 
     @Id
@@ -192,4 +194,13 @@ public class AnagraficaClienteEntity {
         this.reportPatronatoByIdRepPatronato = reportPatronatoByIdRepPatronato;
     }
 
+    @Basic
+    @Column(name = "cap")
+    public String getCap() {
+        return cap;
+    }
+
+    public void setCap(String cap) {
+        this.cap = cap;
+    }
 }

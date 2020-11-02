@@ -38,9 +38,11 @@ public class AnagraficaDto{
 
     private String uuid;
 
+    private String cap;
+
     public AnagraficaDto(long idAnagrafica, String nome, String cognome, String email, String codiceFiscale,
                          String nazione, String indirizzo, String citta, String provincia, Date dataNascita,
-                         ReportPatronatoDto reportPatronato, ReportAmministrativeDto reportAmministrative, String uuid, String codice) {
+                         ReportPatronatoDto reportPatronato, ReportAmministrativeDto reportAmministrative, String uuid, String codice, String cap) {
         this.idAnagrafica = idAnagrafica;
         this.nome = nome;
         this.cognome = cognome;
@@ -55,6 +57,7 @@ public class AnagraficaDto{
         this.reportAmministrative = reportAmministrative;
         this.uuid = uuid;
         this.codice = codice;
+        this.cap = cap;
     }
 
     public AnagraficaDto() {
@@ -185,6 +188,14 @@ public class AnagraficaDto{
 
     public void setCodice(String codice) {
         this.codice = codice;
+    }
+
+    public String getCap() {
+        return cap;
+    }
+
+    public void setCap(String cap) {
+        this.cap = cap;
     }
 
     @Override

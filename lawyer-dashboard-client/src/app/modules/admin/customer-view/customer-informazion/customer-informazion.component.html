@@ -1,5 +1,5 @@
 <div class="max-w-full m-8 rich-text">
-
+    <fieldset [disabled]="true">
     <!--    {{ customerForm  | json}}-->
     <form #customerForm="ngForm" class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
         <p class="text-lg font-medium mb-8">Anagrafica Cliente</p>
@@ -51,7 +51,13 @@
                 <mat-icon matPrefix
                           [svgIcon]="'room'"></mat-icon>
             </mat-form-field>
-
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-label>Cap</mat-label>
+                <input matInput [(ngModel)]="customer.cap" name="cap"
+                       [placeholder]="'Cap'">
+                <mat-icon matPrefix
+                          [svgIcon]="'room'"></mat-icon>
+            </mat-form-field>
 <!--            <mat-form-field  class="flex-auto gt-xs:pr-3">-->
 <!--                <mat-label>Data di Nascita</mat-label>-->
 <!--                <input matInput  [(ngModel)]="customer.dataNascita" name="dataNascita" [placeholder]="'Data di Nascita'" [matDatepicker]="picker" readonly>-->
@@ -79,10 +85,11 @@
                 <mat-icon matPrefix
                           [svgIcon]="'mail'"></mat-icon>
             </mat-form-field>
-        </div>
+
 <!--        <div class="flex flex-col gt-xs:flex-row">-->
 <!--          -->
 <!--        </div>-->
+        </div>
         <mat-divider class="mt-6 mb-10"></mat-divider>
 
         <mat-tab-group>
@@ -287,7 +294,7 @@
         </div>
 
     </form>
-
+    </fieldset>
     <sat-popover #p
 
                  xAlign="start"

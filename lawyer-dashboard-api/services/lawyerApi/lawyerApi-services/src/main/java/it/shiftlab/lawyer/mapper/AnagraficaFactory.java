@@ -29,7 +29,8 @@ public class AnagraficaFactory {
                 mapRepPatronatoEntityToDto(entity.getReportPatronatoByIdRepPatronato()),
                 mapRepAmmEntitytoDto(entity.getReportAmministrativeByIdRepAmministrative()),
                 entity.getUuid().toString(),
-                entity.getCodice());
+                entity.getCodice(),
+                entity.getCap());
     }
 
     public static ReportAmministrativeDto mapRepAmmEntitytoDto(ReportAmministrativeEntity entity){
@@ -72,7 +73,7 @@ public class AnagraficaFactory {
                 dto.getProvincia(),
                 dto.getDataNascita(),
                 dto.getUuid() != null ? UUID.fromString(dto.getUuid()) : UUID.randomUUID(),
-                dto.getCodice());
+                dto.getCodice(), dto.getCap());
     }
 
     public static ReportPatronatoEntity mapRepPatronatoDtoToEntity(ReportPatronatoDto dto) {
